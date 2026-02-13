@@ -1,32 +1,52 @@
-﻿using ProjectVitour.Dtos.ReviewDtos;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Razor.TagHelpers;
+using MongoDB.Driver;
+using ProjectVitour.Dtos.ReviewDtos;
+using ProjectVitour.Entities;
+using ProjectVitour.Settings;
 
 namespace ProjectVitour.Services.ReviewServices
 {
     public class ReviewService : IReviewService
     {
-        public Task CreateReviewAsync(CreateReviewDto createReviewDto)
+        private readonly IMapper _mapper;
+        private readonly IMongoCollection<Review> _reviewCollection;
+
+        public ReviewService(IMapper mapper,IDatabaseSettings databaseSettings)
         {
-            throw new NotImplementedException();
+            var client = new MongoClient(databaseSettings.ConnectionString);
+            var database = client.GetDatabase(databaseSettings.DatabaseName);
+            _reviewCollection=database.GetCollection<Review>(databaseSettings.ReviewCollectionName);
+            _mapper = mapper;
         }
 
-        public Task DeleteReviewAsync(string id)
+        public async Task CreateReviewAsync(CreateReviewDto createReviewDto)
         {
-            throw new NotImplementedException();
+            var values=_mapper.Map<Review>(createReviewDto);
+            await _reviewCollection.InsertOneAsync(values);
         }
 
-        public Task<List<ResultReviewDto>> GetAllReviewAsync()
+        public async Task DeleteReviewAsync(string id)
         {
-            throw new NotImplementedException();
+            await _reviewCollection.DeleteOneAsync(x => x.ReviewId == id);
         }
 
-        public Task<GetReviewByIdDto> GetReviewByIdAsync(string id)
+        public async Task<List<ResultReviewDto>> GetAllReviewAsync()
         {
-            throw new NotImplementedException();
+            var values = _reviewCollection.Find(x => true).ToListAsync();
+            return _mapper.Map<List<ResultReviewDto>>(values);
         }
 
-        public Task UpdateReviewAsync(UpdateReviewDto updateReviewDto)
+        public async Task<GetReviewByIdDto> GetReviewByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            var values=await _reviewCollection.Find(x=>x.ReviewId == id).FirstOrDefaultAsync();
+            return _mapper.Map<GetReviewByIdDto>(values);
+        }
+
+        public async Task UpdateReviewAsync(UpdateReviewDto updateReviewDto)
+        {
+           var values = _mapper.Map<Review>(updateReviewDto);
+            await _reviewCollection.FindOneAndReplaceAsync(x=>x.ReviewId==updateReviewDto.ReviewId,values);
         }
     }
 }

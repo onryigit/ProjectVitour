@@ -14,32 +14,38 @@ namespace ProjectVitour.Services.TourServices
         public TourService(IMapper mapper, DatabaseSettings _databaseSettings)
         {
             var client = new MongoClient(_databaseSettings.ConnectionString);
+            var database = client.GetDatabase(_databaseSettings.DatabaseName);
+            _tourCollection = database.GetCollection<Tour>(_databaseSettings.TourCollectionName);
             _mapper = mapper;
         }
 
-        public Task CreateTourAsync(CreateTourDto createTourDto)
+        public async Task CreateTourAsync(CreateTourDto createTourDto)
         {
-            throw new NotImplementedException();
+            var values = _mapper.Map<Tour>(createTourDto);
+           await _tourCollection.InsertOneAsync(values); 
         }
 
-        public Task DeleteTourAsync(string id)
+        public async Task DeleteTourAsync(string id)
         {
-            throw new NotImplementedException();
+            await _tourCollection.DeleteOneAsync(x=>x.TourID==id);
         }
 
-        public Task<List<ResultTourDto>> GetAllTourAsync()
+        public async Task<List<ResultTourDto>> GetAllTourAsync()
         {
-            throw new NotImplementedException();
+            var values = await _tourCollection.Find(x=>true).ToListAsync();
+            return _mapper.Map<List<ResultTourDto>>(values);
         }
 
-        public Task<GetTourByIdDto> GetTourByIdAsync(string id)
+        public async Task<GetTourByIdDto> GetTourByIdAsync(string id)
         {
-            throw new NotImplementedException();
+           var values= await _tourCollection.Find(x=>x.TourID == id).FirstOrDefaultAsync();
+            return _mapper.Map<GetTourByIdDto>(values);
         }
 
-        public Task UpdateTourAsync(UpdateTourDto updateTourDto)
+        public async Task UpdateTourAsync(UpdateTourDto updateTourDto)
         {
-            throw new NotImplementedException();
+            var values = _mapper.Map<Tour>(updateTourDto);
+            await _tourCollection.FindOneAndReplaceAsync(x=>x.TourID==updateTourDto.TourID,values);
         }
     }
 }
