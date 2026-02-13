@@ -33,7 +33,7 @@ namespace ProjectVitour.Services.ReviewServices
 
         public async Task<List<ResultReviewDto>> GetAllReviewAsync()
         {
-            var values = _reviewCollection.Find(x => true).ToListAsync();
+            var values = await _reviewCollection.Find(x => true).ToListAsync();
             return _mapper.Map<List<ResultReviewDto>>(values);
         }
 
