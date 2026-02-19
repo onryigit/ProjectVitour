@@ -11,7 +11,7 @@ namespace ProjectVitour.Services.TourServices
         private readonly IMapper _mapper;
         private readonly IMongoCollection<Tour> _tourCollection;
 
-        public TourService(IMapper mapper, DatabaseSettings _databaseSettings)
+        public TourService(IMapper mapper, IDatabaseSettings _databaseSettings)
         {
             var client = new MongoClient(_databaseSettings.ConnectionString);
             var database = client.GetDatabase(_databaseSettings.DatabaseName);
@@ -21,7 +21,7 @@ namespace ProjectVitour.Services.TourServices
 
         public async Task CreateTourAsync(CreateTourDto createTourDto)
         {
-            var values = _mapper.Map<Tour>(createTourDto);
+           var values = _mapper.Map<Tour>(createTourDto);
            await _tourCollection.InsertOneAsync(values); 
         }
 

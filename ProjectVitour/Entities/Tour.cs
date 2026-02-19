@@ -13,5 +13,3 @@
         public bool IsStatus { get; set; }
     }
 }
-
-
