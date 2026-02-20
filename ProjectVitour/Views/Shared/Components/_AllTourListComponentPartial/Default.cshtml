@@ -3,11 +3,14 @@
 <style>
     /* Tur resimlerini aynı boyuta zorlar ve taşıyan kısımları kırpar */
     .tour-listing-image img {
-        width: 100%;
-        height: 250px; /* Bu yüksekliği tasarımına göre 220px, 280px gibi değiştirebilirsin */
-        object-fit: cover;
+        width: 100% !important;
+        height: 250px !important;
+        object-fit: cover !important;
+        /* Geçiş animasyonunu tamamen kapatır, resim anında şablonun şeklini alır */
+        transition: none !important;
     }
 </style>
+
 <section class="archieve-tour">
     <div class="tf-container">
         <div class="listing-list-car-wrap listing-list-car-wrap-grid3">
