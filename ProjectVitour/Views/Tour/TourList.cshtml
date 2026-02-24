@@ -1,13 +1,12 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+@await Component.InvokeAsync("_TourHeadComponentPartial");
 
-@await Component.InvokeAsync("_TourHeadComponentPartial")
 
 
 <body class="body header-fixed ">
@@ -27,40 +26,32 @@
 
     <!-- /preload -->
 
-
     <div id="wrapper">
         <div id="pagee" class="clearfix">
-            @await Component.InvokeAsync("_TourHeaderComponentPartial")
+
             <!-- Main Header -->
-           
+            @await Component.InvokeAsync("_TourHeaderComponentPartial");
+
             <!-- End Main Header -->
             <main id="main">
-                @await Component.InvokeAsync("_TourBreadCumbComponentPartial")
-               
-                @await Component.InvokeAsync("_TourWidgetSelectComponentPartial")
-               
+
+                @await Component.InvokeAsync("_TourBreadCrumdComponentPartial");
+
+                @await Component.InvokeAsync("_TourWidgetSelectComponentPartial");
+
                 @await Component.InvokeAsync("_AllTourListComponentPartial")
-              
-                <!-- Widget archieve tour -->
-             
-                <!-- Widget archieve tour -->
-                <!-- Widget About Us -->
-                <!-- Widget About Us -->
 
             </main>
 
             @await Component.InvokeAsync("_TourFooterComponentPartial")
 
-            
-
-            <!-- Bottom -->
         </div>
-        <!-- /#page -->
     </div>
 
     <!-- Modal Popup Bid -->
 
     <a id="scroll-top" class="button-go"></a>
+
 
     <!-- Javascript -->
     <script src="/vitour/app/js/jquery.min.js"></script>

@@ -1,19 +1,29 @@
 ﻿@model CreateTourDto
-
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateTour</title>
+</head>
+<body>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yeni Tur Oluştur</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
 
     <style>
@@ -24,122 +34,165 @@
             --accent-pale: #fdf3e3;
             --success: #198754;
             --radius: 14px;
+            --sidebar-w: 240px;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background: #f0f4f8;
             color: #1e2d3d;
+            min-height: 100vh;
         }
 
-        /* ── TOPBAR ── */
-        .page-topbar {
+        /* ── SIDEBAR ── */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-w);
+            height: 100vh;
+            background: var(--brand);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            box-shadow: 4px 0 24px rgba(0,0,0,.15);
+        }
+
+        .sidebar-logo {
+            padding: 28px 24px 20px;
+            border-bottom: 1px solid rgba(255,255,255,.1);
+        }
+
+            .sidebar-logo span {
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: #fff;
+                letter-spacing: -.3px;
+            }
+
+                .sidebar-logo span em {
+                    color: var(--accent);
+                    font-style: normal;
+                }
+
+        .sidebar-nav {
+            padding: 16px 12px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .nav-label {
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,.4);
+            text-transform: uppercase;
+            padding: 8px 12px 6px;
+        }
+
+        .nav-link-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            color: rgba(255,255,255,.7);
+            font-size: .88rem;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 2px;
+            transition: background .18s, color .18s;
+        }
+
+            .nav-link-item i {
+                font-size: 1rem;
+            }
+
+            .nav-link-item:hover {
+                background: rgba(255,255,255,.08);
+                color: #fff;
+            }
+
+            .nav-link-item.active {
+                background: rgba(232,160,69,.2);
+                color: var(--accent);
+            }
+
+        .sidebar-footer {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255,255,255,.1);
+            color: rgba(255,255,255,.5);
+            font-size: .8rem;
+        }
+
+        /* ── MAIN ── */
+        .main-wrap {
+            margin-left: var(--sidebar-w);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── TOP BAR ── */
+        .topbar {
             background: #fff;
             border-bottom: 1px solid #e4ecf4;
-            padding: 18px 32px;
+            padding: 16px 32px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 90;
-            box-shadow: 0 1px 8px rgba(26,60,94,.06);
         }
 
-        .page-topbar-title {
-            font-size: 1.1rem;
+        .topbar-title {
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--brand);
         }
 
-        .breadcrumb-bar {
+        .topbar-breadcrumb {
             font-size: .78rem;
             color: #8fa3ba;
             margin-top: 2px;
         }
 
-            .breadcrumb-bar a {
+            .topbar-breadcrumb span {
                 color: var(--brand);
                 font-weight: 600;
-                text-decoration: none;
             }
 
-                .breadcrumb-bar a:hover {
-                    text-decoration: underline;
-                }
-
-        /* ── CONTENT ── */
-        .page-content {
-            padding: 32px;
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        /* ── STEP INDICATOR ── */
-        .step-indicator {
+        .topbar-actions {
             display: flex;
-            background: #fff;
-            border-radius: var(--radius);
-            border: 1px solid #e4ecf4;
-            overflow: hidden;
-            margin-bottom: 28px;
-            box-shadow: 0 2px 8px rgba(26,60,94,.05);
-        }
-
-        .step-item {
-            flex: 1;
-            padding: 14px 16px;
-            display: flex;
-            align-items: center;
             gap: 10px;
-            border-right: 1px solid #e4ecf4;
-            position: relative;
+            align-items: center;
         }
 
-            .step-item:last-child {
-                border-right: none;
-            }
-
-        .step-num {
-            width: 28px;
-            height: 28px;
+        .avatar {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
+            background: var(--brand-light);
+            color: var(--brand);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: .78rem;
             font-weight: 700;
-            flex-shrink: 0;
-            background: #e4ecf4;
-            color: #8fa3ba;
+            font-size: .85rem;
         }
 
-        .step-item.active .step-num {
-            background: var(--brand);
-            color: #fff;
+        /* ── CONTENT ── */
+        .content {
+            padding: 32px;
+            flex: 1;
         }
 
-        .step-item.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--brand);
-        }
-
-        .step-text {
-            font-size: .8rem;
-            font-weight: 600;
-            color: #8fa3ba;
-        }
-
-        .step-item.active .step-text {
-            color: var(--brand);
-        }
-
-        /* ── CARD PANEL ── */
+        /* ── CARDS ── */
         .card-panel {
             background: #fff;
             border-radius: var(--radius);
@@ -162,10 +215,10 @@
             height: 36px;
             border-radius: 10px;
             background: var(--brand-light);
-            color: var(--brand);
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--brand);
             font-size: 1rem;
         }
 
@@ -185,7 +238,7 @@
             padding: 24px;
         }
 
-        /* ── FORM ── */
+        /* ── FORM CONTROLS ── */
         .form-label {
             font-size: .8rem;
             font-weight: 600;
@@ -217,26 +270,20 @@
                 outline: none;
             }
 
-            .form-control.input-validation-error,
-            .form-control:invalid:not(:placeholder-shown) {
+            .form-control.is-invalid {
                 border-color: #e05c5c;
+            }
+
+            .form-control::placeholder {
+                color: #b0c2d0;
             }
 
         textarea.form-control {
             resize: vertical;
-            min-height: 120px;
+            min-height: 110px;
         }
 
-        .form-control::placeholder {
-            color: #b0c2d0;
-        }
-
-        .text-danger {
-            font-size: .75rem;
-            margin-top: 4px;
-        }
-
-        /* input with leading icon */
+        /* ── INPUT WITH ICON ── */
         .input-icon-wrap {
             position: relative;
         }
@@ -245,7 +292,7 @@
                 padding-left: 40px;
             }
 
-            .input-icon-wrap .input-icon {
+            .input-icon-wrap .bi {
                 position: absolute;
                 left: 13px;
                 top: 50%;
@@ -255,7 +302,7 @@
                 pointer-events: none;
             }
 
-        /* ── SPINNER ── */
+        /* ── NUMBER SPINNERS ── */
         .spinner-group {
             display: flex;
             align-items: center;
@@ -265,26 +312,20 @@
             background: #fbfcfe;
         }
 
-            .spinner-group:focus-within {
-                border-color: var(--brand);
-                box-shadow: 0 0 0 3px rgba(26,60,94,.1);
-            }
-
         .spinner-btn {
-            width: 44px;
-            height: 44px;
+            width: 42px;
+            height: 42px;
             border: none;
             background: var(--brand-light);
             color: var(--brand);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
             transition: background .15s;
-            user-select: none;
+            flex-shrink: 0;
         }
 
             .spinner-btn:hover {
@@ -301,45 +342,34 @@
             color: var(--brand);
             background: transparent;
             outline: none;
-            padding: 0;
         }
-            /* hide browser arrows */
-            .spinner-input::-webkit-outer-spin-button,
-            .spinner-input::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-            }
 
-            .spinner-input[type=number] {
-                -moz-appearance: textfield;
-            }
-
-        /* ── PRICE ── */
+        /* ── PRICE INPUT ── */
         .price-wrap {
             position: relative;
         }
 
-        .price-currency {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-weight: 700;
-            color: var(--brand);
-            font-size: .95rem;
-            pointer-events: none;
-        }
+            .price-wrap .currency {
+                position: absolute;
+                left: 14px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-weight: 700;
+                color: var(--brand);
+                font-size: .95rem;
+            }
 
-        .price-wrap .form-control {
-            padding-left: 30px;
-            font-weight: 600;
-            font-size: .95rem;
-        }
+            .price-wrap .form-control {
+                padding-left: 30px;
+                font-weight: 600;
+                font-size: .95rem;
+            }
 
         /* ── IMAGE UPLOAD ── */
         .upload-zone {
             border: 2px dashed #c8d9e9;
             border-radius: 12px;
-            padding: 28px 20px;
+            padding: 32px 20px;
             text-align: center;
             cursor: pointer;
             transition: border-color .2s, background .2s;
@@ -360,31 +390,32 @@
             }
 
         .upload-icon {
-            width: 52px;
-            height: 52px;
+            width: 56px;
+            height: 56px;
             border-radius: 14px;
             background: var(--brand-light);
             color: var(--brand);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            margin: 0 auto 10px;
+            font-size: 1.5rem;
+            margin: 0 auto 12px;
         }
 
         .upload-zone p {
-            font-size: .82rem;
+            font-size: .85rem;
             color: #8fa3ba;
             margin: 0;
         }
 
         .upload-zone strong {
             display: block;
-            font-size: .88rem;
+            font-size: .9rem;
             color: var(--brand);
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
 
+        /* URL preview */
         #urlPreview {
             display: none;
             margin-top: 14px;
@@ -401,7 +432,7 @@
                 display: block;
             }
 
-        #removeImgBtn {
+        #removeImg {
             position: absolute;
             top: 8px;
             right: 8px;
@@ -443,39 +474,21 @@
                 color: var(--brand);
             }
 
-            .badge-chip.sel-default.selected {
+            .badge-chip.active {
                 background: var(--brand);
                 border-color: var(--brand);
                 color: #fff;
             }
 
-            .badge-chip.sel-accent.selected {
+            .badge-chip.accent.active {
                 background: var(--accent);
                 border-color: var(--accent);
                 color: #fff;
             }
 
-            .badge-chip.sel-green.selected {
-                background: var(--success);
-                border-color: var(--success);
-                color: #fff;
-            }
-
-            .badge-chip.sel-dark.selected {
-                background: #374151;
-                border-color: #374151;
-                color: #fff;
-            }
-
-            .badge-chip.sel-red.selected {
-                background: #dc2626;
-                border-color: #dc2626;
-                color: #fff;
-            }
-
-            .badge-chip.sel-none.selected {
-                background: #6b7280;
-                border-color: #6b7280;
+            .badge-chip.green.active {
+                background: #198754;
+                border-color: #198754;
                 color: #fff;
             }
 
@@ -518,7 +531,7 @@
                 box-shadow: none;
             }
 
-        /* ── SUMMARY ── */
+        /* ── SUMMARY CARD ── */
         .summary-card {
             background: linear-gradient(135deg, var(--brand) 0%, #0f2540 100%);
             border-radius: var(--radius);
@@ -526,45 +539,42 @@
             padding: 24px;
             margin-bottom: 20px;
             position: sticky;
-            top: 76px;
+            top: 80px;
         }
 
             .summary-card h6 {
-                font-size: .72rem;
+                font-size: .78rem;
                 letter-spacing: 1px;
                 text-transform: uppercase;
-                color: rgba(255,255,255,.45);
+                color: rgba(255,255,255,.5);
                 margin-bottom: 16px;
             }
 
-        .sum-row {
+        .summary-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 9px;
+            margin-bottom: 10px;
         }
 
-            .sum-row .lbl {
-                font-size: .8rem;
-                color: rgba(255,255,255,.55);
+            .summary-row .lbl {
+                font-size: .82rem;
+                color: rgba(255,255,255,.6);
             }
 
-            .sum-row .val {
-                font-size: .85rem;
+            .summary-row .val {
+                font-size: .88rem;
                 font-weight: 600;
                 color: #fff;
-                max-width: 55%;
-                text-align: right;
-                word-break: break-word;
             }
 
-        .sum-divider {
+        .summary-divider {
             border-top: 1px solid rgba(255,255,255,.12);
             margin: 14px 0;
         }
 
-        .sum-price {
-            font-size: 1.5rem;
+        .summary-price {
+            font-size: 1.6rem;
             font-weight: 700;
             color: var(--accent);
         }
@@ -573,7 +583,7 @@
             border-radius: 10px;
             overflow: hidden;
             margin-bottom: 16px;
-            height: 120px;
+            height: 130px;
             background: rgba(255,255,255,.08);
             display: flex;
             align-items: center;
@@ -588,25 +598,7 @@
 
             .preview-img-wrap span {
                 color: rgba(255,255,255,.3);
-                font-size: .8rem;
-                text-align: center;
-            }
-
-        /* ── FIELD CHECKS ── */
-        .field-check-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: .82rem;
-            padding: 3px 0;
-        }
-
-            .field-check-item.ok {
-                color: var(--success);
-            }
-
-            .field-check-item.nok {
-                color: #8fa3ba;
+                font-size: .82rem;
             }
 
         /* ── BUTTONS ── */
@@ -616,7 +608,7 @@
             border: none;
             border-radius: 10px;
             padding: 12px 28px;
-            font-family: 'Plus Jakarta Sans',sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 700;
             font-size: .9rem;
             cursor: pointer;
@@ -631,19 +623,13 @@
                 transform: translateY(-1px);
             }
 
-            .btn-brand:disabled {
-                opacity: .6;
-                cursor: not-allowed;
-                transform: none;
-            }
-
         .btn-accent {
             background: var(--accent);
             color: #fff;
             border: none;
             border-radius: 10px;
             padding: 12px 28px;
-            font-family: 'Plus Jakarta Sans',sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 700;
             font-size: .9rem;
             cursor: pointer;
@@ -658,27 +644,107 @@
                 transform: translateY(-1px);
             }
 
-        .btn-outline {
+        .btn-outline-brand {
             background: transparent;
             color: var(--brand);
             border: 1.5px solid #c8d9e9;
             border-radius: 10px;
             padding: 11px 20px;
-            font-family: 'Plus Jakarta Sans',sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 600;
             font-size: .88rem;
             cursor: pointer;
             transition: all .18s;
-            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
         }
 
-            .btn-outline:hover {
+            .btn-outline-brand:hover {
                 background: var(--brand-light);
                 border-color: var(--brand);
             }
+
+        /* ── STEP INDICATOR ── */
+        .step-indicator {
+            display: flex;
+            gap: 0;
+            margin-bottom: 28px;
+            background: #fff;
+            border-radius: var(--radius);
+            border: 1px solid #e4ecf4;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(26,60,94,.05);
+        }
+
+        .step-item {
+            flex: 1;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-right: 1px solid #e4ecf4;
+            position: relative;
+        }
+
+            .step-item:last-child {
+                border-right: none;
+            }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .78rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            background: #e4ecf4;
+            color: #8fa3ba;
+        }
+
+        .step-item.done .step-num {
+            background: var(--success);
+            color: #fff;
+        }
+
+        .step-item.active .step-num {
+            background: var(--brand);
+            color: #fff;
+        }
+
+        .step-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--brand);
+        }
+
+        .step-text {
+            font-size: .8rem;
+            font-weight: 600;
+            color: #8fa3ba;
+        }
+
+        .step-item.active .step-text {
+            color: var(--brand);
+        }
+
+        .step-item.done .step-text {
+            color: var(--success);
+        }
+
+        /* ── HELPER TEXT ── */
+        .form-hint {
+            font-size: .75rem;
+            color: #9fb5c8;
+            margin-top: 5px;
+        }
 
         /* ── CHAR COUNTER ── */
         .char-counter {
@@ -688,118 +754,97 @@
             margin-top: 4px;
         }
 
-        .form-hint {
-            font-size: .75rem;
-            color: #9fb5c8;
-            margin-top: 5px;
-        }
-
-        /* ── LOADING OVERLAY ── */
-        #loadingOverlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: rgba(15,37,64,.65);
-            backdrop-filter: blur(4px);
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .spinner-ring {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            border: 4px solid rgba(255,255,255,.15);
-            border-top-color: var(--accent);
-            animation: spin .8s linear infinite;
-        }
-        @@keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        #loadingOverlay p {
-            color: #fff;
-            font-weight: 600;
-            font-size: .95rem;
-        }
-
-        @@media (max-width:768px) {
-            .page-content {
-                padding: 16px;
-            }
-
-            .step-text {
+        @@media (max-width: 992px) {
+            .sidebar {
                 display: none;
+            }
+
+            .main-wrap {
+                margin-left: 0;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .topbar {
+                padding: 12px 16px;
+            }
+
+            .content {
+                padding: 12px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div id="loadingOverlay">
-        <div class="spinner-ring"></div>
-        <p>Tur oluşturuluyor...</p>
-    </div>
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <span>Tur<em>Panel</em></span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-label">Genel</div>
+            <a class="nav-link-item" href="#"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+            <a class="nav-link-item active" href="#"><i class="bi bi-map"></i> Turlar</a>
+            <a class="nav-link-item" href="#"><i class="bi bi-people"></i> Müşteriler</a>
+            <a class="nav-link-item" href="#"><i class="bi bi-calendar3"></i> Rezervasyonlar</a>
+            <div class="nav-label mt-2">Yönetim</div>
+            <a class="nav-link-item" href="#"><i class="bi bi-bar-chart"></i> Raporlar</a>
+            <a class="nav-link-item" href="#"><i class="bi bi-gear"></i> Ayarlar</a>
+        </nav>
+        <div class="sidebar-footer">
+            <i class="bi bi-shield-check me-1"></i> v2.4.1 &mdash; TurPanel
+        </div>
+    </aside>
 
-    <div class="page-topbar">
-        <div>
-            <div class="page-topbar-title">Yeni Tur Oluştur</div>
-            <div class="breadcrumb-bar">
-                <a asp-action="TourList">Tur Listesi</a> › Yeni Tur
+    <!-- ── MAIN ── -->
+    <div class="main-wrap">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+            <div>
+                <div class="topbar-title">Yeni Tur Oluştur</div>
+                <div class="topbar-breadcrumb">Turlar &rsaquo; <span>Yeni Tur</span></div>
             </div>
-        </div>
-        <div class="d-flex gap-2 align-items-center">
-            <a asp-action="TourList" class="btn-outline">
-                <i class="bi bi-arrow-left"></i> Listeye Dön
-            </a>
-        </div>
-    </div>
+            <div class="topbar-actions">
+                <button class="btn-outline-brand"><i class="bi bi-eye"></i> Önizle</button>
+                <div class="avatar">AY</div>
+            </div>
+        </header>
 
-    <div class="page-content">
+        <!-- CONTENT -->
+        <main class="content">
 
-        @if (!ViewData.ModelState.IsValid)
-        {
-            <div class="alert alert-danger d-flex align-items-center gap-2 mb-4 rounded-3" role="alert">
-                <i class="bi bi-exclamation-triangle-fill fs-5"></i>
-                <div>
-                    <strong>Formu tamamlayın:</strong>
-                    <asp-validation-summary asp-validation-summary="All" class="mb-0 mt-1" />
+            <!-- STEP INDICATOR -->
+            <div class="step-indicator">
+                <div class="step-item done">
+                    <div class="step-num"><i class="bi bi-check"></i></div>
+                    <div class="step-text">Temel Bilgiler</div>
+                </div>
+                <div class="step-item active">
+                    <div class="step-num">2</div>
+                    <div class="step-text">Detaylar & Fiyat</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div class="step-text">Medya</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">4</div>
+                    <div class="step-text">Yayın</div>
                 </div>
             </div>
-        }
-
-        <div class="step-indicator">
-            <div class="step-item active">
-                <div class="step-num">1</div>
-                <div class="step-text">Temel Bilgiler</div>
-            </div>
-            <div class="step-item active">
-                <div class="step-num">2</div>
-                <div class="step-text">Detay & Fiyat</div>
-            </div>
-            <div class="step-item active">
-                <div class="step-num">3</div>
-                <div class="step-text">Medya & Rozet</div>
-            </div>
-            <div class="step-item active">
-                <div class="step-num">4</div>
-                <div class="step-text">Yayın</div>
-            </div>
-        </div>
-
-        <form asp-action="CreateTour" asp-controller="Tour"
-              method="post" id="createTourForm" novalidate>
-            @Html.AntiForgeryToken()
 
             <div class="row g-4">
 
-                <div class="col-xl-8 col-lg-7">
+                <!-- ── LEFT COLUMN ── -->
+                <div class="col-lg-8">
 
+                    <!-- 1. Temel Bilgiler -->
                     <div class="card-panel">
                         <div class="card-panel-header">
                             <div class="card-panel-icon"><i class="bi bi-pencil-square"></i></div>
@@ -809,45 +854,28 @@
                             </div>
                         </div>
                         <div class="card-panel-body">
-
                             <div class="mb-4">
-                                <label asp-for="Title" class="form-label">
-                                    Tur Başlığı <span class="req">*</span>
-                                </label>
+                                <label class="form-label">Tur Başlığı <span class="req">*</span></label>
                                 <div class="input-icon-wrap">
-                                    <i class="bi bi-type-h1 input-icon"></i>
-                                    <input asp-for="Title"
-                                           class="form-control"
-                                           placeholder="Örn: 5 Gün 4 Gece Kapadokya & Göreme Turu"
-                                           maxlength="120"
-                                           oninput="onTitleInput(this)" />
+                                    <i class="bi bi-type-h1"></i>
+                                    <input type="text" class="form-control" id="titleInput"
+                                           placeholder="Örn: 5 Gün Kapadokya & Göreme Turu"
+                                           oninput="updateSummary()">
                                 </div>
-                                <div class="d-flex justify-content-between">
-                                    <span asp-validation-for="Title" class="text-danger"></span>
-                                    <span class="char-counter"><span id="titleCount">0</span>/120</span>
-                                </div>
+                                <div class="char-counter"><span id="titleCount">0</span> / 120 karakter</div>
                             </div>
-
                             <div class="mb-0">
-                                <label asp-for="Description" class="form-label">
-                                    Tur Açıklaması <span class="req">*</span>
-                                </label>
-                                <textarea asp-for="Description"
-                                          class="form-control"
-                                          rows="6"
+                                <label class="form-label">Tur Açıklaması <span class="req">*</span></label>
+                                <textarea class="form-control" id="descInput" rows="5"
                                           placeholder="Tur rotası, konaklama, ulaşım ve dahil olan aktiviteler hakkında detaylı bilgi verin..."
-                                          maxlength="2000"
-                                          oninput="onDescInput(this)"></textarea>
-                                <div class="d-flex justify-content-between">
-                                    <span asp-validation-for="Description" class="text-danger"></span>
-                                    <span class="char-counter"><span id="descCount">0</span>/2000</span>
-                                </div>
+                                          oninput="updateCharCount()"></textarea>
+                                <div class="char-counter"><span id="descCount">0</span> / 1000 karakter</div>
                                 <p class="form-hint"><i class="bi bi-info-circle me-1"></i>En az 80 karakter önerilir.</p>
                             </div>
-
                         </div>
                     </div>
 
+                    <!-- 2. Tur Detayları -->
                     <div class="card-panel">
                         <div class="card-panel-header">
                             <div class="card-panel-icon"><i class="bi bi-sliders"></i></div>
@@ -859,99 +887,70 @@
                         <div class="card-panel-body">
                             <div class="row g-4">
 
+                                <!-- Gün Sayısı -->
                                 <div class="col-sm-4">
-                                    <label asp-for="DayCount" class="form-label">
-                                        Tur Süresi (Gün) <span class="req">*</span>
-                                    </label>
+                                    <label class="form-label">Tur Süresi (Gün) <span class="req">*</span></label>
                                     <div class="spinner-group">
-                                        <button type="button" class="spinner-btn"
-                                                onclick="spinField('DayCount', -1)">
-                                            &#8722;
-                                        </button>
-                                        <input asp-for="DayCount"
-                                               type="number"
-                                               class="spinner-input"
-                                               min="1" max="365"
-                                               oninput="updateSummary()" />
-                                        <button type="button" class="spinner-btn"
-                                                onclick="spinField('DayCount', 1)">
-                                            &#43;
-                                        </button>
+                                        <button class="spinner-btn" type="button" onclick="spin('dayCount', -1)">&#8722;</button>
+                                        <input class="spinner-input" type="number" id="dayCount" value="5" min="1" max="365" oninput="updateSummary()">
+                                        <button class="spinner-btn" type="button" onclick="spin('dayCount', 1)">&#43;</button>
                                     </div>
-                                    <span asp-validation-for="DayCount" class="text-danger"></span>
-                                    <p class="form-hint">1 – 365 gün</p>
+                                    <p class="form-hint">1 – 365 gün arası</p>
                                 </div>
 
+                                <!-- Kapasite -->
                                 <div class="col-sm-4">
-                                    <label asp-for="Capacity" class="form-label">
-                                        Maksimum Kapasite <span class="req">*</span>
-                                    </label>
+                                    <label class="form-label">Maksimum Kapasite <span class="req">*</span></label>
                                     <div class="spinner-group">
-                                        <button type="button" class="spinner-btn"
-                                                onclick="spinField('Capacity', -1)">
-                                            &#8722;
-                                        </button>
-                                        <input asp-for="Capacity"
-                                               type="number"
-                                               class="spinner-input"
-                                               min="1" max="500"
-                                               oninput="updateSummary()" />
-                                        <button type="button" class="spinner-btn"
-                                                onclick="spinField('Capacity', 1)">
-                                            &#43;
-                                        </button>
+                                        <button class="spinner-btn" type="button" onclick="spin('capacity', -1)">&#8722;</button>
+                                        <input class="spinner-input" type="number" id="capacity" value="20" min="1" max="500" oninput="updateSummary()">
+                                        <button class="spinner-btn" type="button" onclick="spin('capacity', 1)">&#43;</button>
                                     </div>
-                                    <span asp-validation-for="Capacity" class="text-danger"></span>
-                                    <p class="form-hint">1 – 500 kişi</p>
+                                    <p class="form-hint">1 – 500 kişi arası</p>
                                 </div>
 
+                                <!-- Fiyat -->
                                 <div class="col-sm-4">
-                                    <label asp-for="Price" class="form-label">
-                                        Kişi Başı Fiyat (₺) <span class="req">*</span>
-                                    </label>
+                                    <label class="form-label">Kişi Başı Fiyat (₺) <span class="req">*</span></label>
                                     <div class="price-wrap">
-                                        <span class="price-currency">₺</span>
-                                        <input asp-for="Price"
-                                               type="number"
-                                               class="form-control"
-                                               placeholder="0,00"
-                                               min="0" step="0.01"
-                                               oninput="updateSummary()" />
+                                        <span class="currency">₺</span>
+                                        <input type="number" class="form-control" id="priceInput"
+                                               placeholder="0.00" min="0" step="0.01"
+                                               oninput="updateSummary()">
                                     </div>
-                                    <span asp-validation-for="Price" class="text-danger"></span>
-                                    <p class="form-hint">KDV dahil fiyat</p>
+                                    <p class="form-hint">KDV dahil fiyat giriniz</p>
                                 </div>
 
                             </div>
                         </div>
                     </div>
 
+                    <!-- 3. Kapak Görseli -->
                     <div class="card-panel">
                         <div class="card-panel-header">
                             <div class="card-panel-icon"><i class="bi bi-image"></i></div>
                             <div>
                                 <div class="card-panel-title">Kapak Görseli</div>
-                                <div class="card-panel-sub">Görsel URL'sini girin veya dosya yükleyin</div>
+                                <div class="card-panel-sub">URL girin veya dosya yükleyin</div>
                             </div>
                         </div>
                         <div class="card-panel-body">
 
+                            <!-- Tab: URL -->
                             <div class="mb-3">
-                                <label asp-for="CoverImageUrl" class="form-label">Görsel URL'si</label>
+                                <label class="form-label">Görsel URL'si</label>
                                 <div class="input-icon-wrap">
-                                    <i class="bi bi-link-45deg input-icon"></i>
-                                    <input asp-for="CoverImageUrl"
-                                           type="url"
-                                           class="form-control"
+                                    <i class="bi bi-link-45deg"></i>
+                                    <input type="url" class="form-control" id="coverImageUrl"
                                            placeholder="https://example.com/gorsel.jpg"
-                                           oninput="previewFromUrl(this.value)" />
+                                           oninput="previewImage()">
                                 </div>
-                                <span asp-validation-for="CoverImageUrl" class="text-danger"></span>
                             </div>
 
+                            <!-- Preview -->
                             <div id="urlPreview">
-                                <img id="previewImg" src="" alt="Kapak Görseli Önizleme">
-                                <button type="button" id="removeImgBtn" onclick="removeImage()">
+                                <img id="previewImg" src="" alt="Ön izleme">
+                                <button id="removeImg" type="button" onclick="removeImage()" title="Kaldır">
                                     <i class="bi bi-x"></i>
                                 </button>
                             </div>
@@ -962,6 +961,7 @@
                                 <hr class="flex-grow-1 m-0">
                             </div>
 
+                            <!-- Upload -->
                             <div class="upload-zone">
                                 <input type="file" accept="image/*" onchange="handleFileUpload(event)">
                                 <div class="upload-icon"><i class="bi bi-cloud-arrow-up"></i></div>
@@ -972,6 +972,7 @@
                         </div>
                     </div>
 
+                    <!-- 4. Rozet & Durum -->
                     <div class="card-panel">
                         <div class="card-panel-header">
                             <div class="card-panel-icon"><i class="bi bi-tags"></i></div>
@@ -983,290 +984,293 @@
                         <div class="card-panel-body">
 
                             <label class="form-label mb-2">Rozet Seçin</label>
-                            <input asp-for="Badge" type="hidden" id="badgeHidden" />
-                            <div class="badge-options mb-4">
-                                <span class="badge-chip sel-default" data-val="Öne Çıkan" onclick="selectBadge(this)">🌟 Öne Çıkan</span>
-                                <span class="badge-chip sel-accent" data-val="Fırsat" onclick="selectBadge(this)">🔥 Fırsat</span>
-                                <span class="badge-chip sel-green" data-val="Yeni" onclick="selectBadge(this)">✨ Yeni</span>
-                                <span class="badge-chip sel-dark" data-val="Çok Satan" onclick="selectBadge(this)">🏆 Çok Satan</span>
-                                <span class="badge-chip sel-red" data-val="Son Kontenjan" onclick="selectBadge(this)">⏳ Son Kontenjan</span>
-                                <span class="badge-chip sel-none" data-val="" onclick="selectBadge(this)">🚫 Rozet Yok</span>
+                            <input type="hidden" id="badgeValue" value="">
+                            <div class="badge-options mb-4" id="badgeOptions">
+                                <span class="badge-chip active" data-badge="Öne Çıkan" onclick="selectBadge(this)">🌟 Öne Çıkan</span>
+                                <span class="badge-chip accent" data-badge="Fırsat" onclick="selectBadge(this)">🔥 Fırsat</span>
+                                <span class="badge-chip green" data-badge="Yeni" onclick="selectBadge(this)">✨ Yeni</span>
+                                <span class="badge-chip" data-badge="Çok Satan" onclick="selectBadge(this)">🏆 Çok Satan</span>
+                                <span class="badge-chip" data-badge="Son Kontenjan" onclick="selectBadge(this)">⏳ Son Kontenjan</span>
+                                <span class="badge-chip" data-badge="" onclick="selectBadge(this)">🚫 Rozet Yok</span>
                             </div>
 
                             <label class="form-label mb-2">Yayın Durumu</label>
                             <div class="toggle-wrap">
                                 <div>
-                                    <div class="toggle-label">Tur Yayında mı?</div>
-                                    <div class="toggle-sub" id="statusSubText">
-                                        Tur aktif — kullanıcılar listeyi görebilir
-                                    </div>
+                                    <div class="toggle-label">Tur Yayında</div>
+                                    <div class="toggle-sub" id="statusSub">Tur şu an aktif ve listelenebilir durumda</div>
                                 </div>
                                 <div class="form-check form-switch mb-0">
-                                    <input asp-for="IsStatus"
-                                           class="form-check-input"
-                                           type="checkbox"
-                                           role="switch"
-                                           onchange="onStatusChange(this)" />
+                                    <input class="form-check-input" type="checkbox" id="isStatus" checked
+                                           onchange="updateStatusLabel()">
                                 </div>
                             </div>
-                            <span asp-validation-for="IsStatus" class="text-danger"></span>
 
                         </div>
                     </div>
 
-                    <div class="d-flex gap-3 flex-wrap pb-4">
-                        <button type="submit" class="btn-accent" id="submitBtn">
+                    <!-- SUBMIT BUTTONS -->
+                    <div class="d-flex gap-3 flex-wrap">
+                        <button class="btn-accent" type="button" onclick="submitForm()">
                             <i class="bi bi-check-circle"></i> Turu Oluştur
                         </button>
-                        <a asp-action="TourList" class="btn-outline">
-                            <i class="bi bi-x-circle"></i> İptal
-                        </a>
+                        <button class="btn-brand" type="button">
+                            <i class="bi bi-floppy"></i> Taslak Kaydet
+                        </button>
+                        <button class="btn-outline-brand" type="button">
+                            <i class="bi bi-arrow-left"></i> İptal
+                        </button>
                     </div>
 
-                </div><div class="col-xl-4 col-lg-5">
+                </div><!-- /col-lg-8 -->
+                <!-- ── RIGHT COLUMN: SUMMARY ── -->
+                <div class="col-lg-4">
 
+                    <!-- Özet Kartı -->
                     <div class="summary-card">
-                        <h6>Canlı Özet</h6>
-                        <div class="preview-img-wrap" id="sumImgWrap">
-                            <span id="sumImgPlaceholder">
-                                <i class="bi bi-image" style="font-size:1.6rem;display:block;margin-bottom:4px"></i>
-                                Kapak görseli bekleniyor
-                            </span>
-                            <img id="sumImg" src="" alt="" style="display:none">
+                        <h6>Tur Özeti</h6>
+
+                        <div class="preview-img-wrap" id="summaryImgWrap">
+                            <span id="summaryImgPlaceholder"><i class="bi bi-image" style="font-size:1.4rem;display:block;margin-bottom:4px"></i>Kapak görseli</span>
+                            <img id="summaryImg" src="" alt="" style="display:none">
                         </div>
-                        <div class="sum-row">
+
+                        <div class="summary-row">
                             <span class="lbl">Başlık</span>
-                            <span class="val" id="sumTitle">—</span>
+                            <span class="val" id="sumTitle" style="max-width:55%;text-align:right;font-size:.8rem">—</span>
                         </div>
-                        <div class="sum-row">
+                        <div class="summary-row">
                             <span class="lbl">Süre</span>
-                            <span class="val" id="sumDay">—</span>
+                            <span class="val" id="sumDay">5 Gün</span>
                         </div>
-                        <div class="sum-row">
+                        <div class="summary-row">
                             <span class="lbl">Kapasite</span>
-                            <span class="val" id="sumCap">—</span>
+                            <span class="val" id="sumCapacity">20 Kişi</span>
                         </div>
-                        <div class="sum-row">
+                        <div class="summary-row">
                             <span class="lbl">Rozet</span>
-                            <span class="val" id="sumBadge">—</span>
+                            <span class="val" id="sumBadge">🌟 Öne Çıkan</span>
                         </div>
-                        <div class="sum-row">
+                        <div class="summary-row">
                             <span class="lbl">Durum</span>
                             <span class="val" id="sumStatus" style="color:#4ade80">● Yayında</span>
                         </div>
-                        <div class="sum-divider"></div>
-                        <div class="sum-row">
-                            <span class="lbl" style="font-size:.85rem">Kişi Başı Fiyat</span>
-                            <span class="sum-price" id="sumPrice">—</span>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span class="lbl" style="font-size:.9rem">Kişi Başı Fiyat</span>
+                            <span class="summary-price" id="sumPrice">—</span>
                         </div>
                     </div>
 
+                    <!-- İpuçları -->
                     <div class="card-panel">
                         <div class="card-panel-header">
-                            <div class="card-panel-icon" style="background:#edfbf1;color:#198754">
-                                <i class="bi bi-check2-all"></i>
-                            </div>
-                            <div>
-                                <div class="card-panel-title">Form Kontrolü</div>
-                                <div class="card-panel-sub">Zorunlu alanların durumu</div>
-                            </div>
-                        </div>
-                        <div class="card-panel-body" id="fieldChecks"></div>
-                    </div>
-
-                    <div class="card-panel">
-                        <div class="card-panel-header">
-                            <div class="card-panel-icon" style="background:#fdf3e3;color:var(--accent)">
-                                <i class="bi bi-lightbulb"></i>
-                            </div>
+                            <div class="card-panel-icon" style="background:#fdf3e3;color:var(--accent)"><i class="bi bi-lightbulb"></i></div>
                             <div>
                                 <div class="card-panel-title">İpuçları</div>
                             </div>
                         </div>
                         <div class="card-panel-body pt-2">
-                            <ul style="padding-left:18px;font-size:.82rem;color:#475f74;line-height:1.9;margin:0">
+                            <ul class="mb-0" style="padding-left:18px;font-size:.82rem;color:#475f74;line-height:1.8">
                                 <li>Başlık en az <strong>20 karakter</strong> olmalıdır.</li>
-                                <li>Kapak görseli <strong>16:9 oranında</strong> olmalıdır.</li>
+                                <li>Kapak görseli <strong>16:9 oran</strong>ında olmalıdır.</li>
                                 <li>Açıklama SEO için önemlidir, detaylı yazın.</li>
-                                <li>Fiyatı <strong>₺ (TL)</strong> cinsinden girin.</li>
-                                <li>Rozet seçimi isteğe bağlıdır.</li>
+                                <li>Fiyatı KDV dahil, <strong>₺ cinsinden</strong> girin.</li>
+                                <li>Yayınlamadan önce önizleme yapın.</li>
                             </ul>
                         </div>
                     </div>
 
-                </div>
-            </div>
-        </form>
+                    <!-- Zorunlu Alan Durumu -->
+                    <div class="card-panel">
+                        <div class="card-panel-header">
+                            <div class="card-panel-icon" style="background:#edfbf1;color:#198754"><i class="bi bi-check2-all"></i></div>
+                            <div>
+                                <div class="card-panel-title">Zorunlu Alanlar</div>
+                            </div>
+                        </div>
+                        <div class="card-panel-body pt-2">
+                            <div id="fieldChecks" style="font-size:.82rem;display:flex;flex-direction:column;gap:6px"></div>
+                        </div>
+                    </div>
 
+                </div><!-- /col-lg-4 -->
+
+            </div><!-- /row -->
+        </main>
+    </div><!-- /main-wrap -->
+    <!-- SUCCESS TOAST -->
+    <div id="toast" style="
+  position:fixed;bottom:28px;right:28px;z-index:9999;
+  background:#1a3c5e;color:#fff;padding:14px 22px;border-radius:12px;
+  display:none;align-items:center;gap:10px;
+  box-shadow:0 8px 32px rgba(0,0,0,.2);font-size:.88rem;font-weight:600;
+  animation: slideUp .3s ease;">
+        <i class="bi bi-check-circle-fill" style="color:#4ade80;font-size:1.1rem"></i>
+        <span id="toastMsg">İşlem başarılı!</span>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <partial name="_ValidationScriptsPartial" />
+
+    <style>
+        @@keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+
     <script>
-        // ── Init: set char counts from server-side values (edit scenario) ──
-        (function init() {
-            const t = document.getElementById('Title');
-            const d = document.getElementById('Description');
-            if (t) document.getElementById('titleCount').textContent = t.value.length;
-            if (d) document.getElementById('descCount').textContent  = d.value.length;
-
-            // Sync badge hidden field → select matching chip
-            const badgeVal = document.getElementById('badgeHidden')?.value;
-            if(badgeVal) {
-                document.querySelectorAll('.badge-chip').forEach(c => {
-                    if (c.dataset.val === badgeVal) {
-                        c.classList.add('selected');
-                    }
-                });
-            }
-
-            // Default badge if none selected
-            const anySelected = document.querySelector('.badge-chip.selected');
-            if (!anySelected) {
-                const first = document.querySelector('.badge-chip');
-                if (first) { first.classList.add('selected'); document.getElementById('badgeHidden').value = first.dataset.val; }
-            }
-
-            updateSummary();
-            updateFieldChecks();
-            const statusEl = document.getElementById('IsStatus');
-            if(statusEl) syncStatusLabel(statusEl);
-        })();
+        // ── Spinner ──
+        function spin(id, delta) {
+          const el = document.getElementById(id);
+          const min = parseInt(el.min) || 1;
+          const max = parseInt(el.max) || 9999;
+          el.value = Math.min(max, Math.max(min, parseInt(el.value || 0) + delta));
+          updateSummary();
+        }
 
         // ── Char counters ──
-        function onTitleInput(el) {
-            document.getElementById('titleCount').textContent = el.value.length;
-            updateSummary();
-        }
-        function onDescInput(el) {
-            document.getElementById('descCount').textContent = el.value.length;
-            updateFieldChecks();
-        }
-
-        // ── Spinner ──
-        function spinField(id, delta) {
-            const el = document.getElementById(id);
-            if (!el) return;
-            const min = parseInt(el.min) || 1;
-            const max = parseInt(el.max) || 9999;
-            el.value = Math.min(max, Math.max(min, parseInt(el.value || 0) + delta));
-            updateSummary();
+        document.getElementById('titleInput').addEventListener('input', function () {
+          document.getElementById('titleCount').textContent = this.value.length;
+          updateSummary();
+        });
+        function updateCharCount() {
+          const v = document.getElementById('descInput').value.length;
+          document.getElementById('descCount').textContent = v;
         }
 
-        // ── Image ──
-        function previewFromUrl(url) {
-            const wrap = document.getElementById('urlPreview');
-            const img  = document.getElementById('previewImg');
-            if (url.trim()) {
-                img.src = url.trim();
-                wrap.style.display = 'block';
-                setSummaryImage(url.trim());
-            } else {
-                wrap.style.display = 'none';
-                setSummaryImage('');
-            }
-            updateFieldChecks();
+        // ── Image preview ──
+        function previewImage() {
+          const url = document.getElementById('coverImageUrl').value.trim();
+          const wrap = document.getElementById('urlPreview');
+          const img  = document.getElementById('previewImg');
+          if (url) {
+            img.src = url;
+            wrap.style.display = 'block';
+            updateSummaryImage(url);
+          } else {
+            wrap.style.display = 'none';
+            updateSummaryImage('');
+          }
         }
         function removeImage() {
-            document.getElementById('CoverImageUrl').value = '';
-            document.getElementById('urlPreview').style.display = 'none';
-            setSummaryImage('');
-            updateFieldChecks();
+          document.getElementById('coverImageUrl').value = '';
+          document.getElementById('urlPreview').style.display = 'none';
+          updateSummaryImage('');
         }
-                function handleFileUpload(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = ev => {
-                const wrap = document.getElementById('urlPreview');
-                document.getElementById('previewImg').src = ev.target.result;
-                wrap.style.display = 'block';
-                setSummaryImage(ev.target.result);
-                updateFieldChecks();
-            };
-            reader.readAsDataURL(file);
+        function handleFileUpload(e) {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = ev => {
+            const wrap = document.getElementById('urlPreview');
+            document.getElementById('previewImg').src = ev.target.result;
+            wrap.style.display = 'block';
+            updateSummaryImage(ev.target.result);
+          };
+          reader.readAsDataURL(file);
         }
-        function setSummaryImage(src) {
-            const si = document.getElementById('sumImg');
-            const ph = document.getElementById('sumImgPlaceholder');
-            if (src) { si.src = src; si.style.display = 'block'; ph.style.display = 'none'; }
-            else     { si.style.display = 'none'; ph.style.display = 'block'; }
+        function updateSummaryImage(src) {
+          const si = document.getElementById('summaryImg');
+          const ph = document.getElementById('summaryImgPlaceholder');
+          if (src) { si.src = src; si.style.display = 'block'; ph.style.display = 'none'; }
+          else      { si.style.display = 'none'; ph.style.display = 'block'; }
         }
 
-        // ── Badge ──
+        // ── Badge select ──
+        document.getElementById('badgeOptions').querySelectorAll('.badge-chip')[0].classList.add('active');
+        document.getElementById('badgeValue').value = 'Öne Çıkan';
+
         function selectBadge(el) {
-            document.querySelectorAll('.badge-chip').forEach(c => c.classList.remove('selected'));
-            el.classList.add('selected');
-            document.getElementById('badgeHidden').value = el.dataset.val;
-            updateSummary();
+          document.querySelectorAll('.badge-chip').forEach(c => c.classList.remove('active'));
+          el.classList.add('active');
+          document.getElementById('badgeValue').value = el.dataset.badge;
+          updateSummary();
         }
 
         // ── Status ──
-        function onStatusChange(el) {
-            syncStatusLabel(el);
-            updateSummary();
-        }
-        function syncStatusLabel(el) {
-            const on = el && el.checked;
-            document.getElementById('statusSubText').textContent = on
-                ? 'Tur aktif — kullanıcılar listeyi görebilir'
-                : 'Tur pasif — kullanıcılara görünmez';
-            const sumSt = document.getElementById('sumStatus');
-            sumSt.textContent = on ? '● Yayında' : '○ Pasif';
-            sumSt.style.color = on ? '#4ade80' : '#f87171';
+        function updateStatusLabel() {
+          const on = document.getElementById('isStatus').checked;
+          document.getElementById('statusSub').textContent = on
+            ? 'Tur şu an aktif ve listelenebilir durumda'
+            : 'Tur pasif – kullanıcılara görünmez';
+          document.getElementById('sumStatus').textContent = on ? '● Yayında' : '○ Pasif';
+          document.getElementById('sumStatus').style.color  = on ? '#4ade80' : '#f87171';
+          updateFieldChecks();
         }
 
-        // ── Summary ──
+        // ── Summary update ──
         function updateSummary() {
-            const title = (document.getElementById('Title')?.value || '').trim();
-            const day   = document.getElementById('DayCount')?.value || 0;
-            const cap   = document.getElementById('Capacity')?.value || 0;
-            const price = parseFloat(document.getElementById('Price')?.value);
-            const badge = document.getElementById('badgeHidden')?.value || '';
+          const title    = document.getElementById('titleInput').value || '—';
+          const day      = document.getElementById('dayCount').value || 0;
+          const capacity = document.getElementById('capacity').value || 0;
+          const price    = parseFloat(document.getElementById('priceInput').value);
+          const badge    = document.getElementById('badgeValue').value;
 
-            document.getElementById('sumTitle').textContent = title
-                ? (title.length > 30 ? title.slice(0, 30) + '…' : title) : '—';
-            document.getElementById('sumDay').textContent   = day   ? day   + ' Gün'  : '—';
-            document.getElementById('sumCap').textContent   = cap   ? cap   + ' Kişi' : '—';
-            document.getElementById('sumBadge').textContent = badge || 'Rozet Yok';
-            document.getElementById('sumPrice').textContent = isNaN(price) || price <= 0
-                ? '—' : price.toLocaleString('tr-TR', { style:'currency', currency:'TRY', maximumFractionDigits:0 });
-
-            updateFieldChecks();
+          document.getElementById('sumTitle').textContent    = title.length > 28 ? title.slice(0, 28) + '…' : title;
+          document.getElementById('sumDay').textContent      = day + ' Gün';
+          document.getElementById('sumCapacity').textContent = capacity + ' Kişi';
+          document.getElementById('sumBadge').textContent    = badge || 'Yok';
+          document.getElementById('sumPrice').textContent    = isNaN(price) ? '—' : price.toLocaleString('tr-TR', { style:'currency', currency:'TRY' });
+          updateFieldChecks();
         }
 
-        // ── Field Checks ──
+        // ── Field checks ──
         function updateFieldChecks() {
-            const fields = [
-                { lbl:'Başlık',        ok: (document.getElementById('Title')?.value.trim().length || 0) >= 3 },
-                { lbl:'Açıklama',      ok: (document.getElementById('Description')?.value.trim().length || 0) >= 10 },
-                { lbl:'Kapak Görseli', ok: (document.getElementById('CoverImageUrl')?.value.trim().length || 0) > 5 },
-                { lbl:'Gün Sayısı',    ok: parseInt(document.getElementById('DayCount')?.value) >= 1 },
-                { lbl:'Kapasite',      ok: parseInt(document.getElementById('Capacity')?.value) >= 1 },
-                { lbl:'Fiyat',         ok: parseFloat(document.getElementById('Price')?.value) > 0 },
-            ];
-            document.getElementById('fieldChecks').innerHTML = fields.map(f =>
-                `<div class="field-check-item ${f.ok ? 'ok' : 'nok'}">
-                    <i class="bi ${f.ok ? 'bi-check-circle-fill' : 'bi-circle'}" style="font-size:.95rem"></i>
-                    ${f.lbl}
-                </div>`
-            ).join('');
+          const fields = [
+            { label:'Başlık',       ok: document.getElementById('titleInput').value.length > 3 },
+            { label:'Açıklama',     ok: document.getElementById('descInput').value.length > 10 },
+            { label:'Kapak Görseli',ok: document.getElementById('coverImageUrl').value.length > 5 || document.getElementById('previewImg').src.startsWith('data') },
+            { label:'Gün Sayısı',   ok: parseInt(document.getElementById('dayCount').value) > 0 },
+            { label:'Kapasite',     ok: parseInt(document.getElementById('capacity').value) > 0 },
+            { label:'Fiyat',        ok: parseFloat(document.getElementById('priceInput').value) > 0 },
+          ];
+          const wrap = document.getElementById('fieldChecks');
+          wrap.innerHTML = fields.map(f => `
+            <div style="display:flex;align-items:center;gap:8px;color:${f.ok ? '#198754' : '#8fa3ba'}">
+              <i class="bi ${f.ok ? 'bi-check-circle-fill' : 'bi-circle'}" style="font-size:.95rem"></i>
+              ${f.label}
+            </div>`).join('');
         }
 
-                // ── Submit loading overlay ──
-        const form = document.getElementById('createTourForm');
-        if (form) {
-            form.addEventListener('submit', function (e) {
-                // Tarayıcının kendi doğrulamasını kullanıyoruz (checkValidity)
-                // Eğer formda boş veya hatalı yer yoksa animasyonu çalıştır
-                if (this.checkValidity()) {
-                    document.getElementById('loadingOverlay').style.display = 'flex';
-                } else {
-                    // Form eksikse animasyonu açma, uyarıları göster
-                    document.getElementById('loadingOverlay').style.display = 'none';
-                }
-            });
+        // ── Submit ──
+        function submitForm() {
+          const dto = {
+            title:         document.getElementById('titleInput').value,
+            description:   document.getElementById('descInput').value,
+            coverImageUrl: document.getElementById('coverImageUrl').value,
+            badge:         document.getElementById('badgeValue').value,
+            dayCount:      parseInt(document.getElementById('dayCount').value),
+            capacity:      parseInt(document.getElementById('capacity').value),
+            price:         parseFloat(document.getElementById('priceInput').value),
+            isStatus:      document.getElementById('isStatus').checked,
+          };
+
+          if (!dto.title || !dto.description || dto.price <= 0) {
+            showToast('⚠️ Lütfen zorunlu alanları doldurun.');
+            return;
+          }
+          console.log('CreateTourDto →', dto);
+          showToast('✅ Tur başarıyla oluşturuldu!');
         }
+
+        function showToast(msg) {
+          const t = document.getElementById('toast');
+          document.getElementById('toastMsg').textContent = msg;
+          t.style.display = 'flex';
+          setTimeout(() => { t.style.display = 'none'; }, 3500);
+        }
+
+        // Init
+        updateSummary();
+        updateFieldChecks();
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
