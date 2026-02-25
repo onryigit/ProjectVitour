@@ -30,7 +30,7 @@ namespace ProjectVitour.Services.TourServices
             await _tourCollection.DeleteOneAsync(x=>x.TourID==id);
         }
 
-        public async Task<List<ResultTourDto>> GetAllTourAsync()
+        public async Task<List<ResultTourDto>> GetAllToursAsync()
         {
             var values = await _tourCollection.Find(x=>true).ToListAsync();
             return _mapper.Map<List<ResultTourDto>>(values);

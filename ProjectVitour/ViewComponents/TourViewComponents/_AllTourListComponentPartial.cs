@@ -13,7 +13,7 @@ namespace ProjectVitour.ViewComponents.TourViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var values = await _tourService.GetAllTourAsync();
+            var values = await _tourService.GetAllToursAsync();
             return View(values);
         }
     }

@@ -4,7 +4,7 @@ namespace ProjectVitour.Services.TourServices
 {
     public interface ITourService
     {
-        Task<List<ResultTourDto>> GetAllTourAsync();
+        Task<List<ResultTourDto>> GetAllToursAsync();
         Task CreateTourAsync(CreateTourDto createTourDto);
         Task UpdateTourAsync(UpdateTourDto updateTourDto);
         Task DeleteTourAsync(string id);
