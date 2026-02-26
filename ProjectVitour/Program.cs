@@ -3,12 +3,14 @@ using ProjectVitour.Services.CategoryServices;
 using ProjectVitour.Settings;
 using System.Reflection;
 using ProjectVitour.Services.TourServices;
+using ProjectVitour.Services.ReviewServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ITourService, TourService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettingKey"));

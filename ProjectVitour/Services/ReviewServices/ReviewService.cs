@@ -37,6 +37,12 @@ namespace ProjectVitour.Services.ReviewServices
             return _mapper.Map<List<ResultReviewDto>>(values);
         }
 
+        public async Task<List<ResultReviewByTourIdDto>> GetAllReviewsByTourIdAsync(string id)
+        {
+           var values=await _reviewCollection.Find(x=> x.TourId==id).ToListAsync();
+            return _mapper.Map<List<ResultReviewByTourIdDto>>(values);
+        }
+
         public async Task<GetReviewByIdDto> GetReviewByIdAsync(string id)
         {
             var values=await _reviewCollection.Find(x=>x.ReviewId == id).FirstOrDefaultAsync();

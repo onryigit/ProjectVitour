@@ -9,6 +9,8 @@ namespace ProjectVitour.Services.TourServices
         Task UpdateTourAsync(UpdateTourDto updateTourDto);
         Task DeleteTourAsync(string id);
         Task<GetTourByIdDto> GetTourByIdAsync(string id);
+        Task<List<ResultTourDto>> GetToursWithPaginationAsync(int page, int pageSize);
+        Task<long> GetTourCountAsync();
 
     }
 }
