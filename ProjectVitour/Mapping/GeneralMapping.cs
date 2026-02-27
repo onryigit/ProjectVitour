@@ -25,7 +25,7 @@ namespace ProjectVitour.Mapping
             CreateMap<Review, UpdateReviewDto>().ReverseMap();
             CreateMap<Review, GetReviewByIdDto>().ReverseMap();
             CreateMap<Review, ResultReviewByTourIdDto>().ReverseMap();
-
+            CreateMap<TourPlan, TourPlanDto>().ReverseMap();
         }
     }
 }

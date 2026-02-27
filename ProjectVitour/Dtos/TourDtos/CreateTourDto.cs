@@ -10,5 +10,7 @@
         public int Capacity { get; set; }
         public decimal Price { get; set; }
         public bool IsStatus { get; set; }
+        public string Location { get; set; }
+        public string MapLocationImageUrl { get; set; }
     }
 }

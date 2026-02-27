@@ -1,0 +1,150 @@
+﻿@model ProjectVitour.Dtos.TourDtos.GetTourByIdDto
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_VitourLayout.cshtml";
+}
+
+<section class="tour-single" style="margin-top: 130px;">
+    <div class="tf-container">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="nav justify-content-between tab-tour-single" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-information-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-information" type="button" role="tab"
+                                aria-controls="pills-information" aria-selected="true">
+                            <i class="icon-Vector-51"></i> Information
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-tour-planing-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-tour-planing" type="button" role="tab"
+                                aria-controls="pills-tour-planing" aria-selected="false">
+                            <i class="icon-destination-2-1"></i> Tour Planing
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-location-share-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-location-share" type="button" role="tab"
+                                aria-controls="pills-location-share" aria-selected="false">
+                            <i class="icon-map-1"></i> Location Share
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row pd-main">
+            <div class="col-lg-12">
+                <div class="tab-content" id="pills-tabContent">
+
+                    <div class="tab-pane fade show active" id="pills-information" role="tabpanel"
+                         aria-labelledby="pills-information-tab" tabindex="0">
+                        <div class="row mb-50">
+                            <div class="col-lg-12">
+                                <div class="inner-heading-wrap flex-two">
+                                    <div class="inner-heading">
+                                        <span class="feature">@Model.Badge</span>
+                                        <h2 class="title">@Model.Title</h2>
+                                        <ul class="flex-three list-wrap-heading">
+                                            <li class="flex-three">
+                                                <i class="icon-time-left"></i>
+                                                <span>@Model.DayCount Gün</span>
+                                            </li>
+                                            <li class="flex-three">
+                                                <i class="icon-user"></i>
+                                                <span>Kapasite: @Model.Capacity Kişi</span>
+                                            </li>
+                                            <li class="flex-three">
+                                                <i class="icon-18"></i>
+                                                <span>@Model.Location</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="inner-price">
+                                        <div class="flex-three">
+                                            <div class="start">
+                                                <i class="icon-Star"></i><i class="icon-Star"></i><i class="icon-Star"></i><i class="icon-Star"></i><i class="icon-Star"></i>
+                                            </div>
+                                            <span class="review">(0 Review)</span>
+                                        </div>
+                                        <p class="price-sale text-main">$@Model.Price</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-40">
+                            <div class="col-12">
+                                <img src="@Model.CoverImageUrl" alt="@Model.Title" style="width:100%; height:400px; object-fit:cover; border-radius:12px;">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="information-content-tour">
+                                    <div class="description-wrap mb-40">
+                                        <span class="description">Açıklama:</span>
+                                        <p class="des">@Model.Description</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-tour-planing" role="tabpanel"
+                         aria-labelledby="pills-tour-planing-tab" tabindex="0">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="planing-content-tour">
+                                    <h3 class="title-plan">Tur Programı:</h3>
+
+                                    @if (Model.TourPlans != null && Model.TourPlans.Count > 0)
+                                    {
+                                        foreach (var plan in Model.TourPlans)
+                                        {
+                                            <div class="tour-planing-section flex">
+                                                <div class="number-box flex-five">@plan.DayNumber.ToString("D2")</div>
+                                                <div class="content-box">
+                                                    <h5 class="title">@plan.Title</h5>
+                                                    <p class="des mb-10">@plan.Description</p>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-info mt-3">Bu tur için henüz bir program eklenmemiştir.</div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-location-share" role="tabpanel"
+                         aria-labelledby="pills-location-share-tab" tabindex="0">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="localtion-content-tour">
+                                    <h3 class="title-location mb-3">Tur Bölge Haritası</h3>
+
+                                    <div class="map-image-wrapper mb-32" style="border-radius:15px; overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                                        <img src="@Model.MapLocationImageUrl" alt="Pixar Style Map" style="width:100%; height:auto;">
+                                    </div>
+
+                                    <div class="flex-three map-list mb-50 mt-4">
+                                        <i class="icon-18"></i>
+                                        <p>@Model.Location</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

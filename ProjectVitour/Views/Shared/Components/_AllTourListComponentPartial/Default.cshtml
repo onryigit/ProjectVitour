@@ -14,10 +14,27 @@
 <section class="archieve-tour">
     <div class="tf-container">
         <div class="listing-list-car-wrap listing-list-car-wrap-grid3">
+
             <form action="/" class="tf-my-listing mb-37">
                 <div class="row align-center">
                     <div class="col-sm-5">
-                        <p class="showing">Gösteriliyor: <span class="text-main">12</span> of 21 Results</p>
+                        @{
+                            // Eğer ViewBag verileri boş gelirse hata vermemesi için güvenli atamalar
+                            int currentPage = ViewBag.CurrentPage != null ? (int)ViewBag.CurrentPage : 1;
+                            int pageSize = ViewBag.PageSize != null ? (int)ViewBag.PageSize : 6;
+                            long totalCount = ViewBag.TotalCount != null ? (long)ViewBag.TotalCount : Model.Count;
+                            int totalPages = ViewBag.TotalPages != null ? (int)ViewBag.TotalPages : 1;
+
+                            int startItem = ((currentPage - 1) * pageSize) + 1;
+                            long endItem = startItem + Model.Count - 1;
+
+                            if (totalCount == 0)
+                            {
+                                startItem = 0;
+                                endItem = 0;
+                            }
+                        }
+                        <p class="showing">Gösteriliyor: <span class="text-main">@startItem - @endItem</span> of @totalCount Results</p>
                     </div>
                     <div class="col-sm-7  flex-six group-bar-wrap">
                         <div class="listing-all-wrap">
@@ -28,9 +45,7 @@
                                         <ul class="list">
                                             <li data-value="" class="option selected focus">Price</li>
                                             <li data-value="new" class="option">New</li>
-                                            <li data-value="Recently Added" class="option">
-                                                Recently Added
-                                            </li>
+                                            <li data-value="Recently Added" class="option">Recently Added</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -51,25 +66,25 @@
                     </div>
                 </div>
             </form>
+
             <div class="listing-list-car-grid mb-60">
-              @foreach (var item in Model)
+                @foreach (var item in Model)
                 {
                     <div class="tour-listing box-sd">
-                        <a href="tour-single.html" class="tour-listing-image">
+                        <a href="/Tour/Details/@item.TourID" class="tour-listing-image">
                             <div class="badge-top flex-two">
-                                <span class="feature">Featured</span>
+                                <span class="feature">@item.Badge</span>
                                 <div class="badge-media flex-five">
                                     <span class="media"><i class="icon-Group-1000002909"></i>5</span>
                                     <span class="media"><i class="icon-Group-1000002910"></i>2</span>
                                 </div>
                             </div>
                             <img src="@item.CoverImageUrl" alt="Image Listing">
-
                         </a>
                         <div class="tour-listing-content">
-                            <span class="map"><i class="icon-Vector4"></i>United States USA</span>
+                            <span class="map"><i class="icon-Vector4"></i>Tour Destination</span>
                             <h3 class="title-tour-list">
-                                <a href="tour-single.html">
+                                <a href="/Tour/Details/@item.TourID">
                                     @item.Title
                                 </a>
                             </h3>
@@ -109,8 +124,8 @@
                             </div>
                             <div class="flex-two">
                                 <div class="price-box flex-three">
-                                    <p>From <span class="price-sale">$169.00</span></p>
-                                    <span class="price">@(item.Price + item.Price*20/100)</span>
+                                    <p>Fiyat <span class="price-sale">$@(item.Price + (item.Price * 20 / 100))</span></p>
+                                    <span class="price">$@item.Price</span>
                                 </div>
                                 <div class="icon-bookmark">
                                     <i class="icon-Vector-151"></i>
@@ -122,26 +137,47 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12 ">
+                <div class="col-md-12">
                     <ul class="tf-pagination flex-five mt-20">
-                        <li>
-                            <a class="pages-link" href="#"> <i class="icon-29"></i></a>
-                        </li>
-                        <li>
-                            <a class="pages-link" href="#">1</a>
-                        </li>
-                        <li class="pages-item active" aria-current="page">
-                            <a class="pages-link" href="#">2</a>
-                        </li>
-                        <li><a class="pages-link" href="#">3</a></li>
-                        <li>
-                            <a class="pages-link" href="#"><i class=" icon--1"></i></a>
-                        </li>
-                    </ul>
+                        @{
+                            // Sayfalama değişkenleri yukarıda atanmıştı
+                            int currentPg = ViewBag.CurrentPage != null ? (int)ViewBag.CurrentPage : 1;
+                            int totalPgs = ViewBag.TotalPages != null ? (int)ViewBag.TotalPages : 1;
+                        }
 
+                        @if (currentPg > 1)
+                        {
+                            <li>
+                                <a class="pages-link" href="?page=@(currentPg - 1)"> <i class="icon-29"></i></a>
+                            </li>
+                        }
+
+                        @for (int i = 1; i <= totalPgs; i++)
+                        {
+                            if (i == currentPg)
+                            {
+                                <li class="pages-item active" aria-current="page">
+                                    <a class="pages-link" href="#">@i</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a class="pages-link" href="?page=@i">@i</a>
+                                </li>
+                            }
+                        }
+
+                        @if (currentPg < totalPgs)
+                        {
+                            <li>
+                                <a class="pages-link" href="?page=@(currentPg + 1)"><i class="icon--1"></i></a>
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
 </section>
