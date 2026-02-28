@@ -13,16 +13,28 @@ namespace ProjectVitour.Controllers
             _reviewService = reviewService;
         }
 
-        public IActionResult CreateReview()
+        [HttpGet]
+        public IActionResult CreateReview(string tourId)
         {
-            return View();
+            var model = new CreateReviewDto
+            {
+                TourId = tourId,
+                ReviewDate = DateTime.Now // Tarihi backend'den bugüne ayarladık!
+            };
+
+            return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> CreateReview(CreateReviewDto createReviewDto)
         {
+            // Yorumu onaysız olarak kaydet (İstersen test aşamasındayken burayı true yapabilirsin)
             createReviewDto.Status = false;
+
             await _reviewService.CreateReviewAsync(createReviewDto);
-            return RedirectToAction("ReviewList");
+
+            // HATA VEREN ESKİ KOD: return RedirectToAction("ReviewList");
+            // YENİ KOD: Yorum yapılan turun detay sayfasına (Tour/Details/ID) geri dön
+            return RedirectToAction("Details", "Tour", new { id = createReviewDto.TourId });
         }
         public async Task<IActionResult> GetReviewByTourId(string id)
         {

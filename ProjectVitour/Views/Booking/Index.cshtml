@@ -1,0 +1,104 @@
+@model ProjectVitour.Dtos.ReservationDtos.CreateReservationDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rezervasyon Tamamla - Vitour</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+
+    <div class="max-w-4xl w-full bg-white shadow-2xl rounded-3xl overflow-hidden flex flex-col md:flex-row m-4">
+        
+        <!-- SOL TARAF: TUR ÖZETİ -->
+        <div class="md:w-1/3 bg-emerald-700 text-white p-10 flex flex-col justify-between">
+            <div>
+                <h1 class="text-3xl font-bold mb-6">Vitour</h1>
+                <p class="text-emerald-100 mb-8 italic">"Dünyayı bizimle keşfedin, unutulmaz anılar biriktirin."</p>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+                        <p class="text-sm">Seçilen Tur: <span class="font-semibold">@ViewBag.TourName</span></p>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+                        <p class="text-sm">Kişi Başı: <span class="font-semibold">$@ViewBag.TourPrice</span></p>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+                        <p class="text-sm">Kalan Kontenjan: <span class="font-semibold">@ViewBag.MaxCapacity Kişi</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 border-t border-emerald-600 pt-6 text-xs text-emerald-200">
+                Güvenli Ödeme & Hızlı Rezervasyon
+            </div>
+        </div>
+
+        <!-- SAĞ TARAF: REZERVASYON FORMU -->
+        <div class="md:w-2/3 p-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Rezervasyon Bilgileri</h2>
+            <p class="text-gray-500 mb-8">Lütfen formu eksiksiz doldurunuz.</p>
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
+                    <p class="text-red-700 text-sm">@TempData["ErrorMessage"]</p>
+                </div>
+            }
+
+            <form action="/Booking/Index" method="post" class="space-y-5">
+                <input type="hidden" name="TourID" value="@ViewBag.TourId" />
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Ad Soyad</label>
+                    <input type="text" name="FullName" required placeholder="Örn: Ahmet Yılmaz" 
+                           class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">E-Posta</label>
+                        <input type="email" name="Email" required placeholder="ahmet@example.com"
+                               class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Telefon</label>
+                        <input type="tel" name="Phone" required placeholder="05XX XXX XX XX"
+                               class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Kişi Sayısı</label>
+                    <input type="number" name="PersonCount" min="1" max="@ViewBag.MaxCapacity" required
+                           class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all">
+                    <p class="text-xs text-gray-400 mt-1">Maksimum @ViewBag.MaxCapacity kişi seçebilirsiniz.</p>
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit" 
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-emerald-200 transition-all transform hover:-translate-y-1">
+                        Rezervasyonu Tamamla
+                    </button>
+                    <a href="/Tour/Details/@ViewBag.TourId" class="block text-center text-sm text-gray-400 mt-4 hover:text-gray-600">
+                        Vazgeç ve Tur Bilgilerine Dön
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

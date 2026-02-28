@@ -1,4 +1,4 @@
-﻿@model CreateReviewDto
+﻿@model ProjectVitour.Dtos.ReviewDtos.CreateReviewDto
 
 @{
     Layout = null;
@@ -80,7 +80,6 @@
             border: 1px solid rgba(255,255,255,0.8);
         }
 
-        /* Form Labels */
         .form-label {
             font-weight: 600;
             color: #2c3e35;
@@ -96,7 +95,6 @@
                 font-size: 1rem;
             }
 
-        /* Inputs */
         .form-control, .form-select {
             border: 1.5px solid #dee2e6;
             border-radius: 10px;
@@ -113,17 +111,11 @@
                 outline: none;
             }
 
-            .form-control::placeholder {
-                color: #adb5bd;
-                font-size: 0.88rem;
-            }
-
         textarea.form-control {
             resize: vertical;
             min-height: 130px;
         }
 
-        /* Star Rating */
         .star-rating-label {
             display: flex;
             align-items: center;
@@ -142,10 +134,10 @@
             background: #fafafa;
             border: 1.5px solid #dee2e6;
             border-radius: 10px;
-            padding: 0.75rem 1rem;
+            padding: 0.5rem 1rem;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            justify-content: space-between;
             transition: border-color 0.2s;
         }
 
@@ -165,7 +157,7 @@
 
             .star-rating label {
                 cursor: pointer;
-                font-size: 2rem;
+                font-size: 1.8rem;
                 color: #dee2e6;
                 transition: color 0.15s, transform 0.15s;
                 line-height: 1;
@@ -185,27 +177,12 @@
                 transform: scale(1.1);
             }
 
-        .star-hint {
-            font-size: 0.8rem;
-            color: var(--text-muted-custom);
-            margin-left: 0.5rem;
-        }
-
-        #starScoreText {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--accent);
-            min-width: 80px;
-        }
-
-        /* Divider */
         .section-divider {
             border: none;
             border-top: 1.5px dashed #e9ecef;
             margin: 1.5rem 0;
         }
 
-        /* Submit Button */
         .btn-submit {
             background: linear-gradient(135deg, var(--primary) 0%, #2d9e6e 100%);
             color: #fff;
@@ -215,53 +192,16 @@
             font-size: 1rem;
             font-weight: 600;
             width: 100%;
-            letter-spacing: 0.3px;
-            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 6px 20px rgba(26,107,74,0.3);
-            position: relative;
-            overflow: hidden;
         }
-
-            .btn-submit::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-                transition: left 0.4s;
-            }
 
             .btn-submit:hover {
                 transform: translateY(-2px);
                 box-shadow: 0 10px 28px rgba(26,107,74,0.4);
-                background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
                 color: #fff;
             }
 
-                .btn-submit:hover::before {
-                    left: 100%;
-                }
-
-            .btn-submit:active {
-                transform: translateY(0);
-            }
-
-            .btn-submit i {
-                font-size: 1.1rem;
-            }
-
-        /* Validation */
-        .invalid-feedback {
-            font-size: 0.82rem;
-        }
-
-        .is-invalid {
-            border-color: #dc3545 !important;
-        }
-
-        /* Info badge */
         .tour-info-badge {
             background: var(--primary-light);
             border: 1px solid #a8d5bc;
@@ -274,127 +214,116 @@
             gap: 0.4rem;
             margin-bottom: 1.5rem;
         }
-
-        @@media (max-width: 576px) {
-            .review-card {
-                padding: 1.5rem;
-            }
-
-            .star-rating label {
-                font-size: 1.7rem;
-            }
-
-            .brand-header h1 {
-                font-size: 1.4rem;
-            }
-        }
     </style>
 </head>
 <body>
 
     <div class="page-wrapper">
-
-        <!-- Header -->
         <div class="brand-header">
             <div class="brand-icon">
-                <i class="bi bi-airplane-engines-fill"></i>
+                <i class="bi bi-star-half"></i>
             </div>
             <h1>Tur Yorumu Ekle</h1>
-            <p>Deneyiminizi bizimle paylaşın</p>
+            <p>Deneyiminizi 4 farklı kriterde değerlendirin</p>
         </div>
 
-        <!-- Card -->
         <div class="review-card">
-
-            @if (Model?.TourId != null)
-            {
-                <div class="tour-info-badge">
-                    <i class="bi bi-geo-alt-fill"></i>
-                    Tur ID: <strong>@Model.TourId</strong>
-                </div>
-            }
 
             <form asp-action="CreateReview" method="post" novalidate id="reviewForm">
                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3 small"></div>
 
-                <!-- Hidden Fields -->
-                <input type="text" asp-for="TourId" value="@Model?.TourId" placeholder="Tur Id Değeri" />
+                <input type="hidden" name="TourId" value="@Model?.TourId" />
+                <input type="hidden" name="Score" value="0" />
 
-                <!-- Ad Soyad -->
                 <div class="mb-4">
                     <label asp-for="NameSurname" class="form-label">
                         <i class="bi bi-person-fill"></i> Ad Soyad
                     </label>
-                    <input asp-for="NameSurname"
-                           class="form-control"
-                           placeholder="Adınızı ve soyadınızı girin"
-                           maxlength="100" />
-                    <span asp-validation-for="NameSurname" class="invalid-feedback d-block"></span>
+                    <input asp-for="NameSurname" class="form-control" placeholder="Adınızı ve soyadınızı girin" required />
                 </div>
 
-                <!-- Yorum Detayı -->
                 <div class="mb-4">
                     <label asp-for="Detail" class="form-label">
                         <i class="bi bi-chat-quote-fill"></i> Yorum Detayı
                     </label>
-                    <textarea asp-for="Detail"
-                              class="form-control"
-                              placeholder="Tur deneyiminizi detaylı olarak anlatın..."></textarea>
-                    <span asp-validation-for="Detail" class="invalid-feedback d-block"></span>
+                    <textarea asp-for="Detail" class="form-control" placeholder="Tur deneyiminizi detaylı olarak anlatın..." required></textarea>
                 </div>
 
-                <!-- Puan (Yıldız) -->
-                <div class="mb-4">
-                    <div class="star-rating-label">
-                        <i class="bi bi-star-fill"></i> Puanınız
-                    </div>
-                    <div class="star-rating-wrapper">
-                        <div class="star-rating" id="starRating">
-                            <input type="radio" asp-for="Score" id="star5" value="5" />
-                            <label for="star5" title="Mükemmel">&#9733;</label>
-                            <input type="radio" asp-for="Score" id="star4" value="4" />
-                            <label for="star4" title="Çok İyi">&#9733;</label>
-                            <input type="radio" asp-for="Score" id="star3" value="3" />
-                            <label for="star3" title="İyi">&#9733;</label>
-                            <input type="radio" asp-for="Score" id="star2" value="2" />
-                            <label for="star2" title="Orta">&#9733;</label>
-                            <input type="radio" asp-for="Score" id="star1" value="1" />
-                            <label for="star1" title="Kötü">&#9733;</label>
+                <hr class="section-divider" />
+                <h6 class="mb-3 text-muted">Detaylı Değerlendirme</h6>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="star-rating-label"><i class="bi bi-person-badge"></i> Rehber</div>
+                        <div class="star-rating-wrapper">
+                            <div class="star-rating">
+                                <input type="radio" asp-for="GuideRating" id="gStar5" value="5" required /> <label for="gStar5">&#9733;</label>
+                                <input type="radio" asp-for="GuideRating" id="gStar4" value="4" /> <label for="gStar4">&#9733;</label>
+                                <input type="radio" asp-for="GuideRating" id="gStar3" value="3" /> <label for="gStar3">&#9733;</label>
+                                <input type="radio" asp-for="GuideRating" id="gStar2" value="2" /> <label for="gStar2">&#9733;</label>
+                                <input type="radio" asp-for="GuideRating" id="gStar1" value="1" /> <label for="gStar1">&#9733;</label>
+                            </div>
                         </div>
-                        <span id="starScoreText" class="ms-2"></span>
                     </div>
-                    <span asp-validation-for="Score" class="invalid-feedback d-block"></span>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="star-rating-label"><i class="bi bi-house-door"></i> Konaklama</div>
+                        <div class="star-rating-wrapper">
+                            <div class="star-rating">
+                                <input type="radio" asp-for="AccommodationRating" id="aStar5" value="5" required /> <label for="aStar5">&#9733;</label>
+                                <input type="radio" asp-for="AccommodationRating" id="aStar4" value="4" /> <label for="aStar4">&#9733;</label>
+                                <input type="radio" asp-for="AccommodationRating" id="aStar3" value="3" /> <label for="aStar3">&#9733;</label>
+                                <input type="radio" asp-for="AccommodationRating" id="aStar2" value="2" /> <label for="aStar2">&#9733;</label>
+                                <input type="radio" asp-for="AccommodationRating" id="aStar1" value="1" /> <label for="aStar1">&#9733;</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="star-rating-label"><i class="bi bi-bus-front"></i> Ulaşım</div>
+                        <div class="star-rating-wrapper">
+                            <div class="star-rating">
+                                <input type="radio" asp-for="TransportRating" id="tStar5" value="5" required /> <label for="tStar5">&#9733;</label>
+                                <input type="radio" asp-for="TransportRating" id="tStar4" value="4" /> <label for="tStar4">&#9733;</label>
+                                <input type="radio" asp-for="TransportRating" id="tStar3" value="3" /> <label for="tStar3">&#9733;</label>
+                                <input type="radio" asp-for="TransportRating" id="tStar2" value="2" /> <label for="tStar2">&#9733;</label>
+                                <input type="radio" asp-for="TransportRating" id="tStar1" value="1" /> <label for="tStar1">&#9733;</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="star-rating-label"><i class="bi bi-cup-hot"></i> Konfor</div>
+                        <div class="star-rating-wrapper">
+                            <div class="star-rating">
+                                <input type="radio" asp-for="ComfortRating" id="cStar5" value="5" required /> <label for="cStar5">&#9733;</label>
+                                <input type="radio" asp-for="ComfortRating" id="cStar4" value="4" /> <label for="cStar4">&#9733;</label>
+                                <input type="radio" asp-for="ComfortRating" id="cStar3" value="3" /> <label for="cStar3">&#9733;</label>
+                                <input type="radio" asp-for="ComfortRating" id="cStar2" value="2" /> <label for="cStar2">&#9733;</label>
+                                <input type="radio" asp-for="ComfortRating" id="cStar1" value="1" /> <label for="cStar1">&#9733;</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <hr class="section-divider" />
 
-                <!-- Yorum Tarihi -->
                 <div class="mb-4">
                     <label asp-for="ReviewDate" class="form-label">
                         <i class="bi bi-calendar3"></i> Yorum Tarihi
                     </label>
-                    <input asp-for="ReviewDate"
-                           type="date"
-                           class="form-control"
-                           id="reviewDateInput" />
-                    <span asp-validation-for="ReviewDate" class="invalid-feedback d-block"></span>
+                    <input asp-for="ReviewDate" type="date" class="form-control" id="reviewDateInput" required />
                 </div>
 
-                <!-- Submit -->
                 <div class="mt-4">
                     <button type="submit" class="btn btn-submit">
-                        <i class="bi bi-send-fill me-2"></i> Yorumu Gönder
+                        <i class="bi bi-send-fill me-2"></i> Yorumu Kaydet
                     </button>
                 </div>
 
             </form>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
 
     <script>
         // Set today's date as default
@@ -408,25 +337,6 @@
                 dateInput.value = `${yyyy}-${mm}-${dd}`;
             }
         })();
-
-        // Star rating text
-        const scoreLabels = {
-            1: '⭐ Kötü',
-            2: '⭐⭐ Orta',
-            3: '⭐⭐⭐ İyi',
-            4: '⭐⭐⭐⭐ Çok İyi',
-            5: '⭐⭐⭐⭐⭐ Mükemmel'
-        };
-
-        document.querySelectorAll('#starRating input[type="radio"]').forEach(function (radio) {
-            radio.addEventListener('change', function () {
-                const scoreText = document.getElementById('starScoreText');
-                scoreText.textContent = scoreLabels[this.value] || '';
-            });
-        });
     </script>
-
 </body>
 </html>
-
-

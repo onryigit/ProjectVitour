@@ -1,4 +1,6 @@
-﻿namespace ProjectVitour.Dtos.TourDtos
+﻿using ProjectVitour.Dtos.TourImageDtos;
+
+namespace ProjectVitour.Dtos.TourDtos
 {
     public class GetTourByIdDto
     {
@@ -16,5 +18,7 @@
 
         // Turun gün gün planlarını tutacak liste
         public List<TourPlanDto> TourPlans { get; set; }
+        public List<ProjectVitour.Dtos.ReviewDtos.ResultReviewByTourIdDto> Reviews { get; set; }
+        public List<ResultTourImageDto> TourImages { get; set; }
     }
 }

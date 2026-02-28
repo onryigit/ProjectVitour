@@ -483,65 +483,60 @@
         <div class="sidebar-brand">
             <div class="brand-icon"><i class="bi bi-compass"></i></div>
             <div class="brand-text">
-                <span class="brand-name">Horizon Tours</span>
-                <span class="brand-sub">Admin Panel</span>
+                <span class="brand-name">Vitour Admin</span>
+                <span class="brand-sub">Yönetim Paneli</span>
             </div>
         </div>
 
         <!-- Navigation -->
         <nav class="sidebar-nav">
-            <div class="nav-section-label">Main</div>
+            <div class="nav-section-label">Ana Menü</div>
 
-            <a href="/admin" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
-                <i class="bi bi-grid-1x2-fill"></i>
-                <span class="nav-label">Dashboard</span>
+            <a href="/Home/Index" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Siteye Git">
+                <i class="bi bi-house-door-fill"></i>
+                <span class="nav-label">Siteye Git</span>
             </a>
 
-            <a href="/admin/tours" class="nav-item-link active" data-bs-toggle="tooltip" data-bs-placement="right" title="Tours">
+            <a href="/AdminTour/TourList" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Turlar">
                 <i class="bi bi-map-fill"></i>
-                <span class="nav-label">Tours</span>
+                <span class="nav-label">Turlar</span>
             </a>
 
-            <a href="/admin/reservations" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Reservations">
+            <a href="/AdminReservation/ReservationList" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Rezervasyonlar">
                 <i class="bi bi-calendar2-check-fill"></i>
-                <span class="nav-label">Reservations</span>
+                <span class="nav-label">Rezervasyonlar</span>
             </a>
 
-            <a href="/admin/customers" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Customers">
-                <i class="bi bi-people-fill"></i>
-                <span class="nav-label">Customers</span>
+            <a href="/Category/TourList" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Kategoriler">
+                <i class="bi bi-tags-fill"></i>
+                <span class="nav-label">Kategoriler</span>
             </a>
 
-            <a href="/admin/guides" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Guides">
-                <i class="bi bi-person-badge-fill"></i>
-                <span class="nav-label">Guides</span>
+            <a href="/AdminReview/ReviewList" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Yorumlar">
+                <i class="bi bi-chat-left-text-fill"></i>
+                <span class="nav-label">Yorumlar</span>
             </a>
 
-            <a href="/admin/destinations" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Destinations">
-                <i class="bi bi-geo-alt-fill"></i>
-                <span class="nav-label">Destinations</span>
+            <div class="nav-section-label">Raporlama</div>
+
+            <a href="/AdminReservation/ReservationList" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Excel/PDF Raporları">
+                <i class="bi bi-file-earmark-bar-graph-fill"></i>
+                <span class="nav-label">Raporlar</span>
             </a>
 
-            <div class="nav-section-label">Analytics</div>
+            <div class="nav-section-label">Sistem</div>
 
-            <a href="/admin/reports" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Reports">
-                <i class="bi bi-bar-chart-line-fill"></i>
-                <span class="nav-label">Reports</span>
-            </a>
-
-            <div class="nav-section-label">System</div>
-
-            <a href="/admin/settings" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Settings">
+            <a href="#" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Ayarlar">
                 <i class="bi bi-gear-fill"></i>
-                <span class="nav-label">Settings</span>
+                <span class="nav-label">Ayarlar</span>
             </a>
         </nav>
 
         <!-- Sidebar Footer / Logout -->
         <div class="sidebar-footer">
-            <a href="/account/logout" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Logout">
+            <a href="/Account/Logout" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Çıkış Yap">
                 <i class="bi bi-box-arrow-left" style="color:var(--danger);"></i>
-                <span class="nav-label" style="color:rgba(255,255,255,.55);">Logout</span>
+                <span class="nav-label" style="color:rgba(255,255,255,.55);">Çıkış Yap</span>
             </a>
         </div>
     </aside>

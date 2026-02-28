@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MongoDB.Driver;
 using ProjectVitour.Dtos.TourDtos;
+using ProjectVitour.Dtos.TourImageDtos;
 using ProjectVitour.Entities;
 using ProjectVitour.Settings;
 
@@ -10,20 +11,18 @@ namespace ProjectVitour.Services.TourServices
     {
         private readonly IMapper _mapper;
         private readonly IMongoCollection<Tour> _tourCollection;
-
-        // 1. Yeni TourPlan koleksiyonumuzu tanımlıyoruz
+        private readonly IMongoCollection<Review> _reviewCollection;
         private readonly IMongoCollection<TourPlan> _tourPlanCollection;
+        private readonly IMongoCollection<TourImage> _tourImageCollection;
 
         public TourService(IMapper mapper, IDatabaseSettings _databaseSettings)
         {
             var client = new MongoClient(_databaseSettings.ConnectionString);
             var database = client.GetDatabase(_databaseSettings.DatabaseName);
-
+            _reviewCollection = database.GetCollection<Review>(_databaseSettings.ReviewCollectionName);
             _tourCollection = database.GetCollection<Tour>(_databaseSettings.TourCollectionName);
-
-            // 2. TourPlan koleksiyonunu veritabanından alıyoruz
             _tourPlanCollection = database.GetCollection<TourPlan>(_databaseSettings.TourPlanCollectionName);
-
+            _tourImageCollection = database.GetCollection<TourImage>(_databaseSettings.TourImageCollectionName);
             _mapper = mapper;
         }
 
@@ -44,27 +43,29 @@ namespace ProjectVitour.Services.TourServices
             return _mapper.Map<List<ResultTourDto>>(values);
         }
 
-        // 3. GetTourByIdAsync metodunu güncelliyoruz
         public async Task<GetTourByIdDto> GetTourByIdAsync(string id)
         {
-            // Önce ana tur bilgisini çekiyoruz
             var tour = await _tourCollection.Find(x => x.TourID == id).FirstOrDefaultAsync();
             var tourDto = _mapper.Map<GetTourByIdDto>(tour);
 
             if (tourDto != null)
             {
-                // Tura ait olan gün gün planları (TourID ile ilişkili olarak) buluyoruz ve DayNumber'a göre sıralıyoruz
                 var plans = await _tourPlanCollection.Find(x => x.TourID == id)
                                                      .SortBy(x => x.DayNumber)
                                                      .ToListAsync();
-
-                // Bulunan planları DTO'daki listemize mapleyerek atıyoruz
                 tourDto.TourPlans = _mapper.Map<List<TourPlanDto>>(plans);
+
+                var reviews = await _reviewCollection.Find(x => x.TourId == id && x.Status == true).ToListAsync();
+                tourDto.Reviews = _mapper.Map<List<ProjectVitour.Dtos.ReviewDtos.ResultReviewByTourIdDto>>(reviews);
+
+                // --- CASE 3 MADDE 1.2: SHOT GALLERY ---
+                var images = await _tourImageCollection.Find(x => x.TourID == id).ToListAsync();
+                tourDto.TourImages = _mapper.Map<List<ResultTourImageDto>>(images);
+                // --------------------------------------
             }
 
             return tourDto;
         }
-
         public async Task UpdateTourAsync(UpdateTourDto updateTourDto)
         {
             var values = _mapper.Map<Tour>(updateTourDto);

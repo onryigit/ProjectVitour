@@ -9,6 +9,10 @@
         public DateTime ReviewDate { get; set; }
         public bool Status { get; set; }
         public string TourId { get; set; }
+        public int GuideRating { get; set; }         // Rehber Puanı
+        public int AccommodationRating { get; set; } // Konaklama Puanı
+        public int TransportRating { get; set; }     // Ulaşım Puanı
+        public int ComfortRating { get; set; }       // Konfor Puanı
 
     }
 }

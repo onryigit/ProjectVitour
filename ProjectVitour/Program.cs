@@ -4,6 +4,8 @@ using ProjectVitour.Settings;
 using System.Reflection;
 using ProjectVitour.Services.TourServices;
 using ProjectVitour.Services.ReviewServices;
+using ProjectVitour.Services.ReservationServices;
+using ProjectVitour.Services.TourImageServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ITourService, TourService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
+builder.Services.AddScoped<ITourImageService, TourImageService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettingKey"));
