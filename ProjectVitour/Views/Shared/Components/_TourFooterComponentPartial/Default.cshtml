@@ -1,4 +1,7 @@
-﻿<footer class="footer footer-style1">
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<ProjectVitour.SharedResource> SharedLocalizer
+
+<footer class="footer footer-style1">
     <div class="tf-container">
         <div class="footer-main">
             <div class="footer-logo">
@@ -29,19 +32,13 @@
 
                 <ul class="footer-menu">
                     <li>
-                        <a href="about-us.html">Hakkımızda</a>
+                        <a href="/Home/Index">@SharedLocalizer["Hakkimizda"]</a>
                     </li>
                     <li>
-                        <a href="gallery.html">Galeri</a>
+                        <a href="/Tour/TourList">@SharedLocalizer["Turlar"]</a>
                     </li>
                     <li>
-                        <a href="team.html">Ekibimiz</a>
-                    </li>
-                    <li>
-                        <a href="blog.html">Blog Yazıları</a>
-                    </li>
-                    <li>
-                        <a href="contact-us.html">İletişim</a>
+                        <a href="/Home/Index">@SharedLocalizer["Iletisim"]</a>
                     </li>
                 </ul>
             </div>

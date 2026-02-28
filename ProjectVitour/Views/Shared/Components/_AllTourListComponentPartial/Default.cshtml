@@ -1,13 +1,40 @@
-﻿@model List<ProjectVitour.Dtos.TourDtos.ResultTourDto>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<ProjectVitour.SharedResource> SharedLocalizer
+@model List<ProjectVitour.Dtos.TourDtos.ResultTourDto>
 
 <style>
-    /* Tur resimlerini aynı boyuta zorlar ve taşıyan kısımları kırpar */
+    .tour-listing-image {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        border-radius: 16px 16px 0 0;
+    }
     .tour-listing-image img {
         width: 100% !important;
         height: 250px !important;
         object-fit: cover !important;
-        /* Geçiş animasyonunu tamamen kapatır, resim anında şablonun şeklini alır */
-        transition: none !important;
+        transition: transform 0.5s ease;
+    }
+    .tour-listing:hover .tour-listing-image img {
+        transform: scale(1.08);
+    }
+    /* Premium Glassmorphism Badge */
+    .premium-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 700;
+        z-index: 10;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
 </style>
 
@@ -70,66 +97,36 @@
             <div class="listing-list-car-grid mb-60">
                 @foreach (var item in Model)
                 {
-                    <div class="tour-listing box-sd">
+                    <div class="tour-listing box-sd" style="border-radius: 16px; transition: box-shadow 0.3s;">
                         <a href="/Tour/Details/@item.TourID" class="tour-listing-image">
-                            <div class="badge-top flex-two">
-                                <span class="feature">@item.Badge</span>
-                                <div class="badge-media flex-five">
-                                    <span class="media"><i class="icon-Group-1000002909"></i>5</span>
-                                    <span class="media"><i class="icon-Group-1000002910"></i>2</span>
-                                </div>
-                            </div>
-                            <img src="@item.CoverImageUrl" alt="Image Listing">
+                            <span class="premium-badge">@item.Badge</span>
+                            <img src="@item.CoverImageUrl" alt="@item.Title">
                         </a>
-                        <div class="tour-listing-content">
-                            <span class="map"><i class="icon-Vector4"></i>Tour Destination</span>
-                            <h3 class="title-tour-list">
+                        <div class="tour-listing-content" style="padding: 24px;">
+                            <span class="map" style="color:#64748b; font-size:13px;"><i class="icon-Vector4"></i> @item.Location</span>
+                            <h3 class="title-tour-list" style="margin-top:8px; margin-bottom:15px; font-weight:700;">
                                 <a href="/Tour/Details/@item.TourID">
                                     @item.Title
                                 </a>
                             </h3>
-                            <div class="review">
-                                <i class="icon-Star"></i>
-                                <i class="icon-Star"></i>
-                                <i class="icon-Star"></i>
-                                <i class="icon-Star"></i>
-                                <i class="icon-Star"></i>
-                                <span>(0 Değerlendirme)</span>
-                            </div>
-                            <div class="icon-box flex-three">
+                            <div class="icon-box flex-three" style="border-bottom: 1px solid #f1f5f9; padding-bottom:15px; margin-bottom:15px;">
                                 <div class="icons flex-three">
-                                    <i class="icon-time-left"></i>
-                                    <span>@item.DayCount Gün</span>
+                                    <i class="icon-time-left" style="color:#1a6b4a;"></i>
+                                    <span style="font-weight:600;">@item.DayCount @SharedLocalizer["Gun"]</span>
                                 </div>
                                 <div class="icons flex-three">
-                                    <svg width="21" height="16" viewBox="0 0 21 16" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M4.34766 4.79761C4.34766 2.94013 5.85346 1.43433 7.71094 1.43433C9.56841 1.43433 11.0742 2.94013 11.0742 4.79761C11.0742 6.65508 9.56841 8.16089 7.71094 8.16089C5.85346 8.16089 4.34766 6.65508 4.34766 4.79761Z"
-                                              stroke="currentColor" stroke-width="1.7"
-                                              stroke-miterlimit="10" stroke-linecap="round"
-                                              stroke-linejoin="round" />
-                                        <path d="M9.5977 15.1797H2.46098C1.34827 15.1797 0.558268 14.0954 0.898984 13.0362C1.80408 10.222 4.57804 8.18566 7.69301 8.18566C9.17897 8.18566 10.5566 8.64906 11.6895 9.43922"
-                                              stroke="currentColor" stroke-width="1.7"
-                                              stroke-miterlimit="10" stroke-linecap="round"
-                                              stroke-linejoin="round" />
-                                        <path d="M17.1035 15.1797V9.02734" stroke="currentColor"
-                                              stroke-width="1.7" stroke-miterlimit="10"
-                                              stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M20.1797 12.1035H14.0273" stroke="currentColor"
-                                              stroke-width="1.7" stroke-miterlimit="10"
-                                              stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                    <span>@item.Capacity</span>
+                                    <i class="icon-user" style="color:#1a6b4a; margin-right:5px;"></i>
+                                    <span style="font-weight:600;">@item.Capacity @SharedLocalizer["Kisi"]</span>
                                 </div>
                             </div>
-                            <div class="flex-two">
-                                <div class="price-box flex-three">
-                                    <p>Fiyat <span class="price-sale">$@(item.Price + (item.Price * 20 / 100))</span></p>
-                                    <span class="price">$@item.Price</span>
+                            <div class="flex-two align-center">
+                                <div class="price-box">
+                                    <span style="color:#64748b; font-size:12px; display:block;">@SharedLocalizer["Fiyat"]</span>
+                                    <span class="price" style="font-size:22px; font-weight:800; color:#1a6b4a;">$@item.Price.ToString("N0")</span>
                                 </div>
-                                <div class="icon-bookmark">
-                                    <i class="icon-Vector-151"></i>
-                                </div>
+                                <a href="/Tour/Details/@item.TourID" class="btn btn-sm" style="background:#1a6b4a; color:#fff; border-radius:8px; padding:8px 16px;">
+                                    @SharedLocalizer["DetaylariGor"]
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -1,9 +1,9 @@
-﻿@{
+@{
     Layout = null;
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -492,10 +492,17 @@
         <nav class="sidebar-nav">
             <div class="nav-section-label">Ana Menü</div>
 
-            <a href="/Home/Index" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Siteye Git">
-                <i class="bi bi-house-door-fill"></i>
+            <a href="/AdminDashboard/Index" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
+                <i class="bi bi-grid-1x2-fill"></i>
+                <span class="nav-label">Dashboard (Özet)</span>
+            </a>
+
+            <a href="/" class="nav-item-link text-warning" target="_blank" data-bs-toggle="tooltip" data-bs-placement="right" title="Siteye Git">
+                <i class="bi bi-box-arrow-up-right"></i>
                 <span class="nav-label">Siteye Git</span>
             </a>
+
+            <div class="nav-section-label">Tur ve Rezervasyon</div>
 
             <a href="/AdminTour/TourList" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Turlar">
                 <i class="bi bi-map-fill"></i>
@@ -507,14 +514,31 @@
                 <span class="nav-label">Rezervasyonlar</span>
             </a>
 
-            <a href="/Category/TourList" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Kategoriler">
+            <a href="/Category/CategoryList" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Kategoriler">
                 <i class="bi bi-tags-fill"></i>
                 <span class="nav-label">Kategoriler</span>
             </a>
 
+            <a href="/AdminDestination/Index" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Destinasyonlar">
+                <i class="bi bi-geo-alt-fill"></i>
+                <span class="nav-label">Destinasyonlar</span>
+            </a>
+
+            <a href="/AdminGuide/Index" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Rehberler">
+                <i class="bi bi-person-badge-fill"></i>
+                <span class="nav-label">Rehberler</span>
+            </a>
+
+            <div class="nav-section-label">İletişim ve Yorumlar</div>
+
             <a href="/AdminReview/ReviewList" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Yorumlar">
                 <i class="bi bi-chat-left-text-fill"></i>
-                <span class="nav-label">Yorumlar</span>
+                <span class="nav-label">Yorum Yönetimi</span>
+            </a>
+
+            <a href="/AdminMessage/MessageList" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Mesajlar">
+                <i class="bi bi-envelope-fill"></i>
+                <span class="nav-label">Gelen Mesajlar</span>
             </a>
 
             <div class="nav-section-label">Raporlama</div>

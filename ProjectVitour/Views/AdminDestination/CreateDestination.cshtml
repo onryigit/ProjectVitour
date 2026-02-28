@@ -1,0 +1,51 @@
+@model ProjectVitour.Entities.Destination
+@{
+    ViewData["Title"] = "Yeni Destinasyon Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="page-title text-navy fw-bold">Yeni Destinasyon Ekle</h2>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/AdminDashboard/Index" class="text-muted">Admin</a></li>
+                <li class="breadcrumb-item"><a href="/AdminDestination/Index" class="text-muted">Destinasyonlar</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Yeni Ekle</li>
+            </ol>
+        </nav>
+    </div>
+    <a href="/AdminDestination/Index" class="btn btn-outline-secondary rounded-3 shadow-sm">
+        <i class="bi bi-arrow-left me-2"></i> Listeye Dön
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-5">
+    <div class="card-body p-4">
+        <form asp-action="CreateDestination" method="post">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Şehir Adı</label>
+                    <input type="text" asp-for="CityName" class="form-control" required placeholder="Örn: Kapadokya" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Ülke Adı</label>
+                    <input type="text" asp-for="CountryName" class="form-control" required placeholder="Örn: Türkiye" />
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label fw-bold">Görsel URL</label>
+                    <input type="url" asp-for="ImageUrl" class="form-control" required placeholder="https://..." />
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label fw-bold">Kısa Açıklama</label>
+                    <textarea asp-for="Description" class="form-control" rows="4" required placeholder="Bölge hakkında kısa bir açıklama..."></textarea>
+                </div>
+            </div>
+            <div class="mt-4 text-end">
+                <button type="submit" class="btn btn-success rounded-3 px-4 py-2 fw-bold">
+                    <i class="bi bi-check-circle me-2"></i> Kaydet
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,4 +1,6 @@
 @model ProjectVitour.Dtos.ReservationDtos.CreateReservationDto
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<ProjectVitour.SharedResource> SharedLocalizer
 @{
     Layout = null;
 }
@@ -32,11 +34,11 @@
                     </div>
                     <div class="flex items-center">
                         <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                        <p class="text-sm">Kişi Başı: <span class="font-semibold">$@ViewBag.TourPrice</span></p>
+                        <p class="text-sm">@SharedLocalizer["Fiyat"]: <span class="font-semibold">$@ViewBag.TourPrice</span></p>
                     </div>
                     <div class="flex items-center">
                         <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                        <p class="text-sm">Kalan Kontenjan: <span class="font-semibold">@ViewBag.MaxCapacity Kişi</span></p>
+                        <p class="text-sm">@SharedLocalizer["Kapasite"]: <span class="font-semibold">@ViewBag.MaxCapacity @SharedLocalizer["Kisi"]</span></p>
                     </div>
                 </div>
             </div>
@@ -48,7 +50,7 @@
 
         <!-- SAĞ TARAF: REZERVASYON FORMU -->
         <div class="md:w-2/3 p-10">
-            <h2 class="text-2xl font-bold text-gray-800 mb-2">Rezervasyon Bilgileri</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">@SharedLocalizer["RezervasyonYap"]</h2>
             <p class="text-gray-500 mb-8">Lütfen formu eksiksiz doldurunuz.</p>
 
             @if (TempData["ErrorMessage"] != null)

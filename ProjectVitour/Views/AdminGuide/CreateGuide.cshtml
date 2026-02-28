@@ -1,0 +1,55 @@
+@model ProjectVitour.Entities.Guide
+@{
+    ViewData["Title"] = "Yeni Rehber Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="page-title text-navy fw-bold">Yeni Rehber Ekle</h2>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/AdminDashboard/Index" class="text-muted">Admin</a></li>
+                <li class="breadcrumb-item"><a href="/AdminGuide/Index" class="text-muted">Rehberler</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Yeni Ekle</li>
+            </ol>
+        </nav>
+    </div>
+    <a href="/AdminGuide/Index" class="btn btn-outline-secondary rounded-3 shadow-sm">
+        <i class="bi bi-arrow-left me-2"></i> Listeye Dön
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-5">
+    <div class="card-body p-4">
+        <form asp-action="CreateGuide" method="post">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Rehber Adı Soyadı</label>
+                    <input type="text" asp-for="FullName" class="form-control" required placeholder="Örn: Ahmet Yılmaz" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Unvan</label>
+                    <input type="text" asp-for="Title" class="form-control" required placeholder="Örn: Kıdemli Tur Rehberi" />
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label fw-bold">Profil Görseli (URL)</label>
+                    <input type="url" asp-for="ImageUrl" class="form-control" required placeholder="https://..." />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Instagram URL (Opsiyonel)</label>
+                    <input type="url" asp-for="InstagramUrl" class="form-control" placeholder="https://instagram.com/..." />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Twitter URL (Opsiyonel)</label>
+                    <input type="url" asp-for="TwitterUrl" class="form-control" placeholder="https://twitter.com/..." />
+                </div>
+            </div>
+            <div class="mt-4 text-end">
+                <button type="submit" class="btn btn-success rounded-3 px-4 py-2 fw-bold">
+                    <i class="bi bi-check-circle me-2"></i> Kaydet
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

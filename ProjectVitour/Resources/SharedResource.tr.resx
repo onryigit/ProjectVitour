@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="AnaSayfa"><value>Ana Sayfa</value></data>
+  <data name="Turlar"><value>Turlar</value></data>
+  <data name="KulturTurlari"><value>Kültür Turları</value></data>
+  <data name="VizesizTurlar"><value>Vizesiz Turlar</value></data>
+  <data name="Rehberlerimiz"><value>Rehberlerimiz</value></data>
+  <data name="BizeYazin"><value>Bize Yazın</value></data>
+  <data name="RezervasyonYap"><value>Rezervasyon Yap</value></data>
+  <data name="GirisYap"><value>Giriş Yap</value></data>
+  <data name="DilSecin"><value>Dil Seçin</value></data>
+  <data name="Fiyat"><value>Fiyat</value></data>
+  <data name="Sure"><value>Süre</value></data>
+  <data name="Kapasite"><value>Kapasite</value></data>
+  <data name="Gun"><value>Gün</value></data>
+  <data name="Kisi"><value>Kişi</value></data>
+  <data name="DetaylariGor"><value>Detayları Gör</value></data>
+  <data name="Hakkimizda"><value>Hakkımızda</value></data>
+  <data name="Iletisim"><value>İletişim</value></data>
+  <data name="AramaYap"><value>Aranacak kelime...</value></data>
+  <data name="Bilgi"><value>Bilgi</value></data>
+  <data name="Program"><value>Program</value></data>
+  <data name="Harita"><value>Harita</value></data>
+  <data name="Yorumlar"><value>Yorumlar</value></data>
+  <data name="Galeri"><value>Galeri</value></data>
+  <data name="TurAciklamasi"><value>Tur Açıklaması</value></data>
+  <data name="GunlukTurProgrami"><value>Günlük Tur Programı</value></data>
+  <data name="BolgeHaritasi"><value>Bölge Haritası (AI Pixar Style)</value></data>
+  <data name="MusteriYorumlari"><value>Müşteri Yorumları</value></data>
+  <data name="GenelPuan"><value>Genel Puan</value></data>
+  <data name="Rehber"><value>Rehber</value></data>
+  <data name="Konaklama"><value>Konaklama</value></data>
+  <data name="Ulasim"><value>Ulaşım</value></data>
+  <data name="Konfor"><value>Konfor</value></data>
+  <data name="TurGalerisi"><value>Tur Galerisi</value></data>
+  <data name="KisiBasiBaslayanFiyatlar"><value>Kişi Başı Başlayan Fiyatlar</value></data>
+  <data name="UcretsizIptal"><value>Ücretsiz İptal</value></data>
+  <data name="RezervasyonAnindaOnay"><value>Rezervasyon Anında Onay</value></data>
+  <data name="EnIyiFiyatGarantisi"><value>En İyi Fiyat Garantisi</value></data>
+  <data name="KontenjanDolu"><value>Kontenjan Dolu</value></data>
+  <data name="KalanKontenjan"><value>Kalan Kontenjan</value></data>
+</root>

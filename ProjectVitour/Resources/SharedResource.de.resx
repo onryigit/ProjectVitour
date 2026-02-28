@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="AnaSayfa"><value>Startseite</value></data>
+  <data name="Turlar"><value>Touren</value></data>
+  <data name="KulturTurlari"><value>Kulturreisen</value></data>
+  <data name="VizesizTurlar"><value>Visumfreie Touren</value></data>
+  <data name="Rehberlerimiz"><value>Unsere Reiseführer</value></data>
+  <data name="BizeYazin"><value>Kontaktiere uns</value></data>
+  <data name="RezervasyonYap"><value>Jetzt Buchen</value></data>
+  <data name="GirisYap"><value>Anmelden</value></data>
+  <data name="DilSecin"><value>Sprache</value></data>
+  <data name="Fiyat"><value>Preis</value></data>
+  <data name="Sure"><value>Dauer</value></data>
+  <data name="Kapasite"><value>Kapazität</value></data>
+  <data name="Gun"><value>Tage</value></data>
+  <data name="Kisi"><value>Person</value></data>
+  <data name="DetaylariGor"><value>Details Ansehen</value></data>
+  <data name="Hakkimizda"><value>Über Uns</value></data>
+  <data name="Iletisim"><value>Kontakt</value></data>
+  <data name="AramaYap"><value>Suchen...</value></data>
+  <data name="Bilgi"><value>Information</value></data>
+  <data name="Program"><value>Tourplan</value></data>
+  <data name="Harita"><value>Karte</value></data>
+  <data name="Yorumlar"><value>Bewertungen</value></data>
+  <data name="Galeri"><value>Galerie</value></data>
+  <data name="TurAciklamasi"><value>Tourbeschreibung</value></data>
+  <data name="GunlukTurProgrami"><value>Täglicher Tourplan</value></data>
+  <data name="BolgeHaritasi"><value>Standortkarte (AI Pixar Style)</value></data>
+  <data name="MusteriYorumlari"><value>Kundenbewertungen</value></data>
+  <data name="GenelPuan"><value>Gesamtbewertung</value></data>
+  <data name="Rehber"><value>Reiseführer</value></data>
+  <data name="Konaklama"><value>Unterkunft</value></data>
+  <data name="Ulasim"><value>Transport</value></data>
+  <data name="Konfor"><value>Komfort</value></data>
+  <data name="TurGalerisi"><value>Tourgalerie</value></data>
+  <data name="KisiBasiBaslayanFiyatlar"><value>Preise ab pro Person</value></data>
+  <data name="UcretsizIptal"><value>Kostenlose Stornierung</value></data>
+  <data name="RezervasyonAnindaOnay"><value>Sofortige Buchungsbestätigung</value></data>
+  <data name="EnIyiFiyatGarantisi"><value>Bestpreisgarantie</value></data>
+  <data name="KontenjanDolu"><value>Ausgebucht</value></data>
+  <data name="KalanKontenjan"><value>Verbleibende Kapazität</value></data>
+</root>

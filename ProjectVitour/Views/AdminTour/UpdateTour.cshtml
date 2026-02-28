@@ -733,6 +733,24 @@
                         <span asp-validation-for="Title" class="validation-msg" style="display:block;"></span>
                     </div>
 
+                    <!-- Destinasyon -->
+                    <div class="mb-4">
+                        <label class="form-label-custom" for="DestinationID">
+                            Destinasyon (Bölge) <span class="required">*</span>
+                        </label>
+                        <select asp-for="DestinationID" id="DestinationID" class="form-control-custom" data-original="@Model.DestinationID">
+                            <option value="">-- Destinasyon Seçiniz --</option>
+                            @if(ViewBag.Destinations != null)
+                            {
+                                foreach(var item in ViewBag.Destinations)
+                                {
+                                    <option value="@item.DestinationID">@item.CityName, @item.CountryName</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="DestinationID" class="validation-msg" style="display:block;"></span>
+                    </div>
+
                     <!-- Açıklama -->
                     <div class="mb-0">
                         <label class="form-label-custom" for="Description">
