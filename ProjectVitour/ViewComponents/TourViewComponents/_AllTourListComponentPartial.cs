@@ -14,27 +14,36 @@ namespace ProjectVitour.ViewComponents.TourViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            // URL'den "?page=2" gibi gelen değeri yakalıyoruz, gelmezse 1 kabul ediyoruz.
+            // Paging
             int page = 1;
-            if (int.TryParse(HttpContext.Request.Query["page"], out int p))
-            {
-                page = p;
-            }
+            if (int.TryParse(HttpContext.Request.Query["page"], out int p)) page = p;
+            int pageSize = 6; 
 
-            int pageSize = 6; // Case 3: Her sayfada 6 tur listelenmelidir.
+            // Filters
+            string search = HttpContext.Request.Query["search"];
+            string categoryId = HttpContext.Request.Query["categoryId"];
+            
+            decimal? minPrice = null;
+            if (decimal.TryParse(HttpContext.Request.Query["minPrice"], out decimal minP)) minPrice = minP;
 
-            // Sadece o sayfanın verilerini getir
-            var values = await _tourService.GetToursWithPaginationAsync(page, pageSize);
+            decimal? maxPrice = null;
+            if (decimal.TryParse(HttpContext.Request.Query["maxPrice"], out decimal maxP)) maxPrice = maxP;
 
-            // Toplam sayfa sayısını hesapla
-            long totalCount = await _tourService.GetTourCountAsync();
+            var values = await _tourService.GetFilteredToursAsync(search, categoryId, minPrice, maxPrice, page, pageSize);
+            long totalCount = await _tourService.GetFilteredTourCountAsync(search, categoryId, minPrice, maxPrice);
+            
             int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
-            // View tarafında kullanmak için ViewBag'e atıyoruz
             ViewBag.CurrentPage = page;
             ViewBag.TotalPages = totalPages;
             ViewBag.TotalCount = totalCount;
             ViewBag.PageSize = pageSize;
+
+            // Preserve query params for pagination links
+            ViewBag.SearchQuery = search;
+            ViewBag.CategoryIdQuery = categoryId;
+            ViewBag.MinPriceQuery = minPrice;
+            ViewBag.MaxPriceQuery = maxPrice;
 
             return View(values);
         }

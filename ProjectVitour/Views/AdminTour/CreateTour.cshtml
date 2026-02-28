@@ -830,6 +830,24 @@
                         <span asp-validation-for="DestinationID" class="validation-msg" style="display:block;"></span>
                     </div>
 
+                    <!-- Kategori -->
+                    <div class="mb-4">
+                        <label class="form-label-custom" for="CategoryID">
+                            Kategori <span class="required">*</span>
+                        </label>
+                        <select asp-for="CategoryID" id="CategoryID" class="form-control-custom">
+                            <option value="">-- Kategori Seçiniz --</option>
+                            @if(ViewBag.Categories != null)
+                            {
+                                foreach(var item in ViewBag.Categories)
+                                {
+                                    <option value="@item.CategoryId">@item.CategoryName</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="CategoryID" class="validation-msg" style="display:block;"></span>
+                    </div>
+
                     <!-- Açıklama -->
                     <div class="mb-0">
                         <label class="form-label-custom" for="Description">

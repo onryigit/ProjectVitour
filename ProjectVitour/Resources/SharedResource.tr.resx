@@ -46,4 +46,16 @@
   <data name="DahilOlanlar"><value>Fiyata Dahil Olanlar</value></data>
   <data name="DahilOlmayanlar"><value>Fiyata Dahil Olmayanlar</value></data>
   <data name="GenelBakis"><value>Genel Bakış</value></data>
+  <data name="Kategori"><value>Kategori</value></data>
+  <data name="TumKategoriler"><value>Tüm Kategoriler</value></data>
+  <data name="MinFiyat"><value>Min. Fiyat</value></data>
+  <data name="MaxFiyat"><value>Max. Fiyat</value></data>
+  <data name="TurlariBul"><value>Turları Bul</value></data>
+  <data name="TurAdiVeyaLokasyon"><value>Tur adı veya lokasyon...</value></data>
+  <data name="Kurumsal"><value>Kurumsal</value></data>
+  <data name="BultenAboneligi"><value>Bülten Aboneliği</value></data>
+  <data name="EpostaGiriniz"><value>E-posta Adresinizi Giriniz</value></data>
+  <data name="SartlariKabulEdiyorum"><value>Tüm şartlar ve gizlilik politikamızı kabul ediyorum</value></data>
+  <data name="TumHaklariSaklidir"><value>Tüm hakları saklıdır.</value></data>
+  <data name="AltBilgiAciklama"><value>Dünyayı keşfetmeniz için güvenli, konforlu ve profesyonel tur hizmetleri sunuyoruz.</value></data>
 </root>

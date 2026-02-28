@@ -85,5 +85,61 @@ namespace ProjectVitour.Services.TourServices
         {
             return await _tourCollection.CountDocumentsAsync(x => true);
         }
+
+        public async Task<List<ResultTourDto>> GetFilteredToursAsync(string keyword, string categoryId, decimal? minPrice, decimal? maxPrice, int page, int pageSize)
+        {
+            var builder = Builders<Tour>.Filter;
+            var filter = builder.Empty;
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                filter &= builder.Regex(x => x.Title, new MongoDB.Bson.BsonRegularExpression(keyword, "i")) | 
+                          builder.Regex(x => x.Location, new MongoDB.Bson.BsonRegularExpression(keyword, "i"));
+            }
+            if (!string.IsNullOrEmpty(categoryId))
+            {
+                filter &= builder.Eq(x => x.CategoryID, categoryId);
+            }
+            if (minPrice.HasValue)
+            {
+                filter &= builder.Gte(x => x.Price, minPrice.Value);
+            }
+            if (maxPrice.HasValue)
+            {
+                filter &= builder.Lte(x => x.Price, maxPrice.Value);
+            }
+
+            var values = await _tourCollection.Find(filter)
+                                              .Skip((page - 1) * pageSize)
+                                              .Limit(pageSize)
+                                              .ToListAsync();
+            return _mapper.Map<List<ResultTourDto>>(values);
+        }
+
+        public async Task<long> GetFilteredTourCountAsync(string keyword, string categoryId, decimal? minPrice, decimal? maxPrice)
+        {
+            var builder = Builders<Tour>.Filter;
+            var filter = builder.Empty;
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                filter &= builder.Regex(x => x.Title, new MongoDB.Bson.BsonRegularExpression(keyword, "i")) | 
+                          builder.Regex(x => x.Location, new MongoDB.Bson.BsonRegularExpression(keyword, "i"));
+            }
+            if (!string.IsNullOrEmpty(categoryId))
+            {
+                filter &= builder.Eq(x => x.CategoryID, categoryId);
+            }
+            if (minPrice.HasValue)
+            {
+                filter &= builder.Gte(x => x.Price, minPrice.Value);
+            }
+            if (maxPrice.HasValue)
+            {
+                filter &= builder.Lte(x => x.Price, maxPrice.Value);
+            }
+
+            return await _tourCollection.CountDocumentsAsync(filter);
+        }
     }
 }

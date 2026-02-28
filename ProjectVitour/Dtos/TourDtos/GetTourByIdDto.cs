@@ -19,6 +19,7 @@ namespace ProjectVitour.Dtos.TourDtos
         public bool IsStatus { get; set; }
         public string Location { get; set; }
         public string DestinationID { get; set; }
+        public string CategoryID { get; set; }
         public string MapLocationImageUrl { get; set; }
 
         // Turun gün gün planlarını tutacak liste

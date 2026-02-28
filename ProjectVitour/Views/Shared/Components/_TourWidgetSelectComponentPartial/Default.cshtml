@@ -1,182 +1,83 @@
-﻿<!-- Widget Select Form -->
+﻿@model List<ProjectVitour.Dtos.CategoryDtos.ResultCategoryDto>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<ProjectVitour.SharedResource> SharedLocalizer
+
+<!-- Widget Select Form (Search & Filter) -->
 <div class="mt--82 z-index3 relative">
     <div class="tf-container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="search-form-widget-slider relative">
-                    <form action="/" id="search-form-slider">
-                        <div class="flex wd-search">
-                            <div class="form-group flex">
-                                <i class="icon-18"></i>
-                                <div class="search-bar-group">
-                                    <label>Destination</label>
-                                    <div class="nice-select" tabindex="0">
-                                        <span class="current">Melborn ,Australia</span>
-                                        <ul class="list">
-                                            <li data-value class="option selected">
-                                                Melborn ,Australia
-                                            </li>
-                                            <li data-value="hanoi" class="option">HaNoi ,Vietnam</li>
-                                            <li data-value="tolyo" class="option">Tokyo , Janpan</li>
-                                            <li data-value="korea" class="option">Seoul , Korea</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="form-group flex">
-                                <i class="icon-hiking-1-1 "></i>
-                                <div class="search-bar-group">
-                                    <label>Type</label>
-                                    <div class="nice-select" tabindex="0">
-                                        <span class="current">Booking Type</span>
-                                        <ul class="list">
-                                            <li data-value class="option selected">Booking Type</li>
-                                            <li data-value="booking" class="option">Booking Type</li>
-                                            <li data-value="booking" class="option">Booking Type</li>
-                                            <li data-value="booking" class="option">Booking Type</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="form-group flex">
-                                <i class=" icon-time-left "></i>
-                                <div class="search-bar-group">
-                                    <label>Duration</label>
-                                    <div class="nice-select" tabindex="0">
-                                        <span class="current">2-4 days tour</span>
-                                        <ul class="list">
-                                            <li data-value class="option selected">2-4 days tour</li>
-                                            <li data-value="booking" class="option">3-6 days tour</li>
-                                            <li data-value="booking" class="option">4-8 days tour</li>
-                                            <li data-value="booking" class="option">5-10 days tour</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                            <div class="form-group flex">
-                                <i class="icon-user"></i>
-                                <div class="search-bar-group">
-                                    <label>Guests</label>
-                                    <input type="text" value="0">
-                                </div>
-                            </div>
-                            <div class="form-group flex-two">
-                                <div class="icon-icon-filter">
-                                    <i class="icon-14"></i>
-                                </div>
-                                <a href="#" class="btn-search"><i class="icon-Vector5"></i>Search</a>
-                            </div>
-                        </div>
-                        <div class="wd-search-form">
-                            <div class="input-group-grid">
-                                <fieldset class="group-select relative ">
-                                    <label>Filter By Price</label>
-                                    <div class="widget widget-price ">
-                                        <div id="slider-range"></div>
-                                        <div class="slider-labels">
-                                            <div>
-                                                <input type="hidden" name="min-value" value="">
-                                                <input type="hidden" name="max-value" value="">
-                                            </div>
-                                            <div class="caption flex-three">
-                                                <p class="price-range">Price: </p>
-                                                <div class="number-range">
-                                                    <span id="slider-range-value1"></span>
-                                                    <span id="slider-range-value2"></span>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div><!-- /.widget_price -->
-                                </fieldset>
-                                <fieldset class="group-select relative input-npd ">
-                                    <div class="search-bar-group relative">
-                                        <label>0</label>
-                                        <div class="nice-select" tabindex="0">
-                                            <span class="current">English</span>
-                                            <ul class="list">
-                                                <li data-value="" class="option selected focus">Language</li>
-                                                <li data-value="language1" class="option">Japan</li>
-                                                <li data-value="language2" class="option">Vietnames</li>
-                                                <li data-value="language3" class="option">Korea</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <fieldset class="group-select relative input-npd ">
-                                    <div class="search-bar-group relative">
-                                        <label>Any</label>
-                                        <div class="nice-select" tabindex="0">
-                                            <span class="current">Month</span>
-                                            <ul class="list">
-                                                <li data-value="" class="option selected focus">Month</li>
-                                                <li data-value="month1" class="option">1 Month</li>
-                                                <li data-value="month2" class="option">2 Month</li>
-                                                <li data-value="month3" class="option">3 Month</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <fieldset class="group-select relative input-npd">
-                                    <div class="search-bar-group relative">
-                                        <label>Any</label>
-                                        <div class="nice-select" tabindex="0">
-                                            <span class="current">Duration</span>
-                                            <ul class="list">
-                                                <li data-value="" class="option selected focus">Duration</li>
-                                                <li data-value="duration1" class="option">10-15 day</li>
-                                                <li data-value="duration2" class="option">15-30 day</li>
-                                                <li data-value="duration3" class="option">20-30 day</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <div class="group-check-box-wrap">
-                                    <div class="checkbox">
-                                        <input id="check4" type="checkbox" name="check" value="check">
-                                        <label for="check4">Accepts Credit Cards</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <input id="check5" type="checkbox" name="check" value="check">
-                                        <label for="check5">Car Parking</label>
-                                    </div>
-                                </div>
-                                <div class="group-check-box-wrap">
-                                    <div class="checkbox">
-                                        <input id="check6" type="checkbox" name="check" value="check">
-                                        <label for="check6">Free Coupons</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <input id="check7" type="checkbox" name="check" value="check">
-                                        <label for="check7">Laundry Service</label>
-                                    </div>
-                                </div>
-                                <div class="group-check-box-wrap">
-                                    <div class="checkbox">
-                                        <input id="check8" type="checkbox" name="check" value="check">
-                                        <label for="check8">Outdoor Seating</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <input id="check9" type="checkbox" name="check" value="check">
-                                        <label for="check9">Reservations</label>
-                                    </div>
-                                </div>
-                                <div class="group-check-box-wrap">
-                                    <div class="checkbox">
-                                        <input id="check10" type="checkbox" name="check" value="check">
-                                        <label for="check10">Restaurant</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <input id="check11" type="checkbox" name="check" value="check">
-                                        <label for="check11">Smoking Allowed</label>
+                <div class="search-form-widget-slider relative shadow-lg rounded-4 bg-white p-4">
+                    <form action="/Tour/TourList" method="get" id="search-form-slider">
+                        <div class="row g-3 align-items-center">
+                            
+                            <!-- Arama Kelimesi -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group border rounded-3 px-3 py-2 d-flex align-items-center">
+                                    <i class="icon-search-2 text-primary fs-5 me-2"></i>
+                                    <div class="w-100">
+                                        <label class="text-muted small fw-bold mb-1">@SharedLocalizer["AramaYap"]</label>
+                                        <input type="text" name="search" class="form-control border-0 p-0 bg-transparent" placeholder="Tur adı veya lokasyon..." value="@Context.Request.Query["search"]">
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Kategori Seçimi -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group border rounded-3 px-3 py-2 d-flex align-items-center">
+                                    <i class="icon-18 text-primary fs-5 me-2"></i>
+                                    <div class="w-100">
+                                        <label class="text-muted small fw-bold mb-1">Kategori</label>
+                                        <select name="categoryId" class="form-select border-0 p-0 bg-transparent shadow-none" style="cursor:pointer;">
+                                            <option value="">Tüm Kategoriler</option>
+                                            @if(Model != null)
+                                            {
+                                                foreach(var cat in Model)
+                                                {
+                                                    if(Context.Request.Query["categoryId"] == cat.CategoryId)
+                                                    {
+                                                        <option value="@cat.CategoryId" selected>@cat.CategoryName</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@cat.CategoryId">@cat.CategoryName</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Minimum Fiyat -->
+                            <div class="col-lg-2 col-md-4">
+                                <div class="form-group border rounded-3 px-3 py-2 d-flex align-items-center">
+                                    <span class="text-primary fw-bold fs-5 me-2">$</span>
+                                    <div class="w-100">
+                                        <label class="text-muted small fw-bold mb-1">Min. Fiyat</label>
+                                        <input type="number" name="minPrice" class="form-control border-0 p-0 bg-transparent" placeholder="0" value="@Context.Request.Query["minPrice"]">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Maksimum Fiyat -->
+                            <div class="col-lg-2 col-md-4">
+                                <div class="form-group border rounded-3 px-3 py-2 d-flex align-items-center">
+                                    <span class="text-primary fw-bold fs-5 me-2">$</span>
+                                    <div class="w-100">
+                                        <label class="text-muted small fw-bold mb-1">Max. Fiyat</label>
+                                        <input type="number" name="maxPrice" class="form-control border-0 p-0 bg-transparent" placeholder="5000" value="@Context.Request.Query["maxPrice"]">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Arama Butonu -->
+                            <div class="col-lg-2 col-md-4 text-end">
+                                <button type="submit" class="btn btn-primary w-100 py-3 rounded-3 fw-bold" style="background: #1a6b4a; border-color: #1a6b4a;">
+                                    <i class="icon-Vector5 me-2"></i> Turları Bul
+                                </button>
+                            </div>
+
                         </div>
                     </form>
                 </div>
@@ -184,4 +85,4 @@
         </div>
     </div>
 </div>
-<!-- Widget Select Form -->
+<!-- End Widget Select Form -->

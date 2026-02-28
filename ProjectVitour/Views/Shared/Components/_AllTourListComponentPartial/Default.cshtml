@@ -144,12 +144,18 @@
                             // Sayfalama değişkenleri yukarıda atanmıştı
                             int currentPg = ViewBag.CurrentPage != null ? (int)ViewBag.CurrentPage : 1;
                             int totalPgs = ViewBag.TotalPages != null ? (int)ViewBag.TotalPages : 1;
+
+                            string qSearch = !string.IsNullOrEmpty((string)ViewBag.SearchQuery) ? $"&search={ViewBag.SearchQuery}" : "";
+                            string qCat = !string.IsNullOrEmpty((string)ViewBag.CategoryIdQuery) ? $"&categoryId={ViewBag.CategoryIdQuery}" : "";
+                            string qMin = ViewBag.MinPriceQuery != null ? $"&minPrice={ViewBag.MinPriceQuery}" : "";
+                            string qMax = ViewBag.MaxPriceQuery != null ? $"&maxPrice={ViewBag.MaxPriceQuery}" : "";
+                            string baseQuery = $"{qSearch}{qCat}{qMin}{qMax}";
                         }
 
                         @if (currentPg > 1)
                         {
                             <li>
-                                <a class="pages-link" href="?page=@(currentPg - 1)"> <i class="icon-29"></i></a>
+                                <a class="pages-link" href="?page=@(currentPg - 1)@baseQuery"> <i class="icon-29"></i></a>
                             </li>
                         }
 
@@ -158,13 +164,13 @@
                             if (i == currentPg)
                             {
                                 <li class="pages-item active" aria-current="page">
-                                    <a class="pages-link" href="#">@i</a>
+                                    <a class="pages-link" href="?page=@i@baseQuery">@i</a>
                                 </li>
                             }
                             else
                             {
                                 <li>
-                                    <a class="pages-link" href="?page=@i">@i</a>
+                                    <a class="pages-link" href="?page=@i@baseQuery">@i</a>
                                 </li>
                             }
                         }
@@ -172,7 +178,7 @@
                         @if (currentPg < totalPgs)
                         {
                             <li>
-                                <a class="pages-link" href="?page=@(currentPg + 1)"><i class="icon--1"></i></a>
+                                <a class="pages-link" href="?page=@(currentPg + 1)@baseQuery"><i class="icon--1"></i></a>
                             </li>
                         }
                     </ul>

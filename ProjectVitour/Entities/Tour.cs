@@ -25,6 +25,8 @@ namespace ProjectVitour.Entities
         public string Location { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
         public string DestinationID { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string CategoryID { get; set; }
         public string MapLocationImageUrl { get; set; }
     }
 }

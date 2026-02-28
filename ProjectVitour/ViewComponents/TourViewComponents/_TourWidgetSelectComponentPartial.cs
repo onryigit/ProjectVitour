@@ -1,12 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjectVitour.Services.CategoryServices;
 
 namespace ProjectVitour.ViewComponents.TourViewComponents
 {
-    public class _TourWidgetSelectComponentPartial:ViewComponent
+    public class _TourWidgetSelectComponentPartial : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        private readonly ICategoryService _categoryService;
+
+        public _TourWidgetSelectComponentPartial(ICategoryService categoryService)
         {
-            return View();
+            _categoryService = categoryService;
+        }
+
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            var categories = await _categoryService.GetAllCategoryAsync();
+            return View(categories);
         }
     }
 }

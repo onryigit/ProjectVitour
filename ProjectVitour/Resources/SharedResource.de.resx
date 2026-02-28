@@ -46,4 +46,16 @@
   <data name="DahilOlanlar"><value>Im Preis inbegriffen</value></data>
   <data name="DahilOlmayanlar"><value>Nicht im Preis inbegriffen</value></data>
   <data name="GenelBakis"><value>Überblick</value></data>
+  <data name="Kategori"><value>Kategorie</value></data>
+  <data name="TumKategoriler"><value>Alle Kategorien</value></data>
+  <data name="MinFiyat"><value>Min. Preis</value></data>
+  <data name="MaxFiyat"><value>Max. Preis</value></data>
+  <data name="TurlariBul"><value>Touren Finden</value></data>
+  <data name="TurAdiVeyaLokasyon"><value>Tourname oder Ort...</value></data>
+  <data name="Kurumsal"><value>Unternehmen</value></data>
+  <data name="BultenAboneligi"><value>Newsletter-Abonnement</value></data>
+  <data name="EpostaGiriniz"><value>Geben Sie Ihre E-Mail ein</value></data>
+  <data name="SartlariKabulEdiyorum"><value>Ich akzeptiere alle Bedingungen und Datenschutzrichtlinien</value></data>
+  <data name="TumHaklariSaklidir"><value>Alle Rechte vorbehalten.</value></data>
+  <data name="AltBilgiAciklama"><value>Wir bieten sichere, komfortable und professionelle Touren an, damit Sie die Welt entdecken können.</value></data>
 </root>

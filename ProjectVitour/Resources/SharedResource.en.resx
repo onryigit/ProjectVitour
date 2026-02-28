@@ -46,4 +46,16 @@
   <data name="DahilOlanlar"><value>Included in Price</value></data>
   <data name="DahilOlmayanlar"><value>Excluded from Price</value></data>
   <data name="GenelBakis"><value>Overview</value></data>
+  <data name="Kategori"><value>Category</value></data>
+  <data name="TumKategoriler"><value>All Categories</value></data>
+  <data name="MinFiyat"><value>Min Price</value></data>
+  <data name="MaxFiyat"><value>Max Price</value></data>
+  <data name="TurlariBul"><value>Find Tours</value></data>
+  <data name="TurAdiVeyaLokasyon"><value>Tour name or location...</value></data>
+  <data name="Kurumsal"><value>Corporate</value></data>
+  <data name="BultenAboneligi"><value>Newsletter Subscription</value></data>
+  <data name="EpostaGiriniz"><value>Enter your email address</value></data>
+  <data name="SartlariKabulEdiyorum"><value>I accept all terms and privacy policy</value></data>
+  <data name="TumHaklariSaklidir"><value>All rights reserved.</value></data>
+  <data name="AltBilgiAciklama"><value>We offer safe, comfortable, and professional tour services for you to explore the world.</value></data>
 </root>
