@@ -43,4 +43,7 @@
   <data name="EnIyiFiyatGarantisi"><value>Best Price Guarantee</value></data>
   <data name="KontenjanDolu"><value>Fully Booked</value></data>
   <data name="KalanKontenjan"><value>Remaining Capacity</value></data>
+  <data name="DahilOlanlar"><value>Included in Price</value></data>
+  <data name="DahilOlmayanlar"><value>Excluded from Price</value></data>
+  <data name="GenelBakis"><value>Overview</value></data>
 </root>

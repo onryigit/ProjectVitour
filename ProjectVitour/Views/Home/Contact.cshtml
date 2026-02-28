@@ -1,0 +1,104 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<ProjectVitour.SharedResource> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["Iletisim"];
+    Layout = "~/Views/Shared/_VitourLayout.cshtml";
+}
+
+<!-- HERO SECTION -->
+<section class="page-hero position-relative" style="margin-top: 100px; height: 30vh; min-height: 250px; background: url('https://images.unsplash.com/photo-1528747045269-390fe33c19f2?w=1920&q=100') center center / cover no-repeat fixed;">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 100%);"></div>
+    <div class="container h-100 position-relative z-1 d-flex flex-column justify-content-center align-items-center text-center">
+        <h1 class="text-white fw-bold display-4 mb-2" style="text-shadow: 0 4px 10px rgba(0,0,0,0.5);">@SharedLocalizer["Iletisim"]</h1>
+        <p class="text-white-50 fs-6">Sorularınız, rezervasyonlarınız ve önerileriniz için buradayız.</p>
+    </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="contact-section py-5 bg-light">
+    <div class="container py-4">
+        <div class="row g-5">
+            
+            <!-- CONTACT INFO -->
+            <div class="col-lg-5">
+                <div class="bg-white p-5 rounded-4 shadow-sm h-100">
+                    <h3 class="fw-bold mb-4" style="color: #112240;">Bize Ulaşın</h3>
+                    <p class="text-muted mb-5">Hayalinizdeki rotayı oluşturmak veya mevcut rezervasyonunuzla ilgili bilgi almak için aşağıdaki kanallardan bize 7/24 ulaşabilirsiniz.</p>
+                    
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                            <i class="bi bi-geo-alt-fill fs-5"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="fw-bold mb-1">Merkez Ofis</h6>
+                            <p class="text-muted mb-0 small">Bağdat Caddesi No:123 Kadıköy / İstanbul</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                            <i class="bi bi-telephone-fill fs-5"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="fw-bold mb-1">Telefon</h6>
+                            <p class="text-muted mb-0 small">+90 212 555 01 02</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mb-5">
+                        <div class="bg-warning-subtle text-warning rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                            <i class="bi bi-envelope-fill fs-5"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="fw-bold mb-1">E-Posta</h6>
+                            <p class="text-muted mb-0 small">info@vitour.com</p>
+                        </div>
+                    </div>
+                    
+                    <hr class="text-muted opacity-25 mb-4">
+                    <h6 class="fw-bold mb-3">Bizi Takip Edin</h6>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-outline-secondary rounded-circle" style="width: 40px; height: 40px; line-height: 26px;"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="btn btn-outline-secondary rounded-circle" style="width: 40px; height: 40px; line-height: 26px;"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="btn btn-outline-secondary rounded-circle" style="width: 40px; height: 40px; line-height: 26px;"><i class="bi bi-twitter-x"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTACT FORM -->
+            <div class="col-lg-7">
+                <div class="bg-white p-5 rounded-4 shadow-sm h-100 border-top border-5 border-primary">
+                    <h3 class="fw-bold mb-2" style="color: #112240;">Mesaj Gönderin</h3>
+                    <p class="text-muted mb-4">Aşağıdaki formu eksiksiz doldurarak müşteri temsilcilerimize anında mesaj iletebilirsiniz.</p>
+                    
+                    <form action="#" method="post">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small">Adınız Soyadınız</label>
+                                <input type="text" class="form-control bg-light border-0 py-3 rounded-3" placeholder="Örn: Ahmet Yılmaz" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small">E-Posta Adresiniz</label>
+                                <input type="email" class="form-control bg-light border-0 py-3 rounded-3" placeholder="info@ornek.com" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold small">Konu</label>
+                                <input type="text" class="form-control bg-light border-0 py-3 rounded-3" placeholder="Mesajınızın konusu nedir?" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold small">Mesajınız</label>
+                                <textarea class="form-control bg-light border-0 py-3 rounded-3" rows="5" placeholder="Lütfen detayları buraya yazınız..." required></textarea>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-sm" style="transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                                    Mesajı Gönder <i class="bi bi-send ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

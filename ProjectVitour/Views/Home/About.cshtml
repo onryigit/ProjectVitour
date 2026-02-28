@@ -1,0 +1,74 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<ProjectVitour.SharedResource> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["Hakkimizda"];
+    Layout = "~/Views/Shared/_VitourLayout.cshtml";
+}
+
+<!-- HERO SECTION -->
+<section class="page-hero position-relative" style="margin-top: 100px; height: 40vh; min-height: 300px; background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1920&q=100') center center / cover no-repeat fixed;">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 100%);"></div>
+    <div class="container h-100 position-relative z-1 d-flex flex-column justify-content-center align-items-center text-center">
+        <h1 class="text-white fw-bold display-3 mb-3" style="text-shadow: 0 4px 10px rgba(0,0,0,0.5);">@SharedLocalizer["Hakkimizda"]</h1>
+        <p class="text-white-50 fs-5" style="max-width: 600px;">Dünyanın en güzel köşelerini, yılların verdiği tecrübe ve bitmeyen bir keşfetme tutkusuyla size sunuyoruz.</p>
+    </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="about-content py-5 bg-light">
+    <div class="container py-4">
+        <div class="row align-items-center mb-5 pb-5 border-bottom border-light">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Hakkımızda" class="img-fluid rounded-4 shadow-lg w-100" style="object-fit: cover; height: 450px;">
+            </div>
+            <div class="col-lg-6 ps-lg-5">
+                <span class="badge bg-primary-subtle text-primary p-2 px-3 rounded-pill mb-3">Hikayemiz</span>
+                <h2 class="fw-bold mb-4" style="color: #112240;">Tutkuyla Kurulan Bir Seyahat Ekosistemi</h2>
+                <p class="text-muted" style="line-height: 1.8; font-size: 1.05rem;">
+                    2010 yılında küçük bir ofiste "Herkes dünyayı görmeli" mottosuyla yola çıktık. Bugün binlerce misafirimizi, kıtalar arası unutulmaz maceralara taşıyan lider bir turizm acentesiyiz.
+                </p>
+                <p class="text-muted mb-4" style="line-height: 1.8; font-size: 1.05rem;">
+                    Amacımız sadece sizi bir noktadan diğerine götürmek değil; gittiğiniz yerin ruhunu, kültürünü ve eşsiz tatlarını size en konforlu ve güvenli şekilde yaşatmaktır.
+                </p>
+                <div class="row g-4 mt-2">
+                    <div class="col-6">
+                        <h3 class="fw-bold text-primary mb-1">15+</h3>
+                        <span class="text-muted small">Yıllık Tecrübe</span>
+                    </div>
+                    <div class="col-6">
+                        <h3 class="fw-bold text-primary mb-1">50.000+</h3>
+                        <span class="text-muted small">Mutlu Misafir</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CORE VALUES -->
+        <div class="row text-center">
+            <div class="col-12 mb-5">
+                <h2 class="fw-bold" style="color: #112240;">Neden Bizi Seçmelisiniz?</h2>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="bg-white p-5 rounded-4 shadow-sm h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <i class="bi bi-shield-check text-success display-4 mb-3 d-block"></i>
+                    <h5 class="fw-bold mb-3">Güvenlik ve Konfor</h5>
+                    <p class="text-muted small">Turlarımızda en üst düzey güvenlik standartlarını ve özenle seçilmiş lüks konaklama tesislerini tercih ediyoruz.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="bg-white p-5 rounded-4 shadow-sm h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <i class="bi bi-person-hearts text-primary display-4 mb-3 d-block"></i>
+                    <h5 class="fw-bold mb-3">Uzman Rehber Kadrosu</h5>
+                    <p class="text-muted small">Gittiğiniz bölgenin dilini, tarihini ve kültürünü ana dili gibi bilen profesyonel rehberlerimiz her an yanınızda.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="bg-white p-5 rounded-4 shadow-sm h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <i class="bi bi-piggy-bank text-warning display-4 mb-3 d-block"></i>
+                    <h5 class="fw-bold mb-3">En İyi Fiyat Garantisi</h5>
+                    <p class="text-muted small">Erken rezervasyon fırsatları ve gizli masraflar içermeyen şeffaf fiyatlandırma politikasıyla yanınızdayız.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

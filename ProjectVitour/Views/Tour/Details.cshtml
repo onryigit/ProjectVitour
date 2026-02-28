@@ -1,177 +1,296 @@
+@using ProjectVitour.Helpers
 @model ProjectVitour.Dtos.TourDtos.GetTourByIdDto
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<ProjectVitour.SharedResource> SharedLocalizer
 @{
-    ViewData["Title"] = Model.Title;
+    var localizedTitle = LocalizationHelper.GetLocalizedText(Model.Title, Model.Title_EN, Model.Title_DE);
+    var localizedDesc = LocalizationHelper.GetLocalizedText(Model.Description, Model.Description_EN, Model.Description_DE);
+    var localizedPrice = LocalizationHelper.GetLocalizedPrice(Model.Price);
+
+    // Bulanıklık sorununu çözmek için URL'yi Full HD çözünürlüğe ve yüksek kaliteye (1920px, q=100) zorluyoruz.
+    var highResCoverImage = Model.CoverImageUrl;
+    if (highResCoverImage.Contains("?w=800"))
+    {
+        highResCoverImage = highResCoverImage.Replace("?w=800", "?w=1920").Replace("&q=80", "&q=100");
+    }
+
+    ViewData["Title"] = localizedTitle;
     Layout = "~/Views/Shared/_VitourLayout.cshtml";
 }
 
-<section class="tour-single" style="margin-top: 130px; margin-bottom: 80px;">
-    <div class="tf-container">
-        <div class="row">
-            <!-- SOL TARAF: İÇERİK VE SEKMELER -->
+<!-- HERO SECTION -->
+<section class="tour-hero position-relative" style="margin-top: 100px; height: 60vh; min-height: 400px; background: url('@highResCoverImage') center center / cover no-repeat fixed; image-rendering: -webkit-optimize-contrast;">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);"></div>
+    <div class="container h-100 position-relative z-1 d-flex flex-column justify-content-end pb-5">
+        <span class="badge bg-primary text-white p-2 px-3 rounded-pill mb-3 d-inline-block" style="width: fit-content; font-size: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">@Model.Badge</span>
+        <h1 class="text-white fw-bold display-4 mb-3" style="text-shadow: 0 2px 5px rgba(0,0,0,0.5);">@localizedTitle</h1>
+        <ul class="d-flex flex-wrap align-items-center gap-4 list-unstyled text-white-50 m-0">
+            <li class="d-flex align-items-center text-white"><i class="icon-time-left me-2 text-primary" style="font-size: 1.5rem;"></i> <span style="font-weight: 500; font-size: 1.1rem; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">@Model.DayCount @SharedLocalizer["Gun"]</span></li>
+            <li class="d-flex align-items-center text-white"><i class="icon-user me-2 text-primary" style="font-size: 1.5rem;"></i> <span style="font-weight: 500; font-size: 1.1rem; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">@SharedLocalizer["Kapasite"]: @Model.Capacity @SharedLocalizer["Kisi"]</span></li>
+            <li class="d-flex align-items-center text-white"><i class="icon-18 me-2 text-primary" style="font-size: 1.5rem;"></i> <span style="font-weight: 500; font-size: 1.1rem; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">@Model.Location</span></li>
+        </ul>
+    </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="tour-single-content py-5 bg-light">
+    <div class="container">
+        <div class="row g-5">
+            
+            <!-- LEFT COLUMN: TABS & CONTENT -->
             <div class="col-lg-8">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ul class="nav justify-content-between tab-tour-single" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-information-tab" data-bs-toggle="pill" data-bs-target="#pills-information" type="button" role="tab">
-                                    <i class="icon-Vector-51"></i> @SharedLocalizer["Bilgi"]
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-tour-planing-tab" data-bs-toggle="pill" data-bs-target="#pills-tour-planing" type="button" role="tab">
-                                    <i class="icon-destination-2-1"></i> @SharedLocalizer["Program"]
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-location-share-tab" data-bs-toggle="pill" data-bs-target="#pills-location-share" type="button" role="tab">
-                                    <i class="icon-map-1"></i> @SharedLocalizer["Harita"]
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-reviews-tab" data-bs-toggle="pill" data-bs-target="#pills-reviews" type="button" role="tab">
-                                    <i class="icon-favourite-1"></i> @SharedLocalizer["Yorumlar"]
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-gallery-tab" data-bs-toggle="pill" data-bs-target="#pills-gallery" type="button" role="tab">
-                                    <i class="icon-gallery-1"></i> @SharedLocalizer["Galeri"]
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
+                
+                <!-- PREMIUM TAB NAVIGATION -->
+                <div class="bg-white rounded-4 shadow-sm mb-4 px-3 py-2">
+                    <ul class="nav nav-pills flex-nowrap overflow-auto" id="tour-pills-tab" role="tablist" style="scrollbar-width: none;">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active px-4 py-3 fw-bold rounded-pill text-dark" id="tab-overview" data-bs-toggle="pill" data-bs-target="#content-overview" type="button" role="tab">
+                                <i class="bi bi-info-circle me-2"></i>@SharedLocalizer["GenelBakis"]
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link px-4 py-3 fw-bold rounded-pill text-dark" id="tab-itinerary" data-bs-toggle="pill" data-bs-target="#content-itinerary" type="button" role="tab">
+                                <i class="bi bi-map me-2"></i>@SharedLocalizer["Program"]
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link px-4 py-3 fw-bold rounded-pill text-dark" id="tab-gallery" data-bs-toggle="pill" data-bs-target="#content-gallery" type="button" role="tab">
+                                <i class="bi bi-images me-2"></i>@SharedLocalizer["Galeri"]
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link px-4 py-3 fw-bold rounded-pill text-dark" id="tab-location" data-bs-toggle="pill" data-bs-target="#content-location" type="button" role="tab">
+                                <i class="bi bi-geo-alt me-2"></i>@SharedLocalizer["Harita"]
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link px-4 py-3 fw-bold rounded-pill text-dark" id="tab-reviews" data-bs-toggle="pill" data-bs-target="#content-reviews" type="button" role="tab">
+                                <i class="bi bi-star me-2"></i>@SharedLocalizer["Yorumlar"]
+                            </button>
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="tab-content pd-main" id="pills-tabContent">
-                    <!-- 1. INFORMATION -->
-                    <div class="tab-pane fade show active" id="pills-information" role="tabpanel">
-                        <div class="inner-heading mb-30">
-                            <span class="feature">@Model.Badge</span>
-                            <h2 class="title mt-2">@Model.Title</h2>
-                            <ul class="flex-three list-wrap-heading mt-3">
-                                <li class="flex-three"><i class="icon-time-left"></i> <span>@Model.DayCount @SharedLocalizer["Gun"]</span></li>
-                                <li class="flex-three"><i class="icon-user"></i> <span>@SharedLocalizer["Kapasite"]: @Model.Capacity @SharedLocalizer["Kisi"]</span></li>
-                                <li class="flex-three"><i class="icon-18"></i> <span>@Model.Location</span></li>
-                            </ul>
+                <style>
+                    /* Tab Hover and Active States */
+                    #tour-pills-tab .nav-link { transition: all 0.3s ease; white-space: nowrap; }
+                    #tour-pills-tab .nav-link:hover { background-color: #f1f5f9; color: #1a6b4a !important; }
+                    #tour-pills-tab .nav-link.active { background-color: #1a6b4a; color: white !important; box-shadow: 0 4px 12px rgba(26,107,74,0.3); }
+                    #tour-pills-tab::-webkit-scrollbar { display: none; }
+                </style>
+
+                <!-- TAB CONTENTS -->
+                <div class="tab-content" id="tour-pills-tabContent">
+                    
+                    <!-- 1. OVERVIEW & INCLUSIONS -->
+                    <div class="tab-pane fade show active" id="content-overview" role="tabpanel">
+                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm mb-4">
+                            <h3 class="fw-bold mb-4" style="color: #112240;">@SharedLocalizer["TurAciklamasi"]</h3>
+                            <p class="text-muted" style="line-height: 1.8; font-size: 1.05rem;">@Html.Raw(localizedDesc)</p>
                         </div>
-                        <img src="@Model.CoverImageUrl" alt="@Model.Title" style="width:100%; height:450px; object-fit:cover; border-radius:15px; margin-bottom:30px;">
-                        <div class="description-wrap">
-                            <h4 class="mb-3">@SharedLocalizer["TurAciklamasi"]</h4>
-                            <p class="des">@Model.Description</p>
+                        
+                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
+                            <div class="row g-4">
+                                <div class="col-md-6 border-end border-light">
+                                    <h5 class="fw-bold mb-4 text-success"><i class="bi bi-check-circle-fill me-2 fs-4 align-middle"></i>@SharedLocalizer["DahilOlanlar"]</h5>
+                                    <ul class="list-unstyled text-muted">
+                                        <li class="mb-3"><i class="bi bi-check2 text-success me-3 fw-bold"></i>Lüks Konaklama</li>
+                                        <li class="mb-3"><i class="bi bi-check2 text-success me-3 fw-bold"></i>Profesyonel Rehberlik Hizmeti</li>
+                                        <li class="mb-3"><i class="bi bi-check2 text-success me-3 fw-bold"></i>Havalimanı Transferleri</li>
+                                        <li class="mb-3"><i class="bi bi-check2 text-success me-3 fw-bold"></i>Açık Büfe Sabah Kahvaltıları</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6 ps-md-4">
+                                    <h5 class="fw-bold mb-4 text-danger"><i class="bi bi-x-circle-fill me-2 fs-4 align-middle"></i>@SharedLocalizer["DahilOlmayanlar"]</h5>
+                                    <ul class="list-unstyled text-muted">
+                                        <li class="mb-3"><i class="bi bi-x-lg text-danger me-3 fw-bold"></i>Öğle ve Akşam Yemekleri</li>
+                                        <li class="mb-3"><i class="bi bi-x-lg text-danger me-3 fw-bold"></i>Kişisel Harcamalar</li>
+                                        <li class="mb-3"><i class="bi bi-x-lg text-danger me-3 fw-bold"></i>Müze ve Ören Yeri Giriş Ücretleri</li>
+                                        <li class="mb-3"><i class="bi bi-x-lg text-danger me-3 fw-bold"></i>Yurtdışı Çıkış Harcı</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- 2. TOUR PLANNING -->
-                    <div class="tab-pane fade" id="pills-tour-planing" role="tabpanel">
-                        <h3 class="title-plan mb-4">@SharedLocalizer["GunlukTurProgrami"]</h3>
-                        @if (Model.TourPlans != null && Model.TourPlans.Count > 0)
-                        {
-                            foreach (var plan in Model.TourPlans)
+                    <!-- 2. ITINERARY (TOUR PLAN) -->
+                    <div class="tab-pane fade" id="content-itinerary" role="tabpanel">
+                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
+                            <h3 class="fw-bold mb-4" style="color: #112240;">@SharedLocalizer["GunlukTurProgrami"]</h3>
+                            @if (Model.TourPlans != null && Model.TourPlans.Count > 0)
                             {
-                                <div class="tour-planing-section flex mb-4" style="background: #f9f9f9; padding: 20px; border-radius: 12px;">
-                                    <div class="number-box flex-five" style="background:#1a6b4a; color:white; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:20px;">@plan.DayNumber</div>
-                                    <div class="content-box">
-                                        <h5 class="title" style="font-weight:700;">@plan.Title</h5>
-                                        <p class="des mt-2">@plan.Description</p>
-                                    </div>
+                                <div class="accordion" id="itineraryAccordion">
+                                    @foreach (var plan in Model.TourPlans)
+                                    {
+                                        <div class="accordion-item border-0 mb-3 bg-light rounded-4 overflow-hidden">
+                                            <h2 class="accordion-header" id="heading-@plan.DayNumber">
+                                                <button class="accordion-button @(plan.DayNumber != 1 ? "collapsed" : "") bg-light fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@plan.DayNumber" aria-expanded="@(plan.DayNumber == 1 ? "true" : "false")" aria-controls="collapse-@plan.DayNumber" style="font-size: 1.1rem; box-shadow: none;">
+                                                    <span class="badge bg-primary me-3 px-3 py-2 rounded-pill shadow-sm">@plan.DayNumber. Gün</span> <span class="text-dark">@plan.Title</span>
+                                                </button>
+                                            </h2>
+                                            <div id="collapse-@plan.DayNumber" class="accordion-collapse collapse @(plan.DayNumber == 1 ? "show" : "")" aria-labelledby="heading-@plan.DayNumber" data-bs-parent="#itineraryAccordion">
+                                                <div class="accordion-body text-muted px-5 pb-4 pt-0" style="line-height: 1.7;">
+                                                    @plan.Description
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                             }
-                        }
-                    </div>
-
-                    <!-- 3. LOCATION (PIXAR MAP) -->
-                    <div class="tab-pane fade" id="pills-location-share" role="tabpanel">
-                        <h3 class="title-location mb-4">@SharedLocalizer["BolgeHaritasi"]</h3>
-                        <div style="border-radius:20px; overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                            <img src="@Model.MapLocationImageUrl" alt="Map" style="width:100%; height:auto;">
                         </div>
                     </div>
 
-                    <!-- 4. REVIEWS -->
-                    <div class="tab-pane fade" id="pills-reviews" role="tabpanel">
-                        @{
-                            var reviewList = Model.Reviews ?? new List<ProjectVitour.Dtos.ReviewDtos.ResultReviewByTourIdDto>();
-                            var totalReviews = reviewList.Count;
-                            double avgGuide = totalReviews > 0 ? reviewList.Average(x => x.GuideRating) : 0;
-                            double avgAcc = totalReviews > 0 ? reviewList.Average(x => x.AccommodationRating) : 0;
-                            double avgTrans = totalReviews > 0 ? reviewList.Average(x => x.TransportRating) : 0;
-                            double avgComf = totalReviews > 0 ? reviewList.Average(x => x.ComfortRating) : 0;
-                            double overallAvg = totalReviews > 0 ? (avgGuide + avgAcc + avgTrans + avgComf) / 4.0 : 0;
-                        }
-                        <h3 class="mb-4">@SharedLocalizer["MusteriYorumlari"]</h3>
-                        <div class="row align-items-center mb-5" style="background:#fcfcfc; padding:30px; border-radius:15px;">
-                            <div class="col-md-4 text-center">
-                                <h1 style="font-size:64px; color:#1a6b4a; font-weight:800;">@overallAvg.ToString("0.0")</h1>
-                                <p>@SharedLocalizer["GenelPuan"] / 5.0</p>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="mb-2">@SharedLocalizer["Rehber"]: @avgGuide.ToString("0.0") <div class="progress"><div class="progress-bar bg-success" style="width:@(avgGuide*20)%"></div></div></div>
-                                <div class="mb-2">@SharedLocalizer["Konaklama"]: @avgAcc.ToString("0.0") <div class="progress"><div class="progress-bar bg-success" style="width:@(avgAcc*20)%"></div></div></div>
-                                <div class="mb-2">@SharedLocalizer["Ulasim"]: @avgTrans.ToString("0.0") <div class="progress"><div class="progress-bar bg-success" style="width:@(avgTrans*20)%"></div></div></div>
-                                <div class="mb-2">@SharedLocalizer["Konfor"]: @avgComf.ToString("0.0") <div class="progress"><div class="progress-bar bg-success" style="width:@(avgComf*20)%"></div></div></div>
-                            </div>
-                        </div>
-                        @foreach (var item in reviewList)
-                        {
-                            <div class="mb-4 p-3 border-bottom">
-                                <h6 style="font-weight:bold;">@item.NameSurname</h6>
-                                <p>@item.Detail</p>
-                                <small class="text-muted">@item.ReviewDate.ToString("dd MMM yyyy")</small>
-                            </div>
-                        }
-                    </div>
-
-                    <!-- 5. SHOT GALLERY -->
-                    <div class="tab-pane fade" id="pills-gallery" role="tabpanel">
-                        <h3 class="mb-4">@SharedLocalizer["TurGalerisi"]</h3>
-                        <div class="row g-3">
-                            @if (Model.TourImages != null)
-                            {
-                                foreach (var img in Model.TourImages)
+                    <!-- 3. GALLERY -->
+                    <div class="tab-pane fade" id="content-gallery" role="tabpanel">
+                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
+                            <h3 class="fw-bold mb-4" style="color: #112240;">@SharedLocalizer["TurGalerisi"]</h3>
+                            <div class="row g-3">
+                                @if (Model.TourImages != null && Model.TourImages.Any())
                                 {
-                                    <div class="col-md-4">
-                                        <img src="@img.ImageUrl" class="img-fluid rounded shadow-sm" style="height:200px; width:100%; object-fit:cover;">
+                                    foreach (var img in Model.TourImages)
+                                    {
+                                        <div class="col-md-6">
+                                            <div class="overflow-hidden rounded-4 shadow-sm">
+                                                <img src="@img.ImageUrl" class="img-fluid w-100" style="height:250px; object-fit:cover; transition: transform 0.4s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="col-12 text-center py-4 text-muted">
+                                        <i class="bi bi-images fs-1 opacity-50"></i>
+                                        <p class="mt-2">Bu tura ait görsel bulunmuyor.</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. LOCATION MAP -->
+                    <div class="tab-pane fade" id="content-location" role="tabpanel">
+                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
+                            <h3 class="fw-bold mb-4" style="color: #112240;">@SharedLocalizer["BolgeHaritasi"]</h3>
+                            <div class="rounded-4 overflow-hidden shadow-sm border">
+                                <img src="@Model.MapLocationImageUrl" alt="Map" style="width:100%; height:auto;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. REVIEWS -->
+                    <div class="tab-pane fade" id="content-reviews" role="tabpanel">
+                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
+                            @{
+                                var reviewList = Model.Reviews ?? new List<ProjectVitour.Dtos.ReviewDtos.ResultReviewByTourIdDto>();
+                                var totalReviews = reviewList.Count;
+                                double avgGuide = totalReviews > 0 ? reviewList.Average(x => x.GuideRating) : 0;
+                                double avgAcc = totalReviews > 0 ? reviewList.Average(x => x.AccommodationRating) : 0;
+                                double avgTrans = totalReviews > 0 ? reviewList.Average(x => x.TransportRating) : 0;
+                                double avgComf = totalReviews > 0 ? reviewList.Average(x => x.ComfortRating) : 0;
+                                double overallAvg = totalReviews > 0 ? (avgGuide + avgAcc + avgTrans + avgComf) / 4.0 : 0;
+                            }
+                            <h3 class="fw-bold mb-4" style="color: #112240;">@SharedLocalizer["MusteriYorumlari"] (@totalReviews)</h3>
+                            
+                            <div class="row align-items-center mb-5 bg-light p-4 rounded-4 border">
+                                <div class="col-md-4 text-center border-end border-secondary border-opacity-25">
+                                    <h1 style="font-size:60px; color:#1a6b4a; font-weight:900; margin:0;">@overallAvg.ToString("0.0")</h1>
+                                    <div class="text-warning mb-2 fs-5">
+                                        @for(int i=0; i<Math.Round(overallAvg); i++){ <i class="bi bi-star-fill"></i> }
+                                        @for(int i=0; i<5-Math.Round(overallAvg); i++){ <i class="bi bi-star text-muted opacity-25"></i> }
+                                    </div>
+                                    <p class="text-muted mb-0 fw-bold">@SharedLocalizer["GenelPuan"]</p>
+                                </div>
+                                <div class="col-md-8 ps-md-4 mt-4 mt-md-0">
+                                    <div class="mb-2 text-muted small d-flex justify-content-between fw-bold"><span>@SharedLocalizer["Rehber"]</span> <span>@avgGuide.ToString("0.0")</span></div>
+                                    <div class="progress mb-3 bg-white border" style="height: 8px;"><div class="progress-bar bg-success" style="width:@(avgGuide*20)%"></div></div>
+                                    
+                                    <div class="mb-2 text-muted small d-flex justify-content-between fw-bold"><span>@SharedLocalizer["Konaklama"]</span> <span>@avgAcc.ToString("0.0")</span></div>
+                                    <div class="progress mb-3 bg-white border" style="height: 8px;"><div class="progress-bar bg-success" style="width:@(avgAcc*20)%"></div></div>
+                                    
+                                    <div class="mb-2 text-muted small d-flex justify-content-between fw-bold"><span>@SharedLocalizer["Ulasim"]</span> <span>@avgTrans.ToString("0.0")</span></div>
+                                    <div class="progress mb-3 bg-white border" style="height: 8px;"><div class="progress-bar bg-success" style="width:@(avgTrans*20)%"></div></div>
+                                    
+                                    <div class="mb-2 text-muted small d-flex justify-content-between fw-bold"><span>@SharedLocalizer["Konfor"]</span> <span>@avgComf.ToString("0.0")</span></div>
+                                    <div class="progress bg-white border" style="height: 8px;"><div class="progress-bar bg-success" style="width:@(avgComf*20)%"></div></div>
+                                </div>
+                            </div>
+
+                            @if(reviewList.Any())
+                            {
+                                foreach (var item in reviewList)
+                                {
+                                    <div class="mb-4 pb-4 border-bottom border-light">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 45px; height: 45px; font-size: 1.2rem;">
+                                                    @item.NameSurname.Substring(0,1).ToUpper()
+                                                </div>
+                                                <div>
+                                                    <h6 style="font-weight:700; color:#112240; margin:0;">@item.NameSurname</h6>
+                                                    <div class="text-warning small mt-1">
+                                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill text-muted opacity-25"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <small class="text-muted bg-light px-2 py-1 rounded-3 border">@item.ReviewDate.ToString("dd MMM yyyy")</small>
+                                        </div>
+                                        <p class="text-muted ms-5 ps-2 border-start border-3 border-success opacity-75" style="line-height:1.6; font-style: italic;">"@item.Detail"</p>
                                     </div>
                                 }
                             }
+                            else
+                            {
+                                <div class="text-center py-4 text-muted">Henüz yorum yapılmamış. İlk yorumu siz yapın!</div>
+                            }
                         </div>
                     </div>
+
                 </div>
             </div>
 
-            <!-- SAĞ TARAF: REZERVASYON PANELİ (STICKY) -->
+            <!-- RIGHT COLUMN: STICKY BOOKING PANEL -->
             <div class="col-lg-4">
-                <div style="position: sticky; top: 150px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.1); border: 1px solid #eee;">
-                    <div class="price-wrap mb-4">
-                        <span style="font-size:14px; color:#777;">@SharedLocalizer["Fiyat"]</span>
-                        <h2 style="color:#1a6b4a; font-weight:800; margin-top:5px;">$@Model.Price.ToString("N0")</h2>
+                <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm" style="position: sticky; top: 120px; border-top: 5px solid #1a6b4a;">
+                    <div class="price-wrap mb-4 text-center">
+                        <span class="text-muted d-block mb-1 fw-bold text-uppercase" style="letter-spacing: 1px; font-size: 12px;">@SharedLocalizer["Fiyat"]</span>
+                        <h2 style="color:#1a6b4a; font-weight:900; font-size: 2.8rem; margin:0;">@localizedPrice</h2>
+                        <span class="text-muted small">/ kişi başı</span>
                     </div>
                     
+                    <hr class="text-muted opacity-10 mb-4">
+
                     <ul class="list-unstyled mb-4">
-                        <li class="mb-2"><i class="icon-check-circle" style="color:#1a6b4a; margin-right:10px;"></i> @SharedLocalizer["UcretsizIptal"]</li>
-                        <li class="mb-2"><i class="icon-check-circle" style="color:#1a6b4a; margin-right:10px;"></i> @SharedLocalizer["RezervasyonAnindaOnay"]</li>
-                        <li class="mb-2"><i class="icon-check-circle" style="color:#1a6b4a; margin-right:10px;"></i> @SharedLocalizer["EnIyiFiyatGarantisi"]</li>
+                        <li class="mb-3 text-muted fw-500"><i class="bi bi-check-circle-fill text-success me-2 fs-5 align-middle"></i> @SharedLocalizer["UcretsizIptal"]</li>
+                        <li class="mb-3 text-muted fw-500"><i class="bi bi-check-circle-fill text-success me-2 fs-5 align-middle"></i> @SharedLocalizer["RezervasyonAnindaOnay"]</li>
+                        <li class="mb-3 text-muted fw-500"><i class="bi bi-check-circle-fill text-success me-2 fs-5 align-middle"></i> @SharedLocalizer["EnIyiFiyatGarantisi"]</li>
                     </ul>
 
                     @if (Model.Capacity > 0)
                     {
                         <a href="/Booking/Index?tourId=@Model.TourID" 
-                           style="display: block; width: 100%; background: #1a6b4a; color: white; text-align: center; padding: 18px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: background 0.3s;"
-                           onmouseover="this.style.background='#14543a'" onmouseout="this.style.background='#1a6b4a'">
-                           @SharedLocalizer["RezervasyonYap"]
+                           class="btn w-100 py-3 fw-bold rounded-pill text-white shadow"
+                           style="background: linear-gradient(135deg, #1a6b4a 0%, #11422e 100%); transition: all 0.3s;"
+                           onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 20px rgba(26,107,74,0.3)';" 
+                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0.5rem 1rem rgba(0,0,0,0.15)';">
+                           <i class="bi bi-calendar-check me-2"></i> @SharedLocalizer["RezervasyonYap"]
                         </a>
                     }
                     else
                     {
-                        <button disabled style="width: 100%; background: #ccc; color: white; padding: 18px; border-radius: 12px; font-weight: 700; border:none; cursor:not-allowed;">
-                           Kontenjan Dolu
+                        <button disabled class="btn w-100 py-3 fw-bold rounded-pill text-white" style="background: #cbd5e1; cursor:not-allowed;">
+                           <i class="bi bi-x-circle me-2"></i> @SharedLocalizer["KontenjanDolu"]
                         </button>
                     }
                     
-                    <p class="text-center mt-3" style="font-size:12px; color:#999;">@SharedLocalizer["Kapasite"]: @Model.Capacity @SharedLocalizer["Kisi"]</p>
+                    <div class="text-center mt-4">
+                        <div class="d-inline-flex align-items-center bg-light text-dark border px-4 py-2 rounded-pill text-muted fw-bold">
+                            <i class="bi bi-people-fill me-2 text-primary"></i> 
+                            @SharedLocalizer["Kapasite"]: <span class="ms-1 text-dark">@Model.Capacity @SharedLocalizer["Kisi"]</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>

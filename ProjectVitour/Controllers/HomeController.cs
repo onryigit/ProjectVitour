@@ -18,6 +18,17 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpGet]
+    public IActionResult About()
+    {
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult Contact()
+    {
+        return View();
+    }
     public IActionResult Privacy()
     {
         return View();

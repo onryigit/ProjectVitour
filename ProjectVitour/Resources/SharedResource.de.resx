@@ -43,4 +43,7 @@
   <data name="EnIyiFiyatGarantisi"><value>Bestpreisgarantie</value></data>
   <data name="KontenjanDolu"><value>Ausgebucht</value></data>
   <data name="KalanKontenjan"><value>Verbleibende Kapazität</value></data>
+  <data name="DahilOlanlar"><value>Im Preis inbegriffen</value></data>
+  <data name="DahilOlmayanlar"><value>Nicht im Preis inbegriffen</value></data>
+  <data name="GenelBakis"><value>Überblick</value></data>
 </root>

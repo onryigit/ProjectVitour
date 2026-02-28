@@ -11,6 +11,7 @@ using ProjectVitour.Services.TourImageServices;
 using ProjectVitour.Services.ContactMessageServices;
 using ProjectVitour.Services.DestinationServices;
 using ProjectVitour.Services.GuideServices;
+using ProjectVitour.Services.EmailServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,7 @@ builder.Services.AddScoped<ITourImageService, TourImageService>();
 builder.Services.AddScoped<IContactMessageService, ContactMessageService>();
 builder.Services.AddScoped<IDestinationService, DestinationService>();
 builder.Services.AddScoped<IGuideService, GuideService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettingKey"));
@@ -67,12 +69,10 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-// --- BİR KEREYE MAHSUS VERİTABANI SEED (TEST VERİSİ) İŞLEMİ ---
-//using (var scope = app.Services.CreateScope())
-//{
-//    var dbSettings = scope.ServiceProvider.GetRequiredService<IDatabaseSettings>();
-//    ProjectVitour.DataSeeder.ClearAndSeed(dbSettings);
-//}
-// -------------------------------------------------------------
+// using (var scope = app.Services.CreateScope())
+// {
+//     var dbSettings = scope.ServiceProvider.GetRequiredService<IDatabaseSettings>();
+//     ProjectVitour.Data.SeedData.Initialize(dbSettings);
+// }
 
 app.Run();

@@ -4,7 +4,11 @@
     {
         public string TourID { get; set; }
         public string Title { get; set; }
+        public string Title_EN { get; set; }
+        public string Title_DE { get; set; }
         public string Description { get; set; }
+        public string Description_EN { get; set; }
+        public string Description_DE { get; set; }
         public string CoverImageUrl { get; set; }
         public string Badge { get; set; }
         public int DayCount { get; set; }

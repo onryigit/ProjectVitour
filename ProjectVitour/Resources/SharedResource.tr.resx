@@ -43,4 +43,7 @@
   <data name="EnIyiFiyatGarantisi"><value>En İyi Fiyat Garantisi</value></data>
   <data name="KontenjanDolu"><value>Kontenjan Dolu</value></data>
   <data name="KalanKontenjan"><value>Kalan Kontenjan</value></data>
+  <data name="DahilOlanlar"><value>Fiyata Dahil Olanlar</value></data>
+  <data name="DahilOlmayanlar"><value>Fiyata Dahil Olmayanlar</value></data>
+  <data name="GenelBakis"><value>Genel Bakış</value></data>
 </root>
