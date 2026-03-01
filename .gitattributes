@@ -61,3 +61,16 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+###############################################################################
+# Dil İstatistikleri Düzenlemesi (Linguist Settings)
+###############################################################################
+
+
+**/*.html linguist-vendored
+**/*.css linguist-vendored
+**/*.js linguist-vendored
+**/*.scss linguist-vendored
+
+
+*.cshtml linguist-language=C#
+*.cs linguist-detectable=true
