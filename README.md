@@ -26,7 +26,8 @@ Proje, tek katmanlı görünmesine rağmen kendi içinde `Services`, `Entities` 
 * **Backend:** ASP.NET Core MVC (.NET 10), C#
 * **Veritabanı:** MongoDB (Asenkron `async/await` mimarisi ile `MongoDB.Driver` kullanımı)
 * **Yapay Zeka Entegrasyonu:** Google Gemini API
-* **Araçlar & Kütüphaneler:** * AutoMapper (DTO dönüşümleri için)
+* **Araçlar & Kütüphaneler:**
+  * AutoMapper (DTO dönüşümleri için)
   * ClosedXML (Excel export)
   * iText7 (PDF export)
   * MailKit (E-posta servisleri)
