@@ -1,49 +1,38 @@
-🌍 ProjectVitour - Tour & Reservation Management Platform
+# 🌍 ProjectVitour - Tour & Reservation Management Platform
+
 ProjectVitour ASP.NET Core MVC (.NET 10) ve MongoDB tabanlı kapsamlı bir tur, destinasyon ve rezervasyon yönetim platformudur.
 
-Bu proje, sadece standart CRUD işlemlerini değil; gelişmiş raporlama, yapay zeka entegrasyonu, asenkron veritabanı yönetimi ve çoklu dil desteği gibi gerçek dünya senaryolarını içerir.
+Bu proje sadece standart CRUD işlemlerini değil; gelişmiş raporlama, yapay zeka entegrasyonu, asenkron veritabanı yönetimi ve çoklu dil desteği gibi gerçek dünya senaryolarını içerir.
 
-🚀 Proje Özellikleri
-👥 Son Kullanıcı (UI) Deneyimi
-Gelişmiş Çoklu Dil & Para Birimi Sistemi: Cookie tabanlı altyapı ile TR/EN/DE dil seçenekleri. Sayfa içeriği ve tur fiyatlandırmaları (para birimleri) seçilen dile göre dinamik olarak anında değişir.
+## 🚀 Proje Özellikleri
 
-Dinamik Tur Listeleme & Paging: MongoDB'den asenkron çekilen tur verileri, sayfa başına 6 öğe düşecek şekilde performanslı bir sayfalama (Paging) yapısıyla sunulur.
+### 👥 Son Kullanıcı (UI) Deneyimi
+* **Gelişmiş Çoklu Dil & Para Birimi Sistemi:** Cookie tabanlı altyapı ile TR/EN/DE dil seçenekleri. Sayfa içeriği ve tur fiyatlandırmaları (para birimleri) seçilen dile göre dinamik olarak anında değişir.
+* **Dinamik Tur Listeleme & Paging:** MongoDB'den asenkron çekilen tur verileri, sayfa başına 6 öğe düşecek şekilde performanslı bir sayfalama (Paging) yapısıyla sunulur.
+* **İnteraktif Tur Detayları:** Turlara ait *Information, Tour Planning, Reviews* ve *Shot Gallery* sekmeleri dinamik olarak yönetilir.
+* **Gemini AI Harita & Bütçe Asistanı:** Klasik Google Haritalar yerine, Google Gemini API kullanılarak üretilmiş "Pixar animasyon" tarzı statik bölge görcelleri entegre edilmiştir. Ayrıca gizli maliyetleri hesaplayan bir Yapay Zeka Bütçe Asistanı bulunur.
+* **Güvenli Rezervasyon Akışı:** Kullanıcı rezervasyon yaparken anlık kapasite (kontenjan) kontrolü yapılır. İşlem başarılı olduğunda **MailKit** aracılığıyla otomatik bilgilendirme e-postası gönderilir.
 
-İnteraktif Tur Detayları: Turlara ait Information, Tour Planning, Reviews ve Shot Gallery sekmeleri dinamik olarak yönetilir.
+### ⚙️ Admin Panel & Operasyonel Yönetim
+* **Modern & Modüler Yönetim:** Tailwind CSS ve yapay zeka desteğiyle sıfırdan tasarlanmış modern bir admin arayüzü. Sol menü ve tüm terimler tamamen Türkçeleştirilmiştir.
+* **Kapsamlı Yönetim (CRUD):** Turlar, Kategoriler, Destinasyonlar, Yorumlar ve Rezervasyonlar için tam yetkili yönetim ekranları.
+* **Gelişmiş Raporlama:** Rezervasyon listeleri tek tıkla **ClosedXML** ile Excel'e veya **iText7** ile PDF formatına dönüştürülerek dışa aktarılabilir.
+* **Dashboard İstatistikleri:** Sistemdeki gelir, popüler turlar ve genel rezervasyon durumlarını gösteren özet ekran.
 
-Gemini AI Harita & Bütçe Asistanı: Klasik Google Haritalar yerine, Google Gemini API kullanılarak üretilmiş "Pixar animasyon" tarzı statik bölge görselleri entegre edilmiştir. Ayrıca gizli maliyetleri hesaplayan bir Yapay Zeka Bütçe Asistanı bulunur.
+## 🛠️ Kullanılan Teknolojiler ve Mimari
 
-Güvenli Rezervasyon Akışı: Kullanıcı rezervasyon yaparken anlık kapasite (kontenjan) kontrolü yapılır. İşlem başarılı olduğunda MailKit aracılığıyla otomatik bilgilendirme e-postası gönderilir.
+Proje, tek katmanlı görünmesine rağmen kendi içinde `Services`, `Entities` ve `DTOs` klasör yapılarıyla **Interface Segregation** prensibine uygun, temiz ve sürdürülebilir bir mimariyle kurgulanmıştır.
 
-⚙️ Admin Panel & Operasyonel Yönetim
-Modern & Modüler Yönetim: Tailwind CSS ve yapay zeka desteğiyle sıfırdan tasarlanmış modern bir admin arayüzü. Sol menü ve tüm terimler tamamen Türkçeleştirilmiştir.
+* **Backend:** ASP.NET Core MVC (.NET 10), C#
+* **Veritabanı:** MongoDB (Asenkron `async/await` mimarisi ile `MongoDB.Driver` kullanımı)
+* **Yapay Zeka Entegrasyonu:** Google Gemini API
+* **Araçlar & Kütüphaneler:** * AutoMapper (DTO dönüşümleri için)
+  * ClosedXML (Excel export)
+  * iText7 (PDF export)
+  * MailKit (E-posta servisleri)
+* **Frontend:** HTML5, Bootstrap, Tailwind CSS (Admin Panel)
 
-Kapsamlı Yönetim (CRUD): Turlar, Kategoriler, Destinasyonlar, Yorumlar ve Rezervasyonlar için tam yetkili yönetim ekranları.
-
-Gelişmiş Raporlama: Rezervasyon listeleri tek tıkla ClosedXML ile Excel'e veya iText7 ile PDF formatına dönüştürülerek dışa aktarılabilir.
-
-Dashboard İstatistikleri: Sistemdeki gelir, popüler turlar ve genel rezervasyon durumlarını gösteren özet ekran.
-
-🛠️ Kullanılan Teknolojiler ve Mimari
-Proje, tek katmanlı görünmesine rağmen kendi içinde Services, Entities ve DTOs klasör yapılarıyla Interface Segregation prensibine uygun, temiz ve sürdürülebilir bir mimariyle kurgulanmıştır.
-
-Backend: ASP.NET Core MVC (.NET 10), C#
-
-Veritabanı: MongoDB (Asenkron async/await mimarisi ile MongoDB.Driver kullanımı)
-
-Yapay Zeka Entegrasyonu: Google Gemini API
-
-Araçlar & Kütüphaneler: * AutoMapper (DTO dönüşümleri için)
-
-ClosedXML (Excel export)
-
-iText7 (PDF export)
-
-MailKit (E-posta servisleri)
-
-Frontend: HTML5, Bootstrap, Tailwind CSS (Admin Panel)
-
-📸 Ekran Görüntüleri
+## 📸 Ekran Görüntüleri
 <img width="941" height="3374" alt="localhost_7095_Tour_TourList_page=2" src="https://github.com/user-attachments/assets/f99cb53c-ea24-4647-a57b-fc2164c1a9c1" />
 <img width="1912" height="948" alt="dashboard" src="https://github.com/user-attachments/assets/7e4029ef-3ae5-4921-85d1-178e1e378b6f" />
 <img width="1905" height="944" alt="3" src="https://github.com/user-attachments/assets/4d06ef77-3dc2-42f8-b04a-23bf0911041f" />
