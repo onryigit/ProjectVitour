@@ -58,4 +58,9 @@
   <data name="SartlariKabulEdiyorum"><value>Tüm şartlar ve gizlilik politikamızı kabul ediyorum</value></data>
   <data name="TumHaklariSaklidir"><value>Tüm hakları saklıdır.</value></data>
   <data name="AltBilgiAciklama"><value>Dünyayı keşfetmeniz için güvenli, konforlu ve profesyonel tur hizmetleri sunuyoruz.</value></data>
+  <data name="MadeBy"><value>Tasarım &amp; Geliştirme:</value></data>
+  <data name="BiziTakipEdin"><value>Bizi Takip Edin :</value></data>
+  <data name="Yeni"><value>Yeni</value></data>
+  <data name="SonEklenenler"><value>Son Eklenenler</value></data>
+  <data name="SiralamaFiyat"><value>Fiyat (Sırala)</value></data>
 </root>

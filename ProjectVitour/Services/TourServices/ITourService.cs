@@ -11,7 +11,7 @@ namespace ProjectVitour.Services.TourServices
         Task<GetTourByIdDto> GetTourByIdAsync(string id);
         Task<List<ResultTourDto>> GetToursWithPaginationAsync(int page, int pageSize);
         Task<long> GetTourCountAsync();
-        Task<List<ResultTourDto>> GetFilteredToursAsync(string keyword, string categoryId, decimal? minPrice, decimal? maxPrice, int page, int pageSize);
+        Task<List<ResultTourDto>> GetFilteredToursAsync(string keyword, string categoryId, decimal? minPrice, decimal? maxPrice, int page, int pageSize, string sort = null);
         Task<long> GetFilteredTourCountAsync(string keyword, string categoryId, decimal? minPrice, decimal? maxPrice);
 
     }

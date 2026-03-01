@@ -46,23 +46,23 @@
                 <h5 class="title">@SharedLocalizer["Galeri"]</h5>
 
                 <div class="gallery-img">
-                    <a href="/vitour/assets/images/gallery/gl1.jpg" data-fancybox="gallery">
-                        <img src="/vitour/assets/images/gallery/gl1.jpg" alt="image gallery">
+                    <a href="https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=1000&q=80" data-fancybox="gallery">
+                        <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=300&q=80" alt="image gallery" style="object-fit: cover; width: 100%; height: 100%;">
                     </a>
-                    <a href="/vitour/assets/images/gallery/gl2.jpg" data-fancybox="gallery">
-                        <img src="/vitour/assets/images/gallery/gl2.jpg" alt="image gallery">
+                    <a href="https://images.unsplash.com/photo-1500835556837-99ac94a94552?w=1000&q=80" data-fancybox="gallery">
+                        <img src="https://images.unsplash.com/photo-1500835556837-99ac94a94552?w=300&q=80" alt="image gallery" style="object-fit: cover; width: 100%; height: 100%;">
                     </a>
-                    <a href="/vitour/assets/images/gallery/gl3.jpg" data-fancybox="gallery">
-                        <img src="/vitour/assets/images/gallery/gl3.jpg" alt="image gallery">
+                    <a href="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1000&q=80" data-fancybox="gallery">
+                        <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=300&q=80" alt="image gallery" style="object-fit: cover; width: 100%; height: 100%;">
                     </a>
-                    <a href="/vitour/assets/images/gallery/gl4.jpg" data-fancybox="gallery">
-                        <img src="/vitour/assets/images/gallery/gl4.jpg" alt="image gallery">
+                    <a href="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&q=80" data-fancybox="gallery">
+                        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=300&q=80" alt="image gallery" style="object-fit: cover; width: 100%; height: 100%;">
                     </a>
-                    <a href="/vitour/assets/images/gallery/gl5.jpg" data-fancybox="gallery">
-                        <img src="/vitour/assets/images/gallery/gl5.jpg" alt="image gallery">
+                    <a href="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1000&q=80" data-fancybox="gallery">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=300&q=80" alt="image gallery" style="object-fit: cover; width: 100%; height: 100%;">
                     </a>
-                    <a href="/vitour/assets/images/gallery/gl6.jpg" data-fancybox="gallery">
-                        <img src="/vitour/assets/images/gallery/gl6.jpg" alt="image gallery">
+                    <a href="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1000&q=80" data-fancybox="gallery">
+                        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=300&q=80" alt="image gallery" style="object-fit: cover; width: 100%; height: 100%;">
                     </a>
                 </div>
 
@@ -107,7 +107,12 @@
 
         <div class="row footer-bottom">
             <div class="col-md-6">
-                <p class="copy-right">@DateTime.Now.Year Vitour. @SharedLocalizer["TumHaklariSaklidir"]</p>
+                <p class="copy-right">
+                    @DateTime.Now.Year Vitour. @SharedLocalizer["TumHaklariSaklidir"]
+                    <span style="margin-left: 10px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(45deg, #ff8a00, #e52e71); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">
+                        @SharedLocalizer["MadeBy"] Yiğit Öner
+                    </span>
+                </p>
             </div>
             <div class="col-md-6">
                 <ul class="social flex-six">

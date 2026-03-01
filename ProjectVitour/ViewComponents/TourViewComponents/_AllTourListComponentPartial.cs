@@ -22,6 +22,7 @@ namespace ProjectVitour.ViewComponents.TourViewComponents
             // Filters
             string search = HttpContext.Request.Query["search"];
             string categoryId = HttpContext.Request.Query["categoryId"];
+            string sort = HttpContext.Request.Query["sort"];
             
             decimal? minPrice = null;
             if (decimal.TryParse(HttpContext.Request.Query["minPrice"], out decimal minP)) minPrice = minP;
@@ -29,7 +30,7 @@ namespace ProjectVitour.ViewComponents.TourViewComponents
             decimal? maxPrice = null;
             if (decimal.TryParse(HttpContext.Request.Query["maxPrice"], out decimal maxP)) maxPrice = maxP;
 
-            var values = await _tourService.GetFilteredToursAsync(search, categoryId, minPrice, maxPrice, page, pageSize);
+            var values = await _tourService.GetFilteredToursAsync(search, categoryId, minPrice, maxPrice, page, pageSize, sort);
             long totalCount = await _tourService.GetFilteredTourCountAsync(search, categoryId, minPrice, maxPrice);
             
             int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
@@ -44,6 +45,7 @@ namespace ProjectVitour.ViewComponents.TourViewComponents
             ViewBag.CategoryIdQuery = categoryId;
             ViewBag.MinPriceQuery = minPrice;
             ViewBag.MaxPriceQuery = maxPrice;
+            ViewBag.SortQuery = sort;
 
             return View(values);
         }

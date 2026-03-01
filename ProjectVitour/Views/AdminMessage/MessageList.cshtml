@@ -28,26 +28,23 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        var rowClass = item.IsRead ? "bg-white" : "table-primary";
-                        <tr class="@rowClass">
+                        var rowClass = item.IsRead ? "bg-white" : "table-primary fw-bold";
+                        <tr class="@rowClass" style="cursor: pointer;" onclick="window.location.href='/AdminMessage/MessageDetails/@item.ContactMessageID'">
                             <td class="ps-4">
-                                <div class="fw-bold">@item.Name</div>
-                                <small class="text-muted">@item.Email</small>
+                                <div class="fw-bold text-dark">@item.Name</div>
+                                <small class="text-muted fw-normal">@item.Email</small>
                             </td>
-                            <td class="fw-bold">@item.Subject</td>
-                            <td><small>@(item.Message.Length > 50 ? item.Message.Substring(0, 50) + "..." : item.Message)</small></td>
-                            <td>@item.SendDate.ToString("dd.MM.yyyy HH:mm")</td>
+                            <td class="text-dark">@item.Subject</td>
+                            <td class="text-muted"><small>@(item.Message.Length > 50 ? item.Message.Substring(0, 50) + "..." : item.Message)</small></td>
+                            <td class="text-muted small">@item.SendDate.ToString("dd.MM.yyyy HH:mm")</td>
                             <td>
-                                @if (item.IsRead) { <span class="badge bg-secondary">Okundu</span> }
+                                @if (item.IsRead) { <span class="badge bg-secondary-subtle text-secondary">Okundu</span> }
                                 else { <span class="badge bg-danger">Yeni</span> }
                             </td>
-                            <td class="text-end pe-4">
-                                @if (!item.IsRead)
-                                {
-                                    <a href="/AdminMessage/MarkAsRead/@item.ContactMessageID" class="btn btn-sm btn-outline-success border-0 me-1" title="Okundu İşaretle">
-                                        <i class="bi bi-envelope-open"></i>
-                                    </a>
-                                }
+                            <td class="text-end pe-4" onclick="event.stopPropagation();">
+                                <a href="/AdminMessage/MessageDetails/@item.ContactMessageID" class="btn btn-sm btn-outline-primary border-0 me-1" title="İncele">
+                                    <i class="bi bi-eye"></i>
+                                </a>
                                 <a href="/AdminMessage/DeleteMessage/@item.ContactMessageID" class="btn btn-sm btn-outline-danger border-0" title="Sil" onclick="return confirm('Silmek istediğinize emin misiniz?')">
                                     <i class="bi bi-trash"></i>
                                 </a>

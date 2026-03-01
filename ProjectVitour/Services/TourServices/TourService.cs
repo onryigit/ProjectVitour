@@ -86,7 +86,7 @@ namespace ProjectVitour.Services.TourServices
             return await _tourCollection.CountDocumentsAsync(x => true);
         }
 
-        public async Task<List<ResultTourDto>> GetFilteredToursAsync(string keyword, string categoryId, decimal? minPrice, decimal? maxPrice, int page, int pageSize)
+        public async Task<List<ResultTourDto>> GetFilteredToursAsync(string keyword, string categoryId, decimal? minPrice, decimal? maxPrice, int page, int pageSize, string sort = null)
         {
             var builder = Builders<Tour>.Filter;
             var filter = builder.Empty;
@@ -109,7 +109,27 @@ namespace ProjectVitour.Services.TourServices
                 filter &= builder.Lte(x => x.Price, maxPrice.Value);
             }
 
-            var values = await _tourCollection.Find(filter)
+            var query = _tourCollection.Find(filter);
+
+            if (sort == "price_asc")
+            {
+                query = query.SortBy(x => x.Price);
+            }
+            else if (sort == "price_desc")
+            {
+                query = query.SortByDescending(x => x.Price);
+            }
+            else if (sort == "recently_added")
+            {
+                query = query.SortByDescending(x => x.TourID); // Assuming ID indicates creation order or you have a Date field
+            }
+            else if (sort == "new")
+            {
+                // If there's no specific 'new' vs 'recently added' distinction, use the same logic or another field
+                query = query.SortByDescending(x => x.TourID);
+            }
+
+            var values = await query
                                               .Skip((page - 1) * pageSize)
                                               .Limit(pageSize)
                                               .ToListAsync();

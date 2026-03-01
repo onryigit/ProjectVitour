@@ -1,0 +1,54 @@
+@model ProjectVitour.Entities.ContactMessage
+@{
+    ViewData["Title"] = "Mesaj Detayları";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="page-title text-navy fw-bold">Mesaj Detayları</h2>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/AdminDashboard/Index" class="text-muted">Admin</a></li>
+                <li class="breadcrumb-item"><a href="/AdminMessage/MessageList" class="text-muted">Mesajlar</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Detay</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <a href="/AdminMessage/MessageList" class="btn btn-outline-secondary rounded-3 shadow-sm">
+            <i class="bi bi-arrow-left me-2"></i> Geri Dön
+        </a>
+        <a href="/AdminMessage/DeleteMessage/@Model.ContactMessageID" class="btn btn-danger rounded-3 shadow-sm ms-2" onclick="return confirm('Bu mesajı silmek istediğinize emin misiniz?')">
+            <i class="bi bi-trash me-2"></i> Sil
+        </a>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
+    <div class="card-header bg-white p-4 border-0 pb-0">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 50px; height: 50px; font-size: 20px;">
+                    @Model.Name.Substring(0, 1).ToUpper()
+                </div>
+                <div class="ms-3">
+                    <h5 class="fw-bold text-dark mb-0">@Model.Name</h5>
+                    <div class="text-muted"><i class="bi bi-envelope me-1"></i> <a href="mailto:@Model.Email" class="text-decoration-none text-muted">@Model.Email</a></div>
+                </div>
+            </div>
+            <div class="text-end text-muted small">
+                <div><i class="bi bi-calendar-event me-1"></i> @Model.SendDate.ToString("dd MMMM yyyy, dddd")</div>
+                <div><i class="bi bi-clock me-1"></i> @Model.SendDate.ToString("HH:mm")</div>
+            </div>
+        </div>
+        <hr class="my-4 text-muted opacity-25" />
+    </div>
+    
+    <div class="card-body p-4 pt-0">
+        <h5 class="fw-bold mb-4 text-navy">Konu: @Model.Subject</h5>
+        <div class="p-4 bg-light rounded-4 text-dark" style="font-size: 15px; line-height: 1.8;">
+            @Html.Raw(Model.Message.Replace("\n", "<br/>"))
+        </div>
+    </div>
+</div>

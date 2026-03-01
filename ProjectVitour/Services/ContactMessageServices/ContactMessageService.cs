@@ -32,6 +32,11 @@ namespace ProjectVitour.Services.ContactMessageServices
             return await _messageCollection.Find(x => true).SortByDescending(x => x.SendDate).ToListAsync();
         }
 
+        public async Task<ContactMessage> GetMessageByIdAsync(string id)
+        {
+            return await _messageCollection.Find(x => x.ContactMessageID == id).FirstOrDefaultAsync();
+        }
+
         public async Task MarkAsReadAsync(string id)
         {
             var update = Builders<ContactMessage>.Update.Set(x => x.IsRead, true);

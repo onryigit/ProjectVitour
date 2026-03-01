@@ -58,4 +58,9 @@
   <data name="SartlariKabulEdiyorum"><value>Ich akzeptiere alle Bedingungen und Datenschutzrichtlinien</value></data>
   <data name="TumHaklariSaklidir"><value>Alle Rechte vorbehalten.</value></data>
   <data name="AltBilgiAciklama"><value>Wir bieten sichere, komfortable und professionelle Touren an, damit Sie die Welt entdecken können.</value></data>
+  <data name="MadeBy"><value>Design &amp; Entwicklung:</value></data>
+  <data name="BiziTakipEdin"><value>Folgen Sie Uns :</value></data>
+  <data name="Yeni"><value>Neu</value></data>
+  <data name="SonEklenenler"><value>Zuletzt Hinzugefügt</value></data>
+  <data name="SiralamaFiyat"><value>Preis</value></data>
 </root>

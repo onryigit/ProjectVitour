@@ -113,10 +113,10 @@
                         <tbody>
                             @if (ViewBag.LastReservations != null)
                             {
-                                var toursList = ViewBag.Tours as List<ProjectVitour.Entities.Tour>;
+                                var toursList = ViewBag.Tours as List<ProjectVitour.Dtos.TourDtos.ResultTourDto>;
                                 foreach (var item in ViewBag.LastReservations)
                                 {
-                                    var tourName = toursList?.FirstOrDefault(x => x.TourID == item.TourID)?.Title ?? "Bilinmiyor";
+                                    var tourName = toursList?.FirstOrDefault(x => x.TourID?.ToString() == item.TourID?.ToString())?.Title ?? "Bilinmiyor";
                                     <tr>
                                         <td class="ps-4 fw-bold">@item.FullName</td>
                                         <td><span class="badge bg-info-subtle text-info">@tourName</span></td>

@@ -58,7 +58,7 @@
                     {
                         foreach (var item in Model)
                         {
-                            var tourName = tours?.FirstOrDefault(x => x.TourID == item.TourID)?.Title ?? "Bilinmiyor";
+                            var tourName = tours?.FirstOrDefault(x => x.TourID?.ToString() == item.TourID?.ToString())?.Title ?? "Bilinmiyor";
                             <tr>
                                 <td class="ps-4 py-3">
                                     <div class="d-flex align-items-center">

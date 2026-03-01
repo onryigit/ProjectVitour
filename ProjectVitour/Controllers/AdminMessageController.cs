@@ -18,6 +18,17 @@ namespace ProjectVitour.Controllers
             return View(values);
         }
 
+        public async Task<IActionResult> MessageDetails(string id)
+        {
+            var value = await _messageService.GetMessageByIdAsync(id);
+            if (value != null && !value.IsRead)
+            {
+                await _messageService.MarkAsReadAsync(id);
+                value.IsRead = true;
+            }
+            return View(value);
+        }
+
         public async Task<IActionResult> MarkAsRead(string id)
         {
             await _messageService.MarkAsReadAsync(id);

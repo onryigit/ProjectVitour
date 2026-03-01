@@ -43,7 +43,11 @@
     <div class="tf-container">
         <div class="listing-list-car-wrap listing-list-car-wrap-grid3">
 
-            <form action="/" class="tf-my-listing mb-37">
+            <form action="/Tour/TourList" method="get" class="tf-my-listing mb-37">
+                <input type="hidden" name="search" value="@ViewBag.SearchQuery" />
+                <input type="hidden" name="categoryId" value="@ViewBag.CategoryIdQuery" />
+                <input type="hidden" name="minPrice" value="@ViewBag.MinPriceQuery" />
+                <input type="hidden" name="maxPrice" value="@ViewBag.MaxPriceQuery" />
                 <div class="row align-center">
                     <div class="col-sm-5">
                         @{
@@ -68,14 +72,13 @@
                         <div class="listing-all-wrap">
                             <div class="flex-three">
                                 <div class="group-select-recently">
-                                    <div class="nice-select" tabindex="0">
-                                        <i class="icon-Vector6"></i><span class="current">Price</span>
-                                        <ul class="list">
-                                            <li data-value="" class="option selected focus">Price</li>
-                                            <li data-value="new" class="option">New</li>
-                                            <li data-value="Recently Added" class="option">Recently Added</li>
-                                        </ul>
-                                    </div>
+                                    <select name="sort" onchange="this.form.submit()" style="border: 1px solid #eee; border-radius: 5px; background: #fff; padding: 5px 15px; font-weight: 500; font-size: 15px; color: #525C6A; outline: none; cursor: pointer; height: 40px; line-height: 28px;">
+                                        <option value="">@SharedLocalizer["SiralamaFiyat"]</option>
+                                        <option value="price_asc" selected="@(ViewBag.SortQuery == "price_asc" ? "selected" : null)">@SharedLocalizer["SiralamaFiyat"] (Artan)</option>
+                                        <option value="price_desc" selected="@(ViewBag.SortQuery == "price_desc" ? "selected" : null)">@SharedLocalizer["SiralamaFiyat"] (Azalan)</option>
+                                        <option value="new" selected="@(ViewBag.SortQuery == "new" ? "selected" : null)">@SharedLocalizer["Yeni"]</option>
+                                        <option value="recently_added" selected="@(ViewBag.SortQuery == "recently_added" ? "selected" : null)">@SharedLocalizer["SonEklenenler"]</option>
+                                    </select>
                                 </div>
                                 <div class="toolbar-list">
                                     <div class="form-group">
