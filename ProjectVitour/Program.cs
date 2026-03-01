@@ -15,15 +15,10 @@ using ProjectVitour.Services.EmailServices;
 using ProjectVitour.Services.GeminiServices;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// --- LOCALIZATION (ÇOKLU DİL) AYARLARI ---
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.AddControllersWithViews()
     .AddViewLocalization()
     .AddDataAnnotationsLocalization();
-// ------------------------------------------
-
-// Add services to the container.
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ITourService, TourService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
@@ -44,11 +39,7 @@ builder.Services.AddScoped<IDatabaseSettings>(sp =>
     return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
 });
 
-// builder.Services.AddControllersWithViews(); // Yukarıya taşıdık
-
 var app = builder.Build();
-
-// --- LOCALIZATION MIDDLEWARE ---
 var supportedCultures = new[] { "tr", "en", "de" };
 var localizationOptions = new RequestLocalizationOptions()
     .SetDefaultCulture("tr")
@@ -57,7 +48,6 @@ var localizationOptions = new RequestLocalizationOptions()
 
 localizationOptions.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
 app.UseRequestLocalization(localizationOptions);
-// --------------------------------
 
 app.UseHttpsRedirection();
 app.UseStaticFiles(); // .NET 10 öncesi için uyumluluk

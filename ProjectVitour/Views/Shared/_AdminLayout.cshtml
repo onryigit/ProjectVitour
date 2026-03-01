@@ -9,17 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] – Horizon Tours Admin</title>
 
-    <!-- Bootstrap 5 -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-    <!-- Bootstrap Icons -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-    <!-- Google Fonts -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
 
     <style>
-        /* ─── CSS Variables ─────────────────────────────────────────── */
+        
         :root {
             --sidebar-w: 260px;
             --sidebar-collapsed-w: 72px;
@@ -42,7 +42,7 @@
             --shadow-lg: 0 10px 40px rgba(13,27,42,.14);
         }
 
-        /* ─── Reset / Base ──────────────────────────────────────────── */
+        
         *, *::before, *::after {
             box-sizing: border-box;
         }
@@ -60,7 +60,7 @@
             text-decoration: none;
         }
 
-        /* ─── Sidebar ───────────────────────────────────────────────── */
+        
         #sidebar {
             position: fixed;
             top: 0;
@@ -79,7 +79,7 @@
                 width: var(--sidebar-collapsed-w);
             }
 
-        /* Brand */
+        
         .sidebar-brand {
             display: flex;
             align-items: center;
@@ -131,7 +131,7 @@
             pointer-events: none;
         }
 
-        /* Nav */
+        
         .sidebar-nav {
             flex: 1;
             padding: 12px 0;
@@ -227,18 +227,18 @@
             overflow: hidden;
         }
 
-        /* Sidebar footer */
+        
         .sidebar-footer {
             padding: 14px 0;
             border-top: 1px solid rgba(255,255,255,.07);
         }
 
-        /* Tooltip for collapsed */
+        
         [data-bs-toggle="tooltip"] {
             position: relative;
         }
 
-        /* ─── Main Wrapper ───────────────────────────────────────────── */
+        
         #main-wrapper {
             margin-left: var(--sidebar-w);
             flex: 1;
@@ -252,7 +252,7 @@
                 margin-left: var(--sidebar-collapsed-w);
             }
 
-        /* ─── Top Navbar ─────────────────────────────────────────────── */
+        
         #topbar {
             position: sticky;
             top: 0;
@@ -413,13 +413,13 @@
             color: var(--text-muted);
         }
 
-        /* ─── Content Area ───────────────────────────────────────────── */
+        
         #content-area {
             flex: 1;
             padding: 28px 28px 40px;
         }
 
-        /* ─── Breadcrumb / Page Header ───────────────────────────────── */
+        
         .page-header {
             margin-bottom: 24px;
         }
@@ -440,7 +440,7 @@
             color: var(--text-muted);
         }
 
-        /* ─── Responsive ─────────────────────────────────────────────── */
+        
         @@media (max-width: 991.98px) {
             #sidebar
 
@@ -477,9 +477,9 @@
 </head>
 <body>
 
-    <!-- ═══ SIDEBAR ════════════════════════════════════════════════════ -->
+    
     <aside id="sidebar">
-        <!-- Brand -->
+        
         <div class="sidebar-brand">
             <div class="brand-icon"><i class="bi bi-compass"></i></div>
             <div class="brand-text">
@@ -488,13 +488,13 @@
             </div>
         </div>
 
-        <!-- Navigation -->
+        
         <nav class="sidebar-nav">
             <div class="nav-section-label">Ana Menü</div>
 
             <a href="/AdminDashboard/Index" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
                 <i class="bi bi-grid-1x2-fill"></i>
-                <span class="nav-label">Dashboard (Özet)</span>
+                <span class="nav-label">Dashboard</span>
             </a>
 
             <a href="/Tour/TourList" class="nav-item-link text-warning" target="_blank" data-bs-toggle="tooltip" data-bs-placement="right" title="Siteye Git">
@@ -549,7 +549,7 @@
             </a>
         </nav>
 
-        <!-- Sidebar Footer / Logout -->
+        
         <div class="sidebar-footer">
             <a href="/Account/Logout" class="nav-item-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Çıkış Yap">
                 <i class="bi bi-box-arrow-left" style="color:var(--danger);"></i>
@@ -558,35 +558,35 @@
         </div>
     </aside>
 
-    <!-- Backdrop (mobile) -->
+    
     <div id="sidebar-backdrop"></div>
 
-    <!-- ═══ MAIN WRAPPER ════════════════════════════════════════════════ -->
+    
     <div id="main-wrapper">
 
-        <!-- ── TOPBAR ─────────────────────────────────────────────── -->
+        
         <header id="topbar">
-            <!-- Toggle sidebar -->
+            
             <button class="btn-toggle-sidebar" id="btnToggleSidebar" aria-label="Toggle sidebar">
                 <i class="bi bi-layout-sidebar-inset"></i>
             </button>
 
-            <!-- Right actions -->
+            
             <div class="topbar-actions ms-auto">
-                <!-- Notifications -->
+                
                 <button class="topbar-icon-btn" aria-label="Notifications">
                     <i class="bi bi-bell-fill"></i>
                     <span class="notif-badge"></span>
                 </button>
 
-                <!-- Messages -->
+                
                 <button class="topbar-icon-btn d-none d-sm-flex" aria-label="Messages">
                     <i class="bi bi-chat-dots-fill"></i>
                 </button>
 
                 <div class="topbar-divider d-none d-sm-block"></div>
 
-                <!-- Admin Profile Dropdown -->
+                
                 <div class="dropdown">
                     <button class="admin-profile-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="admin-avatar">A</div>
@@ -617,17 +617,16 @@
             </div>
         </header>
 
-        <!-- ── CONTENT ─────────────────────────────────────────────── -->
+        
         <main id="content-area">
             @RenderBody()
         </main>
 
-    </div><!-- /main-wrapper -->
-    <!-- Bootstrap JS -->
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // ── Sidebar Toggle ─────────────────────────────────────────────
         const sidebar   = document.getElementById('sidebar');
         const wrapper   = document.getElementById('main-wrapper');
         const backdrop  = document.getElementById('sidebar-backdrop');
@@ -642,7 +641,6 @@
             } else {
                 sidebar.classList.toggle('collapsed');
                 wrapper.classList.toggle('expanded');
-                // Disable/enable tooltips based on state
                 updateTooltips();
             }
         });
@@ -651,8 +649,6 @@
             sidebar.classList.remove('mobile-open');
             backdrop.classList.remove('show');
         });
-
-        // ── Bootstrap Tooltips (collapsed mode) ───────────────────────
         let tooltipInstances = [];
 
         function updateTooltips() {
@@ -664,8 +660,6 @@
                 });
             }
         }
-
-        // Disable tooltips on large screens by default (sidebar expanded)
         document.querySelectorAll('#sidebar [data-bs-toggle="tooltip"]').forEach(el => {
             el.removeAttribute('data-bs-toggle');
             el.dataset.bsToggleTooltip = 'tooltip'; // stash

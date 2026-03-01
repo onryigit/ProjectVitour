@@ -2,6 +2,7 @@ namespace ProjectVitour.Dtos.ReservationDtos
 {
     public class CreateReservationDto
     {
+        public string ReservationCode { get; set; }
         public string TourID { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }

@@ -1,4 +1,4 @@
-/* Magnific Popup CSS */
+
 .mfp-bg {
   top: 0;
   left: 0;
@@ -59,9 +59,7 @@
 
 .mfp-zoom-out-cur, .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
   cursor: pointer;
-  /* cursor: -moz-zoom-out;
-  cursor: -webkit-zoom-out;
-  cursor: zoom-out;  */
+  
   } 
 
 .mfp-zoom {
@@ -241,9 +239,9 @@ button::-moz-focus-inner {
   background: transparent;
   border: unset;
 }
-/* Main image in popup */
+
 img.mfp-img {
-  /* cursor: w-resize; */
+  
   width: auto;
   max-width: 100%;
   height: auto;
@@ -255,7 +253,7 @@ img.mfp-img {
   padding: 40px 0 40px;
   margin: 0 auto; }
 
-/* The shadow behind the image */
+
 .mfp-figure {
   line-height: 0; }
   .mfp-figure:after {
@@ -295,20 +293,16 @@ img.mfp-img {
 .mfp-image-holder .mfp-content {
   max-width: 100%; }
 
-/* .mfp-gallery .mfp-image-holder .mfp-figure {
-  cursor: pointer; } */
 
 @media screen and (max-width: 800px) and (orientation: landscape), screen and (max-height: 300px) {
-  /**
-       * Remove all paddings around the image on small screen
-       */
+  
   .mfp-img-mobile .mfp-image-holder {
     padding-left: 0;
     padding-right: 0; }
   .mfp-img-mobile img.mfp-img {
     padding: 0; }
   .mfp-img-mobile .mfp-figure {
-    /* The shadow behind the image */ }
+     }
     .mfp-img-mobile .mfp-figure:after {
       top: 0;
       bottom: 0; }
@@ -389,7 +383,7 @@ img.mfp-img {
         transform: scale(0.8);  
 }
 
-/* animate in */
+
 .my-mfp-slide-bottom.mfp-ready .mfp-content {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 	filter: alpha(opacity=100);
@@ -402,7 +396,7 @@ img.mfp-img {
         transform: scale(1); 
 }
 
-/* animate out */
+
 .my-mfp-slide-bottom.mfp-removing .mfp-content {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	filter: alpha(opacity=0);
@@ -415,7 +409,7 @@ img.mfp-img {
         transform: scale(0.8); 
 }
 
-/* Dark overlay, start state */
+
 .my-mfp-slide-bottom.mfp-bg {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	filter: alpha(opacity=0);
@@ -428,14 +422,14 @@ img.mfp-img {
 	transition: opacity 0.3s ease-out;
 }
 
-/* animate in */
+
 .my-mfp-slide-bottom.mfp-ready.mfp-bg {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
 	filter: alpha(opacity=80);
 	opacity: 0.8;
 }
 
-/* animate out */
+
 .my-mfp-slide-bottom.mfp-removing.mfp-bg {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	filter: alpha(opacity=0);

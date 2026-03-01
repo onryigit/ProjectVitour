@@ -23,14 +23,10 @@ namespace ProjectVitour.Controllers
             var reservations = await _reservationService.GetAllReservationAsync();
             var tours = await _tourService.GetAllToursAsync();
             var messages = await _messageService.GetAllMessagesAsync();
-
-            // İstatistik Kartları Verileri
             ViewBag.TotalTours = tours.Count;
             ViewBag.TotalReservations = reservations.Count;
             ViewBag.PendingReservations = reservations.Count(x => !x.Status);
             ViewBag.UnreadMessages = messages.Count(x => !x.IsRead);
-            
-            // Toplam Kazanç Hesaplama
             decimal totalEarning = 0;
             foreach (var res in reservations)
             {
@@ -38,12 +34,8 @@ namespace ProjectVitour.Controllers
                 totalEarning += (tourPrice * res.PersonCount);
             }
             ViewBag.TotalEarning = totalEarning;
-
-            // Grafik için Turlara Göre Rezervasyon Sayıları (En Çok Tercih Edilen 5 Tur)
             var tourNames = new List<string>();
             var tourResCounts = new List<int>();
-
-            // En çok rezervasyonu olan turları bulmak için gruplama yapabiliriz
             var popularTours = reservations.GroupBy(r => r.TourID)
                                            .OrderByDescending(g => g.Count())
                                            .Take(5)
@@ -61,7 +53,6 @@ namespace ProjectVitour.Controllers
             }
             else
             {
-                // Hiç rezervasyon yoksa boş kalmaması için ilk 5 turu isimleriyle ekle
                 foreach (var tour in tours.Take(5))
                 {
                     tourNames.Add(tour.Title);
@@ -71,8 +62,6 @@ namespace ProjectVitour.Controllers
 
             ViewBag.ChartLabels = tourNames;
             ViewBag.ChartData = tourResCounts;
-
-            // Son 5 Rezervasyon
             var last5Reservations = reservations.OrderByDescending(x => x.ReservationDate).Take(5).ToList();
             ViewBag.LastReservations = last5Reservations;
             ViewBag.Tours = tours;

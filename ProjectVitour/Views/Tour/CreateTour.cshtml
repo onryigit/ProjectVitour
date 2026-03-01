@@ -1,4 +1,4 @@
-﻿@model CreateTourDto
+@model CreateTourDto
 @{
     Layout = null;
 }
@@ -45,7 +45,7 @@
             min-height: 100vh;
         }
 
-        /* ── SIDEBAR ── */
+        
         .sidebar {
             position: fixed;
             top: 0;
@@ -126,7 +126,7 @@
             font-size: .8rem;
         }
 
-        /* ── MAIN ── */
+        
         .main-wrap {
             margin-left: var(--sidebar-w);
             min-height: 100vh;
@@ -134,7 +134,7 @@
             flex-direction: column;
         }
 
-        /* ── TOP BAR ── */
+        
         .topbar {
             background: #fff;
             border-bottom: 1px solid #e4ecf4;
@@ -183,13 +183,13 @@
             font-size: .85rem;
         }
 
-        /* ── CONTENT ── */
+        
         .content {
             padding: 32px;
             flex: 1;
         }
 
-        /* ── CARDS ── */
+        
         .card-panel {
             background: #fff;
             border-radius: var(--radius);
@@ -235,7 +235,7 @@
             padding: 24px;
         }
 
-        /* ── FORM CONTROLS ── */
+        
         .form-label {
             font-size: .8rem;
             font-weight: 600;
@@ -280,7 +280,7 @@
             min-height: 110px;
         }
 
-        /* ── INPUT WITH ICON ── */
+        
         .input-icon-wrap {
             position: relative;
         }
@@ -299,7 +299,7 @@
                 pointer-events: none;
             }
 
-        /* ── NUMBER SPINNERS ── */
+        
         .spinner-group {
             display: flex;
             align-items: center;
@@ -341,7 +341,7 @@
             outline: none;
         }
 
-        /* ── PRICE INPUT ── */
+        
         .price-wrap {
             position: relative;
         }
@@ -362,7 +362,7 @@
                 font-size: .95rem;
             }
 
-        /* ── IMAGE UPLOAD ── */
+        
         .upload-zone {
             border: 2px dashed #c8d9e9;
             border-radius: 12px;
@@ -412,7 +412,7 @@
             margin-bottom: 4px;
         }
 
-        /* URL preview */
+        
         #urlPreview {
             display: none;
             margin-top: 14px;
@@ -446,7 +446,7 @@
             font-size: .85rem;
         }
 
-        /* ── BADGE CHIPS ── */
+        
         .badge-options {
             display: flex;
             flex-wrap: wrap;
@@ -489,7 +489,7 @@
                 color: #fff;
             }
 
-        /* ── STATUS TOGGLE ── */
+        
         .toggle-wrap {
             display: flex;
             align-items: center;
@@ -528,7 +528,7 @@
                 box-shadow: none;
             }
 
-        /* ── SUMMARY CARD ── */
+        
         .summary-card {
             background: linear-gradient(135deg, var(--brand) 0%, #0f2540 100%);
             border-radius: var(--radius);
@@ -598,7 +598,7 @@
                 font-size: .82rem;
             }
 
-        /* ── BUTTONS ── */
+        
         .btn-brand {
             background: var(--brand);
             color: #fff;
@@ -662,7 +662,7 @@
                 border-color: var(--brand);
             }
 
-        /* ── STEP INDICATOR ── */
+        
         .step-indicator {
             display: flex;
             gap: 0;
@@ -736,14 +736,14 @@
             color: var(--success);
         }
 
-        /* ── HELPER TEXT ── */
+        
         .form-hint {
             font-size: .75rem;
             color: #9fb5c8;
             margin-top: 5px;
         }
 
-        /* ── CHAR COUNTER ── */
+        
         .char-counter {
             font-size: .72rem;
             color: #b0c2d0;
@@ -778,7 +778,7 @@
 </head>
 <body>
 
-    <!-- ── SIDEBAR ── -->
+    
     <aside class="sidebar">
         <div class="sidebar-logo">
             <span>Tur<em>Panel</em></span>
@@ -798,10 +798,10 @@
         </div>
     </aside>
 
-    <!-- ── MAIN ── -->
+    
     <div class="main-wrap">
 
-        <!-- TOP BAR -->
+        
         <header class="topbar">
             <div>
                 <div class="topbar-title">Yeni Tur Oluştur</div>
@@ -813,10 +813,10 @@
             </div>
         </header>
 
-        <!-- CONTENT -->
+        
         <main class="content">
 
-            <!-- STEP INDICATOR -->
+            
             <div class="step-indicator">
                 <div class="step-item done">
                     <div class="step-num"><i class="bi bi-check"></i></div>
@@ -838,10 +838,10 @@
 
             <div class="row g-4">
 
-                <!-- ── LEFT COLUMN ── -->
+                
                 <div class="col-lg-8">
 
-                    <!-- 1. Temel Bilgiler -->
+                    
                     <div class="card-panel">
                         <div class="card-panel-header">
                             <div class="card-panel-icon"><i class="bi bi-pencil-square"></i></div>
@@ -872,7 +872,7 @@
                         </div>
                     </div>
 
-                    <!-- 2. Tur Detayları -->
+                    
                     <div class="card-panel">
                         <div class="card-panel-header">
                             <div class="card-panel-icon"><i class="bi bi-sliders"></i></div>
@@ -884,7 +884,7 @@
                         <div class="card-panel-body">
                             <div class="row g-4">
 
-                                <!-- Gün Sayısı -->
+                                
                                 <div class="col-sm-4">
                                     <label class="form-label">Tur Süresi (Gün) <span class="req">*</span></label>
                                     <div class="spinner-group">
@@ -895,7 +895,7 @@
                                     <p class="form-hint">1 – 365 gün arası</p>
                                 </div>
 
-                                <!-- Kapasite -->
+                                
                                 <div class="col-sm-4">
                                     <label class="form-label">Maksimum Kapasite <span class="req">*</span></label>
                                     <div class="spinner-group">
@@ -906,7 +906,7 @@
                                     <p class="form-hint">1 – 500 kişi arası</p>
                                 </div>
 
-                                <!-- Fiyat -->
+                                
                                 <div class="col-sm-4">
                                     <label class="form-label">Kişi Başı Fiyat (₺) <span class="req">*</span></label>
                                     <div class="price-wrap">
@@ -922,7 +922,7 @@
                         </div>
                     </div>
 
-                    <!-- 3. Kapak Görseli -->
+                    
                     <div class="card-panel">
                         <div class="card-panel-header">
                             <div class="card-panel-icon"><i class="bi bi-image"></i></div>
@@ -933,7 +933,7 @@
                         </div>
                         <div class="card-panel-body">
 
-                            <!-- Tab: URL -->
+                            
                             <div class="mb-3">
                                 <label class="form-label">Görsel URL'si</label>
                                 <div class="input-icon-wrap">
@@ -944,7 +944,7 @@
                                 </div>
                             </div>
 
-                            <!-- Preview -->
+                            
                             <div id="urlPreview">
                                 <img id="previewImg" src="" alt="Ön izleme">
                                 <button id="removeImg" type="button" onclick="removeImage()" title="Kaldır">
@@ -958,7 +958,7 @@
                                 <hr class="flex-grow-1 m-0">
                             </div>
 
-                            <!-- Upload -->
+                            
                             <div class="upload-zone">
                                 <input type="file" accept="image/*" onchange="handleFileUpload(event)">
                                 <div class="upload-icon"><i class="bi bi-cloud-arrow-up"></i></div>
@@ -969,7 +969,7 @@
                         </div>
                     </div>
 
-                    <!-- 4. Rozet & Durum -->
+                    
                     <div class="card-panel">
                         <div class="card-panel-header">
                             <div class="card-panel-icon"><i class="bi bi-tags"></i></div>
@@ -1006,7 +1006,7 @@
                         </div>
                     </div>
 
-                    <!-- SUBMIT BUTTONS -->
+                    
                     <div class="d-flex gap-3 flex-wrap">
                         <button class="btn-accent" type="button" onclick="submitForm()">
                             <i class="bi bi-check-circle"></i> Turu Oluştur
@@ -1019,11 +1019,11 @@
                         </button>
                     </div>
 
-                </div><!-- /col-lg-8 -->
-                <!-- ── RIGHT COLUMN: SUMMARY ── -->
+                </div>
+                
                 <div class="col-lg-4">
 
-                    <!-- Özet Kartı -->
+                    
                     <div class="summary-card">
                         <h6>Tur Özeti</h6>
 
@@ -1059,7 +1059,7 @@
                         </div>
                     </div>
 
-                    <!-- İpuçları -->
+                    
                     <div class="card-panel">
                         <div class="card-panel-header">
                             <div class="card-panel-icon" style="background:#fdf3e3;color:var(--accent)"><i class="bi bi-lightbulb"></i></div>
@@ -1078,7 +1078,7 @@
                         </div>
                     </div>
 
-                    <!-- Zorunlu Alan Durumu -->
+                    
                     <div class="card-panel">
                         <div class="card-panel-header">
                             <div class="card-panel-icon" style="background:#edfbf1;color:#198754"><i class="bi bi-check2-all"></i></div>
@@ -1091,12 +1091,12 @@
                         </div>
                     </div>
 
-                </div><!-- /col-lg-4 -->
+                </div>
 
-            </div><!-- /row -->
+            </div>
         </main>
-    </div><!-- /main-wrap -->
-    <!-- SUCCESS TOAST -->
+    </div>
+    
     <div id="toast" style="
   position:fixed;bottom:28px;right:28px;z-index:9999;
   background:#1a3c5e;color:#fff;padding:14px 22px;border-radius:12px;
@@ -1122,7 +1122,6 @@
     </style>
 
     <script>
-        // ── Spinner ──
         function spin(id, delta) {
           const el = document.getElementById(id);
           const min = parseInt(el.min) || 1;
@@ -1130,8 +1129,6 @@
           el.value = Math.min(max, Math.max(min, parseInt(el.value || 0) + delta));
           updateSummary();
         }
-
-        // ── Char counters ──
         document.getElementById('titleInput').addEventListener('input', function () {
           document.getElementById('titleCount').textContent = this.value.length;
           updateSummary();
@@ -1140,8 +1137,6 @@
           const v = document.getElementById('descInput').value.length;
           document.getElementById('descCount').textContent = v;
         }
-
-        // ── Image preview ──
         function previewImage() {
           const url = document.getElementById('coverImageUrl').value.trim();
           const wrap = document.getElementById('urlPreview');
@@ -1178,8 +1173,6 @@
           if (src) { si.src = src; si.style.display = 'block'; ph.style.display = 'none'; }
           else      { si.style.display = 'none'; ph.style.display = 'block'; }
         }
-
-        // ── Badge select ──
         document.getElementById('badgeOptions').querySelectorAll('.badge-chip')[0].classList.add('active');
         document.getElementById('badgeValue').value = 'Öne Çıkan';
 
@@ -1189,8 +1182,6 @@
           document.getElementById('badgeValue').value = el.dataset.badge;
           updateSummary();
         }
-
-        // ── Status ──
         function updateStatusLabel() {
           const on = document.getElementById('isStatus').checked;
           document.getElementById('statusSub').textContent = on
@@ -1200,8 +1191,6 @@
           document.getElementById('sumStatus').style.color  = on ? '#4ade80' : '#f87171';
           updateFieldChecks();
         }
-
-        // ── Summary update ──
         function updateSummary() {
           const title    = document.getElementById('titleInput').value || '—';
           const day      = document.getElementById('dayCount').value || 0;
@@ -1216,8 +1205,6 @@
           document.getElementById('sumPrice').textContent    = isNaN(price) ? '—' : price.toLocaleString('tr-TR', { style:'currency', currency:'TRY' });
           updateFieldChecks();
         }
-
-        // ── Field checks ──
         function updateFieldChecks() {
           const fields = [
             { label:'Başlık',       ok: document.getElementById('titleInput').value.length > 3 },
@@ -1234,8 +1221,6 @@
               ${f.label}
             </div>`).join('');
         }
-
-        // ── Submit ──
         function submitForm() {
           const dto = {
             title:         document.getElementById('titleInput').value,
@@ -1262,8 +1247,6 @@
           t.style.display = 'flex';
           setTimeout(() => { t.style.display = 'none'; }, 3500);
         }
-
-        // Init
         updateSummary();
         updateFieldChecks();
     </script>

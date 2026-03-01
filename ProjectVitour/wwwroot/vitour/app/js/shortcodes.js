@@ -1,25 +1,4 @@
-/**
-  * isMobile
-  * Parallax
-  * flatCounter
-  * goTop
-  * toggleMenu
-  * topSearch
-  * flatProgressBar
-  * popUpLightBox
-  * Preloader
-  * donatProgress
-  * dropdown
-  * video
-  * checkViewListing
-  * iconbar
-  * retinaLogos
-  * headerFixed
-  * popupGallery
-  * tabs
-  * dropdown
-  * click search form
-*/
+
 
 ; (function ($) {
 
@@ -201,8 +180,6 @@
             });
         }
     };
-
-    //tab-lisst
     var onClickViewListingType = function () {
         if ($('.tf-my-listing').length > 0) {
             $('a.btn-display-listing-grid').click(function (event) {
@@ -290,13 +267,9 @@
             }
         }
     };
-
-    // img upload style 1
     $("#profileimg").click(function (e) {
         $("#tf-upload-img").click();
     });
-
-    // click search form
     $('.pull-right').on('click', function (e) {
         e.preventDefault();
 
@@ -319,9 +292,6 @@
     });
 
     new WOW().init();
-
-
-    // Dom Ready
     $(function () {
         goTop();
         donatProgress();

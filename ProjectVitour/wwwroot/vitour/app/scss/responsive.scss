@@ -1,7 +1,5 @@
 @use './abstracts/' as *;
 
-/* Media Queries
--------------------------------------------------------------- */
 
 @media only screen and (max-width: 1400px) {
   .widget-faq .image-faq {
@@ -41,7 +39,6 @@
     left: 7%;
   }
 }
-
 
 
 @media only screen and (max-width: 1570px) {
@@ -921,8 +918,6 @@
   }
 
 }
-
-
 
 
 @media only screen and (max-width: 767px) {
@@ -1917,7 +1912,6 @@
   }
 
 
-
   .widget-testimonial .testimonial-content .icon-tes {
     display: none;
   }
@@ -1981,7 +1975,6 @@
   }
 
 
-
   .wd-search .form-group {
     width: calc(100% - 20px);
   }
@@ -2016,7 +2009,6 @@
     flex-direction: column;
     text-align: center;
   }
-
 
 
   .header-top .header-top-wrap .header-top-left .follow-social ul {

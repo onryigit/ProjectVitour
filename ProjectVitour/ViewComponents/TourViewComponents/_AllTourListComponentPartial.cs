@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using ProjectVitour.Services.TourServices;
 
 namespace ProjectVitour.ViewComponents.TourViewComponents
@@ -14,12 +14,9 @@ namespace ProjectVitour.ViewComponents.TourViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            // Paging
             int page = 1;
             if (int.TryParse(HttpContext.Request.Query["page"], out int p)) page = p;
             int pageSize = 6; 
-
-            // Filters
             string search = HttpContext.Request.Query["search"];
             string categoryId = HttpContext.Request.Query["categoryId"];
             string sort = HttpContext.Request.Query["sort"];
@@ -39,8 +36,6 @@ namespace ProjectVitour.ViewComponents.TourViewComponents
             ViewBag.TotalPages = totalPages;
             ViewBag.TotalCount = totalCount;
             ViewBag.PageSize = pageSize;
-
-            // Preserve query params for pagination links
             ViewBag.SearchQuery = search;
             ViewBag.CategoryIdQuery = categoryId;
             ViewBag.MinPriceQuery = minPrice;

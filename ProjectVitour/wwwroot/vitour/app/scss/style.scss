@@ -1,34 +1,5 @@
 @use './abstracts/' as *;
 
-/**
-  * Name: Vitour - Travel & Tour Booking HTML Template
-  * Version: 1.0.2
-  * Author: Themesflat
-  * Author URI: http://www.themesflat.com
-*/
-/**
-  	* scroll-top
-    * PreLoad
-    * pagination
-    * Social
-    * price-range
-    * video
-    * widget Tour List
-    * Counter
-    * widget Destination
-    * Blog
-    * widget clip text
-    * widget icon box
-    * widget Testimonial
-    * widget Team
-    * Gallery
-    * widget Image Box
-    * Faq
-    * Count Down 
-    * slider
-    * Button
-    * Tab
-*/
 
 @import "animate.css";
 @import "jquery.fancybox.min.css";
@@ -148,9 +119,6 @@ section {
 }
 
 
-/* Elements
--------------------------------------------------------------- */
-
 html {
     margin-right: 0 !important;
 }
@@ -220,9 +188,6 @@ li {
 .bg-main {
     background-color: $bg4;
 }
-
-
-// form //
 label {
     font-size: 16px;
     font-weight: 600;
@@ -303,7 +268,6 @@ input[type="color"]:focus {
 }
 
 
-/* Placeholder color */
 ::-webkit-input-placeholder {
     color: #8A8AA0;
 }
@@ -318,16 +282,10 @@ input[type="color"]:focus {
 }
 
 
-/* Since FF19 lowers the opacity of the placeholder by default */
-
 :-ms-input-placeholder {
     color: #8A8AA0;
 }
 
-
-
-/* Typography
--------------------------------------------------------------- */
 
 h1,
 h2,
@@ -381,8 +339,7 @@ p {
     font-family: $font-family;
 }
 
-/* Extra classes
--------------------------------------------------------------- */
+
 .msg-success {
     background: linear-gradient(to right, #E250E5, #4B50E6, #E250E5);
     background-clip: text;
@@ -831,7 +788,7 @@ input[type=submit] {
     background-color: $white;
 }
 
-/* Custom radio buttons */
+
 input[type="radio"]+label {
     display: inline-block;
     cursor: pointer;
@@ -873,9 +830,7 @@ input[type="radio"] {
     }
 }
 
-// End Custom radio buttons
 
-/* Custom checkbox */
 input[type="checkbox"]+label {
     display: inline-block;
     cursor: pointer;
@@ -919,18 +874,12 @@ input[type="checkbox"] {
     }
 }
 
-// End Custom checkbox
-
-/* link style
--------------------------------------------------------------- */
 
 a {
     @include transition3;
     text-decoration: none;
     color: $main;
     @include transition3;
-
-    // display: inherit;
     &:focus,
     &:hover {
         color: $primary;
@@ -954,7 +903,6 @@ a {
         background-position: left
     }
 }
-
 
 
 path {
@@ -1082,8 +1030,6 @@ html {
         box-sizing: border-box;
     }
 }
-
-// Center & dribbble
 body {
     .dribbble {
         position: fixed;

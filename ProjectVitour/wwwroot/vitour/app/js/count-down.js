@@ -11,17 +11,13 @@ Util.setAttributes = function (el, attrs) {
         this.element = element;
         this.labels = this.element.getAttribute('data-labels') ? this.element.getAttribute('data-labels').split(',') : [];
         this.intervalId;
-        // set visible labels
         this.setVisibleLabels();
-        //create countdown HTML
         this.createCountDown();
-        //store time elements
         this.days = this.element.getElementsByClassName('js-countdown__value--0')[0];
         this.hours = this.element.getElementsByClassName('js-countdown__value--1')[0];
         this.mins = this.element.getElementsByClassName('js-countdown__value--2')[0];
         this.secs = this.element.getElementsByClassName('js-countdown__value--3')[0];
         this.endTime = this.getEndTime();
-        //init counter
         this.initCountDown();
     };
 
@@ -53,13 +49,10 @@ Util.setAttributes = function (el, attrs) {
 
             wrapper.appendChild(timeItem);
         }
-        // append new content to countdown element
         this.element.insertBefore(wrapper, this.element.firstChild);
-        // this.element.appendChild(wrapper);
     };
 
     CountDown.prototype.getEndTime = function () {
-        // get number of remaining seconds
         if (this.element.getAttribute('data-timer')) return Number(this.element.getAttribute('data-timer')) * 1000 + new Date().getTime();
         else if (this.element.getAttribute('data-countdown')) return Number(new Date(this.element.getAttribute('data-countdown')).getTime());
     };
@@ -73,8 +66,6 @@ Util.setAttributes = function (el, attrs) {
     };
 
     CountDown.prototype.updateCountDown = function (bool) {
-        // original countdown function
-        // https://gist.github.com/adriennetacke/f5a25c304f1b7b4a6fa42db70415bad2
         var time = parseInt((this.endTime - new Date().getTime()) / 1000),
             days = 0,
             hours = 0,
@@ -93,8 +84,6 @@ Util.setAttributes = function (el, attrs) {
             time = (time % 60);
             seconds = parseInt(time);
         }
-
-        // hide days/hours/mins if not available
         if (bool && days == 0 && this.visibleLabels.indexOf('d') < 0) this.days.parentElement.style.display = "none";
         if (bool && days == 0 && hours == 0 && this.visibleLabels.indexOf('h') < 0) this.hours.parentElement.style.display = "none";
         if (bool && days == 0 && hours == 0 && mins == 0 && this.visibleLabels.indexOf('m') < 0) this.mins.parentElement.style.display = "none";
@@ -113,11 +102,8 @@ Util.setAttributes = function (el, attrs) {
         var event = new CustomEvent('countDownFinished');
         this.element.dispatchEvent(event);
     };
-
-    // Functions calling
     window.addEventListener ('load', function () {
-        //initialize the CountDown objects
-/*        window.setTimeout(() => {*/
+
             var countDown = document.getElementsByClassName('js-countdown');
             if (countDown.length > 0) {
                 for (var i = 0; i < countDown.length; i++) {
@@ -126,7 +112,7 @@ Util.setAttributes = function (el, attrs) {
                     })(i);
                 }
             }
-  /*      }, 1000);*/
+  
 
     });
 }());

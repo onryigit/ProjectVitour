@@ -1,9 +1,6 @@
 (function () {
 
 var defs = {}; // id -> {dependencies, definition, instance (possibly undefined)}
-
-// Used when there is no 'main' module.
-// The name is probably (hopefully) unique so minification removes for releases.
 var register_3795 = function (id) {
   var module = dem(id);
   var fragments = id.split('.');
@@ -76,27 +73,16 @@ ephox.bolt = {
 var define = def;
 var require = req;
 var demand = dem;
-// this helps with minificiation when using a lot of global references
 var defineGlobal = function (id, ref) {
   define(id, [], function () { return ref; });
 };
-/*jsc
-["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u"]
-jsc*/
+
 defineGlobal("1", tinymce.ThemeManager);
 defineGlobal("2", tinymce.util.Delay);
 defineGlobal("b", tinymce.util.Tools);
 defineGlobal("c", tinymce.ui.Factory);
 defineGlobal("d", tinymce.DOM);
-/**
- * Toolbar.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
+
 
 define("e", [
 	"b",
@@ -216,20 +202,8 @@ define("e", [
 });
 
 defineGlobal("m", tinymce.util.Promise);
-/**
- * Uuid.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
-/**
- * Generates unique ids this is the same as in core but since
- * it's not exposed as a global we can't access it.
- */
+
 define("n", [
 ], function() {
 	var count = 0;
@@ -251,29 +225,10 @@ define("n", [
 	};
 });
 
-/**
- * Bookmark.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("s", [
 ], function () {
-	/**
-	 * Returns a range bookmark. This will convert indexed bookmarks into temporary span elements with
-	 * index 0 so that they can be restored properly after the DOM has been modified. Text bookmarks will not have spans
-	 * added to them since they can be restored after a dom operation.
-	 *
-	 * So this: <p><b>|</b><b>|</b></p>
-	 * becomes: <p><b><span data-mce-type="bookmark">|</span></b><b data-mce-type="bookmark">|</span></b></p>
-	 *
-	 * @param  {DOMRange} rng DOM Range to get bookmark on.
-	 * @return {Object} Bookmark object.
-	 */
+	
 	var create = function (dom, rng) {
 		var bookmark = {};
 
@@ -315,11 +270,7 @@ define("s", [
 		return bookmark;
 	};
 
-	/**
-	 * Moves the selection to the current bookmark and removes any selection container wrappers.
-	 *
-	 * @param {Object} bookmark Bookmark object to move selection to.
-	 */
+	
 	var resolve = function (dom, bookmark) {
 		function restoreEndPoint(start) {
 			var container, offset, node;
@@ -331,8 +282,6 @@ define("s", [
 					if (node == container) {
 						return idx;
 					}
-
-					// Skip data-mce-type=bookmark nodes
 					if (node.nodeType != 1 || node.getAttribute('data-mce-type') != 'bookmark') {
 						idx++;
 					}
@@ -381,25 +330,10 @@ define("s", [
 });
 
 
-
 defineGlobal("t", tinymce.dom.TreeWalker);
 defineGlobal("u", tinymce.dom.RangeUtils);
-/**
- * Unlink.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
-/**
- * Unlink implementation that doesn't leave partial links for example it would produce:
- *  a[b<a href="x">c]d</a>e -> a[bc]de
- * instead of:
- *  a[b<a href="x">c]d</a>e -> a[bc]<a href="x">d</a>e
- */
+
 define("o", [
 	"s",
 	"b",
@@ -469,15 +403,6 @@ define("o", [
 	};
 });
 
-/**
- * Actions.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("k", [
 	"n",
@@ -576,15 +501,6 @@ define("k", [
 	};
 });
 
-/**
- * UrlType.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("p", [
 ], function () {
@@ -602,17 +518,6 @@ define("p", [
 	};
 });
 
-
-
-/**
- * Forms.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("f", [
 	"b",
@@ -708,15 +613,7 @@ define("f", [
 });
 
 defineGlobal("q", tinymce.geom.Rect);
-/**
- * Convert.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
+
 
 define("r", [
 ], function () {
@@ -746,15 +643,6 @@ define("r", [
 	};
 });
 
-/**
- * Measure.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("g", [
 	"d",
@@ -808,15 +696,6 @@ define("g", [
 	};
 });
 
-/**
- * Layout.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("h", [
 	"q",
@@ -904,15 +783,6 @@ define("h", [
 	};
 });
 
-/**
- * Panel.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("3", [
 	"b",
@@ -1123,15 +993,6 @@ define("3", [
 	};
 });
 
-/**
- * Conversions.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("i", [
 	"m"
@@ -1153,17 +1014,6 @@ define("i", [
 	};
 });
 
-
-
-/**
- * Picker.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("j", [
 	"m"
@@ -1195,17 +1045,6 @@ define("j", [
 });
 
 
-
-/**
- * Buttons.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
-
 define("4", [
 	"3",
 	"i",
@@ -1228,7 +1067,6 @@ define("4", [
 				stateSelector: name,
 				onclick: formatBlock(name),
 				onPostRender: function () {
-					// TODO: Remove this hack that produces bold H1-H6 when we have proper icons
 					var span = this.getEl().firstChild.firstChild;
 					span.style.fontWeight = 'bold';
 				}
@@ -1278,15 +1116,7 @@ define("4", [
 });
 
 defineGlobal("l", tinymce.EditorManager);
-/**
- * SkinLoader.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
+
 
 define("5", [
 	"l",
@@ -1323,28 +1153,14 @@ define("5", [
 });
 
 
-
-/**
- * Matcher.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
-
 define("8", [
 ], function () {
-	// result :: String, Rect -> Matcher.result
 	var result = function (id, rect) {
 		return {
 			id: id,
 			rect: rect
 		};
 	};
-
-	// match :: Editor, [(Editor -> Matcher.result | Null)] -> Matcher.result | Null
 	var match = function (editor, matchers) {
 		for (var i = 0; i < matchers.length; i++) {
 			var f = matchers[i];
@@ -1364,21 +1180,11 @@ define("8", [
 	};
 });
 
-/**
- * SelectionMatcher.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("6", [
 	"8",
 	"g"
 ], function (Matcher, Measure) {
-	// textSelection :: String -> (Editor -> Matcher.result | Null)
 	var textSelection = function (id) {
 		return function (editor) {
 			if (!editor.selection.isCollapsed()) {
@@ -1388,8 +1194,6 @@ define("6", [
 			return null;
 		};
 	};
-
-	// emptyTextBlock :: [Elements], String -> (Editor -> Matcher.result | Null)
 	var emptyTextBlock = function (elements, id) {
 		return function (editor) {
 			var i, textBlockElementsMap = editor.schema.getTextBlockElements();
@@ -1420,21 +1224,11 @@ define("6", [
 	};
 });
 
-/**
- * ElementMatcher.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("7", [
 	"8",
 	"g"
 ], function (Matcher, Measure) {
-	// element :: Element, [PredicateId] -> (Editor -> Matcher.result | Null)
 	var element = function (element, predicateIds) {
 		return function (editor) {
 			for (var i = 0; i < predicateIds.length; i++) {
@@ -1446,8 +1240,6 @@ define("7", [
 			return null;
 		};
 	};
-
-	// parent :: [Elements], [PredicateId] -> (Editor -> Matcher.result | Null)
 	var parent = function (elements, predicateIds) {
 		return function (editor) {
 			for (var i = 0; i < elements.length; i++) {
@@ -1468,15 +1260,6 @@ define("7", [
 	};
 });
 
-/**
- * Arr.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("9", [
 ], function () {
@@ -1491,15 +1274,6 @@ define("9", [
 	};
 });
 
-/**
- * PredicateId.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("a", [
 	"b"
@@ -1510,8 +1284,6 @@ define("a", [
 			predicate: predicate
 		};
 	};
-
-	// fromContextToolbars :: [ContextToolbar] -> [PredicateId]
 	var fromContextToolbars = function (toolbars) {
 		return Tools.map(toolbars, function (toolbar) {
 			return create(toolbar.id, toolbar.predicate);
@@ -1524,15 +1296,6 @@ define("a", [
 	};
 });
 
-/**
- * Theme.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define("0", [
 	"1",

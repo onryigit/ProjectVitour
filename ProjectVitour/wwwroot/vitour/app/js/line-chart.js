@@ -1,5 +1,5 @@
 (function ($) {
-  /* "use strict" */
+  
 
   var tfLineChart = (function () {
 
@@ -59,7 +59,7 @@
       }
     };
 
-    /* Function ============ */
+    
     return {
       init: function () { },
 

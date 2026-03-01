@@ -1,18 +1,9 @@
-/**
- * ElementMatcher.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
+
 
 define('tinymce/inlite/core/ElementMatcher', [
 	'tinymce/inlite/core/Matcher',
 	'tinymce/inlite/core/Measure'
 ], function (Matcher, Measure) {
-	// element :: Element, [PredicateId] -> (Editor -> Matcher.result | Null)
 	var element = function (element, predicateIds) {
 		return function (editor) {
 			for (var i = 0; i < predicateIds.length; i++) {
@@ -24,8 +15,6 @@ define('tinymce/inlite/core/ElementMatcher', [
 			return null;
 		};
 	};
-
-	// parent :: [Elements], [PredicateId] -> (Editor -> Matcher.result | Null)
 	var parent = function (elements, predicateIds) {
 		return function (editor) {
 			for (var i = 0; i < elements.length; i++) {

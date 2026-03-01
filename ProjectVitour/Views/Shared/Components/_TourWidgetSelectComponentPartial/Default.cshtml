@@ -1,8 +1,8 @@
-﻿@model List<ProjectVitour.Dtos.CategoryDtos.ResultCategoryDto>
+@model List<ProjectVitour.Dtos.CategoryDtos.ResultCategoryDto>
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<ProjectVitour.SharedResource> SharedLocalizer
 
-<!-- Widget Select Form (Search & Filter) -->
+
 <div class="mt--82 z-index3 relative">
     <div class="tf-container">
         <div class="row">
@@ -11,7 +11,7 @@
                     <form action="/Tour/TourList" method="get" id="search-form-slider">
                         <div class="row g-3 align-items-center">
                             
-                            <!-- Arama Kelimesi -->
+                            
                             <div class="col-lg-3 col-md-6">
                                 <div class="form-group border rounded-3 px-3 py-2 d-flex align-items-center transition-all focus-ring focus-ring-success">
                                     <i class="icon-search-2 fs-4 me-3" style="color: #1a6b4a;"></i>
@@ -22,7 +22,7 @@
                                 </div>
                             </div>
 
-                            <!-- Kategori Seçimi -->
+                            
                             <div class="col-lg-3 col-md-6">
                                 <div class="form-group border rounded-3 px-3 py-2 d-flex align-items-center transition-all focus-ring focus-ring-success">
                                     <i class="icon-18 fs-4 me-3" style="color: #1a6b4a;"></i>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
 
-                            <!-- Minimum Fiyat -->
+                            
                             <div class="col-lg-2 col-md-4">
                                 <div class="form-group border rounded-3 px-3 py-2 d-flex align-items-center transition-all focus-ring focus-ring-success">
                                     <span class="fw-bold fs-4 me-3" style="color: #1a6b4a;">$</span>
@@ -60,7 +60,7 @@
                                 </div>
                             </div>
 
-                            <!-- Maksimum Fiyat -->
+                            
                             <div class="col-lg-2 col-md-4">
                                 <div class="form-group border rounded-3 px-3 py-2 d-flex align-items-center transition-all focus-ring focus-ring-success">
                                     <span class="fw-bold fs-4 me-3" style="color: #1a6b4a;">$</span>
@@ -71,7 +71,7 @@
                                 </div>
                             </div>
 
-                            <!-- Arama Butonu -->
+                            
                             <div class="col-lg-2 col-md-4 text-end">
                                 <button type="submit" class="btn w-100 py-3 rounded-3 fw-bold text-white shadow-sm" style="background: #1a6b4a; border-color: #1a6b4a; font-size: 16px; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
                                     <i class="icon-Vector5 me-2"></i> @SharedLocalizer["TurlariBul"]
@@ -85,4 +85,3 @@
         </div>
     </div>
 </div>
-<!-- End Widget Select Form -->

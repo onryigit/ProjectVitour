@@ -29,7 +29,6 @@ namespace ProjectVitour.Controllers
             var review = await _reviewService.GetReviewByIdAsync(id);
             if (review != null)
             {
-                // Status değerini true (Onaylı/Yayında) yapıyoruz
                 var updateDto = new ProjectVitour.Dtos.ReviewDtos.UpdateReviewDto
                 {
                     ReviewId = review.ReviewId,

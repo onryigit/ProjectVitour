@@ -1,9 +1,6 @@
 (function () {
 
 var defs = {}; // id -> {dependencies, definition, instance (possibly undefined)}
-
-// Used when there is no 'main' module.
-// The name is probably (hopefully) unique so minification removes for releases.
 var register_3795 = function (id) {
   var module = dem(id);
   var fragments = id.split('.');
@@ -76,27 +73,16 @@ ephox.bolt = {
 var define = def;
 var require = req;
 var demand = dem;
-// this helps with minificiation when using a lot of global references
 var defineGlobal = function (id, ref) {
   define(id, [], function () { return ref; });
 };
-/*jsc
-["tinymce/inlite/Theme","global!tinymce.ThemeManager","global!tinymce.util.Delay","tinymce/inlite/ui/Panel","tinymce/inlite/ui/Buttons","tinymce/inlite/core/SkinLoader","tinymce/inlite/core/SelectionMatcher","tinymce/inlite/core/ElementMatcher","tinymce/inlite/core/Matcher","tinymce/inlite/alien/Arr","tinymce/inlite/core/PredicateId","global!tinymce.util.Tools","global!tinymce.ui.Factory","global!tinymce.DOM","tinymce/inlite/ui/Toolbar","tinymce/inlite/ui/Forms","tinymce/inlite/core/Measure","tinymce/inlite/core/Layout","tinymce/inlite/file/Conversions","tinymce/inlite/file/Picker","tinymce/inlite/core/Actions","global!tinymce.EditorManager","global!tinymce.util.Promise","tinymce/inlite/alien/Uuid","tinymce/inlite/alien/Unlink","tinymce/inlite/core/UrlType","global!tinymce.geom.Rect","tinymce/inlite/core/Convert","tinymce/inlite/alien/Bookmark","global!tinymce.dom.TreeWalker","global!tinymce.dom.RangeUtils"]
-jsc*/
+
 defineGlobal("global!tinymce.ThemeManager", tinymce.ThemeManager);
 defineGlobal("global!tinymce.util.Delay", tinymce.util.Delay);
 defineGlobal("global!tinymce.util.Tools", tinymce.util.Tools);
 defineGlobal("global!tinymce.ui.Factory", tinymce.ui.Factory);
 defineGlobal("global!tinymce.DOM", tinymce.DOM);
-/**
- * Toolbar.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
+
 
 define('tinymce/inlite/ui/Toolbar', [
 	'global!tinymce.util.Tools',
@@ -216,20 +202,8 @@ define('tinymce/inlite/ui/Toolbar', [
 });
 
 defineGlobal("global!tinymce.util.Promise", tinymce.util.Promise);
-/**
- * Uuid.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
-/**
- * Generates unique ids this is the same as in core but since
- * it's not exposed as a global we can't access it.
- */
+
 define("tinymce/inlite/alien/Uuid", [
 ], function() {
 	var count = 0;
@@ -251,29 +225,10 @@ define("tinymce/inlite/alien/Uuid", [
 	};
 });
 
-/**
- * Bookmark.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/alien/Bookmark', [
 ], function () {
-	/**
-	 * Returns a range bookmark. This will convert indexed bookmarks into temporary span elements with
-	 * index 0 so that they can be restored properly after the DOM has been modified. Text bookmarks will not have spans
-	 * added to them since they can be restored after a dom operation.
-	 *
-	 * So this: <p><b>|</b><b>|</b></p>
-	 * becomes: <p><b><span data-mce-type="bookmark">|</span></b><b data-mce-type="bookmark">|</span></b></p>
-	 *
-	 * @param  {DOMRange} rng DOM Range to get bookmark on.
-	 * @return {Object} Bookmark object.
-	 */
+	
 	var create = function (dom, rng) {
 		var bookmark = {};
 
@@ -315,11 +270,7 @@ define('tinymce/inlite/alien/Bookmark', [
 		return bookmark;
 	};
 
-	/**
-	 * Moves the selection to the current bookmark and removes any selection container wrappers.
-	 *
-	 * @param {Object} bookmark Bookmark object to move selection to.
-	 */
+	
 	var resolve = function (dom, bookmark) {
 		function restoreEndPoint(start) {
 			var container, offset, node;
@@ -331,8 +282,6 @@ define('tinymce/inlite/alien/Bookmark', [
 					if (node == container) {
 						return idx;
 					}
-
-					// Skip data-mce-type=bookmark nodes
 					if (node.nodeType != 1 || node.getAttribute('data-mce-type') != 'bookmark') {
 						idx++;
 					}
@@ -381,25 +330,10 @@ define('tinymce/inlite/alien/Bookmark', [
 });
 
 
-
 defineGlobal("global!tinymce.dom.TreeWalker", tinymce.dom.TreeWalker);
 defineGlobal("global!tinymce.dom.RangeUtils", tinymce.dom.RangeUtils);
-/**
- * Unlink.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
-/**
- * Unlink implementation that doesn't leave partial links for example it would produce:
- *  a[b<a href="x">c]d</a>e -> a[bc]de
- * instead of:
- *  a[b<a href="x">c]d</a>e -> a[bc]<a href="x">d</a>e
- */
+
 define("tinymce/inlite/alien/Unlink", [
 	'tinymce/inlite/alien/Bookmark',
 	'global!tinymce.util.Tools',
@@ -469,15 +403,6 @@ define("tinymce/inlite/alien/Unlink", [
 	};
 });
 
-/**
- * Actions.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/core/Actions', [
 	'tinymce/inlite/alien/Uuid',
@@ -576,15 +501,6 @@ define('tinymce/inlite/core/Actions', [
 	};
 });
 
-/**
- * UrlType.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/core/UrlType', [
 ], function () {
@@ -602,17 +518,6 @@ define('tinymce/inlite/core/UrlType', [
 	};
 });
 
-
-
-/**
- * Forms.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/ui/Forms', [
 	'global!tinymce.util.Tools',
@@ -708,15 +613,7 @@ define('tinymce/inlite/ui/Forms', [
 });
 
 defineGlobal("global!tinymce.geom.Rect", tinymce.geom.Rect);
-/**
- * Convert.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
+
 
 define('tinymce/inlite/core/Convert', [
 ], function () {
@@ -746,15 +643,6 @@ define('tinymce/inlite/core/Convert', [
 	};
 });
 
-/**
- * Measure.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/core/Measure', [
 	'global!tinymce.DOM',
@@ -808,15 +696,6 @@ define('tinymce/inlite/core/Measure', [
 	};
 });
 
-/**
- * Layout.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/core/Layout', [
 	'global!tinymce.geom.Rect',
@@ -904,15 +783,6 @@ define('tinymce/inlite/core/Layout', [
 	};
 });
 
-/**
- * Panel.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/ui/Panel', [
 	'global!tinymce.util.Tools',
@@ -1123,15 +993,6 @@ define('tinymce/inlite/ui/Panel', [
 	};
 });
 
-/**
- * Conversions.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/file/Conversions', [
 	'global!tinymce.util.Promise'
@@ -1153,17 +1014,6 @@ define('tinymce/inlite/file/Conversions', [
 	};
 });
 
-
-
-/**
- * Picker.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/file/Picker', [
 	'global!tinymce.util.Promise'
@@ -1195,17 +1045,6 @@ define('tinymce/inlite/file/Picker', [
 });
 
 
-
-/**
- * Buttons.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
-
 define('tinymce/inlite/ui/Buttons', [
 	'tinymce/inlite/ui/Panel',
 	'tinymce/inlite/file/Conversions',
@@ -1228,7 +1067,6 @@ define('tinymce/inlite/ui/Buttons', [
 				stateSelector: name,
 				onclick: formatBlock(name),
 				onPostRender: function () {
-					// TODO: Remove this hack that produces bold H1-H6 when we have proper icons
 					var span = this.getEl().firstChild.firstChild;
 					span.style.fontWeight = 'bold';
 				}
@@ -1278,15 +1116,7 @@ define('tinymce/inlite/ui/Buttons', [
 });
 
 defineGlobal("global!tinymce.EditorManager", tinymce.EditorManager);
-/**
- * SkinLoader.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
+
 
 define('tinymce/inlite/core/SkinLoader', [
 	'global!tinymce.EditorManager',
@@ -1323,28 +1153,14 @@ define('tinymce/inlite/core/SkinLoader', [
 });
 
 
-
-/**
- * Matcher.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
-
 define('tinymce/inlite/core/Matcher', [
 ], function () {
-	// result :: String, Rect -> Matcher.result
 	var result = function (id, rect) {
 		return {
 			id: id,
 			rect: rect
 		};
 	};
-
-	// match :: Editor, [(Editor -> Matcher.result | Null)] -> Matcher.result | Null
 	var match = function (editor, matchers) {
 		for (var i = 0; i < matchers.length; i++) {
 			var f = matchers[i];
@@ -1364,21 +1180,11 @@ define('tinymce/inlite/core/Matcher', [
 	};
 });
 
-/**
- * SelectionMatcher.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/core/SelectionMatcher', [
 	'tinymce/inlite/core/Matcher',
 	'tinymce/inlite/core/Measure'
 ], function (Matcher, Measure) {
-	// textSelection :: String -> (Editor -> Matcher.result | Null)
 	var textSelection = function (id) {
 		return function (editor) {
 			if (!editor.selection.isCollapsed()) {
@@ -1388,8 +1194,6 @@ define('tinymce/inlite/core/SelectionMatcher', [
 			return null;
 		};
 	};
-
-	// emptyTextBlock :: [Elements], String -> (Editor -> Matcher.result | Null)
 	var emptyTextBlock = function (elements, id) {
 		return function (editor) {
 			var i, textBlockElementsMap = editor.schema.getTextBlockElements();
@@ -1420,21 +1224,11 @@ define('tinymce/inlite/core/SelectionMatcher', [
 	};
 });
 
-/**
- * ElementMatcher.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/core/ElementMatcher', [
 	'tinymce/inlite/core/Matcher',
 	'tinymce/inlite/core/Measure'
 ], function (Matcher, Measure) {
-	// element :: Element, [PredicateId] -> (Editor -> Matcher.result | Null)
 	var element = function (element, predicateIds) {
 		return function (editor) {
 			for (var i = 0; i < predicateIds.length; i++) {
@@ -1446,8 +1240,6 @@ define('tinymce/inlite/core/ElementMatcher', [
 			return null;
 		};
 	};
-
-	// parent :: [Elements], [PredicateId] -> (Editor -> Matcher.result | Null)
 	var parent = function (elements, predicateIds) {
 		return function (editor) {
 			for (var i = 0; i < elements.length; i++) {
@@ -1468,15 +1260,6 @@ define('tinymce/inlite/core/ElementMatcher', [
 	};
 });
 
-/**
- * Arr.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/alien/Arr', [
 ], function () {
@@ -1491,15 +1274,6 @@ define('tinymce/inlite/alien/Arr', [
 	};
 });
 
-/**
- * PredicateId.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/core/PredicateId', [
 	'global!tinymce.util.Tools'
@@ -1510,8 +1284,6 @@ define('tinymce/inlite/core/PredicateId', [
 			predicate: predicate
 		};
 	};
-
-	// fromContextToolbars :: [ContextToolbar] -> [PredicateId]
 	var fromContextToolbars = function (toolbars) {
 		return Tools.map(toolbars, function (toolbar) {
 			return create(toolbar.id, toolbar.predicate);
@@ -1524,15 +1296,6 @@ define('tinymce/inlite/core/PredicateId', [
 	};
 });
 
-/**
- * Theme.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
 define('tinymce/inlite/Theme', [
 	'global!tinymce.ThemeManager',

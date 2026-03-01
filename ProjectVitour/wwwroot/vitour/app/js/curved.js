@@ -1,4 +1,3 @@
-// curved
 $(document).ready(function() {
     var str = $('.curved-text').html();
     var curved = '';

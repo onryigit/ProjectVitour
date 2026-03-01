@@ -1,4 +1,3 @@
-// ainimate sider
 (function ($) {
     var Spanizer = (function () {
         var settings = {
@@ -20,12 +19,8 @@
             },
         };
     })();
-    // Let's GO!
     Spanizer.init();
 })(jQuery);
-
-
-//  slider
 var swiper = new Swiper(".mySwiper", {
     navigation: {
         nextEl: ".swiper-button-next",

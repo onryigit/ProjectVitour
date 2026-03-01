@@ -1,19 +1,6 @@
-/**
- * Unlink.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
 
-/**
- * Unlink implementation that doesn't leave partial links for example it would produce:
- *  a[b<a href="x">c]d</a>e -> a[bc]de
- * instead of:
- *  a[b<a href="x">c]d</a>e -> a[bc]<a href="x">d</a>e
- */
+
+
 define("tinymce/inlite/alien/Unlink", [
 	'tinymce/inlite/alien/Bookmark',
 	'global!tinymce.util.Tools',

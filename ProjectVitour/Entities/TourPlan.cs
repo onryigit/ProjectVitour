@@ -1,4 +1,4 @@
-﻿using MongoDB.Bson;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace ProjectVitour.Entities
@@ -8,8 +8,6 @@ namespace ProjectVitour.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string TourPlanID { get; set; }
-
-        // İlişkiyi sağlayacak Foreign Key mantığındaki alanımız
         [BsonRepresentation(BsonType.ObjectId)]
         public string TourID { get; set; }
 

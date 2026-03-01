@@ -18,7 +18,6 @@ namespace ProjectVitour.Services.EmailServices
 
         public async Task SendReservationSuccessEmailAsync(string toEmail, string userName, string tourName, string tourDate, string price, int personCount, string reservationCode)
         {
-            // PROFESYONEL HTML MAİL ŞABLONU
             string htmlTemplate = $@"
             <!DOCTYPE html>
             <html>
@@ -115,13 +114,10 @@ namespace ProjectVitour.Services.EmailServices
                 string smtpServer = _config["SmtpSettings:Server"] ?? "smtp.gmail.com";
                 int smtpPort = int.TryParse(_config["SmtpSettings:Port"], out int port) ? port : 587;
                 string senderEmail = _config["SmtpSettings:Email"];
-                
-                // GITHUB GÜVENLİĞİ: Şifre kesinlikle User Secrets (.env muadili) içinden okunmalıdır.
                 string senderPassword = _config["SmtpSettings:Password"]; 
 
                 if(string.IsNullOrEmpty(senderEmail) || string.IsNullOrEmpty(senderPassword))
                 {
-                    // Uygulama çökmesin diye log atıp geçiyoruz, eğer ayar yapılmadıysa mail atmaz ama rezervasyon başarılı olur.
                     Console.WriteLine("-----------------------------------------------------");
                     Console.WriteLine("UYARI: SMTP ayarları veya şifre eksik olduğu için mail gönderilemedi.");
                     Console.WriteLine("Lütfen User Secrets üzerinden şifrenizi tanımlayın.");

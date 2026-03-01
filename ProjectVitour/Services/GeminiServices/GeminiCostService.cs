@@ -65,8 +65,6 @@ namespace ProjectVitour.Services.GeminiServices
                 if (parts.GetArrayLength() > 0)
                 {
                     var textResponse = parts[0].GetProperty("text").GetString();
-                    
-                    // markdown işaretlerini (eğer gelirse) temizleme önlemi
                     if (textResponse.StartsWith("```json"))
                     {
                         textResponse = textResponse.Substring(7);

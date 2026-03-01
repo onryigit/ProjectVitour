@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using MongoDB.Driver;
 using ProjectVitour.Dtos.TourDtos;
 using ProjectVitour.Dtos.TourImageDtos;
@@ -57,11 +57,8 @@ namespace ProjectVitour.Services.TourServices
 
                 var reviews = await _reviewCollection.Find(x => x.TourId == id && x.Status == true).ToListAsync();
                 tourDto.Reviews = _mapper.Map<List<ProjectVitour.Dtos.ReviewDtos.ResultReviewByTourIdDto>>(reviews);
-
-                // --- CASE 3 MADDE 1.2: SHOT GALLERY ---
                 var images = await _tourImageCollection.Find(x => x.TourID == id).ToListAsync();
                 tourDto.TourImages = _mapper.Map<List<ResultTourImageDto>>(images);
-                // --------------------------------------
             }
 
             return tourDto;
@@ -125,7 +122,6 @@ namespace ProjectVitour.Services.TourServices
             }
             else if (sort == "new")
             {
-                // If there's no specific 'new' vs 'recently added' distinction, use the same logic or another field
                 query = query.SortByDescending(x => x.TourID);
             }
 

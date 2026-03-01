@@ -1,30 +1,4 @@
 @use '../abstracts/' as *;
-
-/**
-  	* scroll-top
-    * PreLoad
-    * pagination
-    * Social
-    * price-range
-    * video
-    * widget Tour List
-    * Counter
-    * widget Destination
-    * Blog
-    * widget clip text
-    * widget icon box
-    * widget Testimonial
-    * widget Team
-    * Gallery
-    * widget Image Box
-    * Faq
-    * Count Down 
-*/
-
-/* Scroll Top
-
--------------------------------------------------------------- */
-// #scroll-top
 .button-go {
     position: fixed;
     display: block;
@@ -76,8 +50,7 @@
     }
 }
 
-/* PreLoad
--------------------------------------------------------------- */
+
 .pl {
     width: 6em;
     height: 6em;
@@ -121,14 +94,12 @@
     right: 0;
     left: 0;
     z-index: 99999999999;
-    // display: block;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/*pagination
--------------------------------------------------------------- */
+
 .swiper-pagination {
     .swiper-pagination-bullet {
         background: $border;
@@ -174,7 +145,6 @@
 }
 
 .swiper-button-disabled {
-    // opacity: 1 !important;
     background-color: $bg2;
 
     &::after {
@@ -182,8 +152,7 @@
     }
 }
 
-/*pagination
--------------------------------------------------------------- */
+
 .tf-pagination {
     flex-wrap: wrap;
     gap: 16px;
@@ -219,8 +188,7 @@
     }
 }
 
-/*Social 
--------------------------------------------------------------- */
+
 .social {
     display: flex;
     align-items: center;
@@ -246,8 +214,6 @@
     }
 }
 
-/* price-range 
--------------------------------------------------------------- */
 
 .noUi-target,
 .noUi-target * {
@@ -325,7 +291,7 @@
     margin-top: 20px;
 }
 
-/* Styling; */
+
 .noUi-background {
     background: $main;
 }
@@ -350,8 +316,7 @@
     left: -7px;
 }
 
-/* Handles and cursors;
- */
+
 .noUi-draggable {
     cursor: w-resize;
 }
@@ -371,7 +336,7 @@
     border: 1px solid $primary;
 }
 
-/* Disabled state; */
+
 [disabled].noUi-connect,
 
 [disabled] .noUi-connect {
@@ -397,8 +362,6 @@
 }
 
 
-/* Tag
--------------------------------------------------------------- */
 .tag {
     display: flex;
     align-items: center;
@@ -431,10 +394,7 @@
     }
 }
 
-/* body
--------------------------------------------------------------- */
-/* video
--------------------------------------------------------------- */
+
 .widget-icon-video {
     width: 80px;
     height: 80px;
@@ -454,8 +414,7 @@
     }
 }
 
-/* video
--------------------------------------------------------------- */
+
 .image-list {
 
     & img,
@@ -488,8 +447,7 @@
     color: $black;
 }
 
-/* Next Priev
--------------------------------------------------------------- */
+
 .swiper-button-next,
 .swiper-button-prev {
     width: 66px;
@@ -510,8 +468,7 @@
 
 }
 
-/* widget heading
--------------------------------------------------------------- */
+
 .sub-title-heading {
     font-size: 18px;
     font-weight: 500;
@@ -519,8 +476,7 @@
     display: inline-block;
 }
 
-/* widget Tour List
--------------------------------------------------------------- */
+
 .tour-listing {
     border-radius: 8px 8px 8px 8px;
     position: relative;
@@ -725,8 +681,7 @@
     }
 }
 
-/* widget Counter
--------------------------------------------------------------- */
+
 .tf-counter {
     background-color: $white;
     padding: 50px;
@@ -838,8 +793,7 @@
 
 }
 
-/* widget Destination
--------------------------------------------------------------- */
+
 .tf-widget-destination {
     &:hover .destination-imgae img {
         transform: scale(1.1);
@@ -948,7 +902,6 @@
                     font-size: 8px;
                 }
             }
-
 
 
         }
@@ -1136,8 +1089,7 @@
     gap: 30px;
 }
 
-/* widget Blog
--------------------------------------------------------------- */
+
 .tf-widget-blog {
 
     &:hover .blog-image>img {
@@ -1515,8 +1467,7 @@
     }
 }
 
-/* widget populer
--------------------------------------------------------------- */
+
 .tf-widget-populer {
     border-radius: 8px;
     overflow: hidden;
@@ -1583,8 +1534,7 @@
     }
 }
 
-/* widget places
--------------------------------------------------------------- */
+
 .tf-widget-place {
     &:hover .content .price-place {
         color: $main;
@@ -1703,8 +1653,7 @@
     }
 }
 
-/* widget clip text
--------------------------------------------------------------- */
+
 .clip-text {
     font-size: 105px;
     font-weight: 800;
@@ -1723,8 +1672,7 @@
     }
 }
 
-/* widget icon box
--------------------------------------------------------------- */
+
 .icon-box-style1 {
     border: 1px solid rgba(224, 224, 224, 0.28);
     box-shadow: 0px 8px 25px 0px rgba(0, 0, 0, 0.06);
@@ -2034,12 +1982,10 @@
     }
 
     .title-icon {
-        // margin-bottom: 23px;
     }
 }
 
-/* widget Testimonial
--------------------------------------------------------------- */
+
 .widget-testimonial {
     .testimonial-content {
         .profile {
@@ -2330,8 +2276,7 @@
 
 }
 
-/* widget Team
--------------------------------------------------------------- */
+
 .tf-widget-team {
     &:hover .team-image .social-team {
         opacity: 1;
@@ -2439,8 +2384,7 @@
     }
 }
 
-/* widget Gallery
--------------------------------------------------------------- */
+
 .grid-gallery {
     display: grid;
     grid-gap: 20px;
@@ -2608,8 +2552,7 @@
     }
 }
 
-/* widget Image Box
--------------------------------------------------------------- */
+
 .tf-adventure {
     .adventure-image {
         margin-right: 19px;
@@ -2670,8 +2613,7 @@
     }
 }
 
-/* Box Tour
--------------------------------------------------------------- */
+
 .box-tour-select-wrap {
     background-color: $white;
     border-radius: 14px;
@@ -2700,7 +2642,6 @@
         top: -100%;
         right: 0;
         transition: all 0.3s ease-in-out;
-        // z-index: 1;
     }
 
     &:hover .icon,
@@ -2771,8 +2712,6 @@
     }
 }
 
-/* Faq
--------------------------------------------------------------- */
 
 .faq-list {
     .accordion-item {
@@ -2825,8 +2764,7 @@
     }
 }
 
-/* Count Down
--------------------------------------------------------------- */
+
 .count-down {
     .countdown__timer {
         display: flex;

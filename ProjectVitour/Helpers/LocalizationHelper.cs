@@ -4,7 +4,6 @@ namespace ProjectVitour.Helpers
 {
     public static class LocalizationHelper
     {
-        // 1. Dinamik Başlık ve Açıklama Çekme
         public static string GetLocalizedText(string trText, string enText, string deText)
         {
             var culture = CultureInfo.CurrentCulture.Name;
@@ -16,13 +15,9 @@ namespace ProjectVitour.Helpers
 
             return trText; // Varsayılan veya TR
         }
-
-        // 2. Dinamik Fiyat ve Para Birimi Formatı (Baz değer USD kabul ediliyor)
         public static string GetLocalizedPrice(decimal priceInUsd)
         {
             var culture = CultureInfo.CurrentCulture.Name;
-            
-            // Sabit kur çarpanları (Gerçek projede bir API'den alınabilir)
             decimal tryRate = 35.0m;
             decimal eurRate = 0.92m;
 

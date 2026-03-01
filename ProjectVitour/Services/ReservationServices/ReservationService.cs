@@ -21,6 +21,11 @@ namespace ProjectVitour.Services.ReservationServices
 
         public async Task CreateReservationAsync(CreateReservationDto createReservationDto)
         {
+            if (string.IsNullOrWhiteSpace(createReservationDto.ReservationCode))
+            {
+                createReservationDto.ReservationCode = "#VIT-" + Guid.NewGuid().ToString("N").Substring(0, 5).ToUpper();
+            }
+
             var value = _mapper.Map<Reservation>(createReservationDto);
             await _reservationCollection.InsertOneAsync(value);
         }

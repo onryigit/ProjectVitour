@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using ProjectVitour.Dtos.TourDtos;
 using ProjectVitour.Services.TourServices;
 using ProjectVitour.Services.DestinationServices;
@@ -26,8 +26,6 @@ namespace ProjectVitour.Controllers
             var values = await _tourService.GetAllToursAsync();
             return View(values);
         }
-
-        // --- CREATE (GET) ---
         [HttpGet]
         public async Task<IActionResult> CreateTour()
         {
@@ -39,19 +37,15 @@ namespace ProjectVitour.Controllers
             }
             catch (Exception ex)
             {
-                // Bir hata olursa en azından sayfa açılsın
                 ModelState.AddModelError("", "Sayfa yüklenirken bir hata oluştu: " + ex.Message);
                 return View(new CreateTourDto());
             }
         }
-
-        // --- CREATE (POST) ---
         [HttpPost]
         public async Task<IActionResult> CreateTour(CreateTourDto createDtoTour)
         {
             try
             {
-                // Destinasyon ID'sinden isim ve ülkeyi alıyoruz
                 if (!string.IsNullOrEmpty(createDtoTour.DestinationID))
                 {
                     var dest = await _destinationService.GetDestinationByIdAsync(createDtoTour.DestinationID);
@@ -60,8 +54,6 @@ namespace ProjectVitour.Controllers
                         createDtoTour.Location = $"{dest.CityName}, {dest.CountryName}";
                     }
                 }
-                
-                // Formdan boş gelse bile hata vermemesi için varsayılan atamalar
                 if (string.IsNullOrEmpty(createDtoTour.Location)) createDtoTour.Location = "Belirtilmemiş";
                 if (string.IsNullOrEmpty(createDtoTour.MapLocationImageUrl)) createDtoTour.MapLocationImageUrl = "";
                 
@@ -73,15 +65,11 @@ namespace ProjectVitour.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", "Tur kaydedilirken bir hata oluştu: " + ex.Message);
-                
-                // Hata durumunda dropdown'ların boş kalmaması için listeleri tekrar dolduruyoruz
                 ViewBag.Destinations = await _destinationService.GetAllDestinationsAsync();
                 ViewBag.Categories = await _categoryService.GetAllCategoryAsync();
                 return View(createDtoTour);
             }
         }
-        
-        // --- DELETE ---
         public async Task<IActionResult> DeleteTour(string id)
         {
             if (string.IsNullOrEmpty(id)) return RedirectToAction("TourList");
@@ -92,12 +80,9 @@ namespace ProjectVitour.Controllers
             }
             catch (Exception)
             {
-                // Opsiyonel: TempData ile hata mesajı dönülebilir
             }
             return RedirectToAction("TourList");
         }
-
-        // --- TOGGLE STATUS ---
         public async Task<IActionResult> ToggleTourStatus(string id)
         {
             if (string.IsNullOrEmpty(id)) return RedirectToAction("TourList");
@@ -132,12 +117,9 @@ namespace ProjectVitour.Controllers
             }
             catch (Exception)
             {
-                // Opsiyonel: Loglama yapılabilir
             }
             return RedirectToAction("TourList");
         }
-
-        // --- UPDATE (GET) ---
         [HttpGet]
         public async Task<IActionResult> UpdateTour(string id)
         {
@@ -159,14 +141,11 @@ namespace ProjectVitour.Controllers
                 return RedirectToAction("TourList");
             }
         }
-
-        // --- UPDATE (POST) ---
         [HttpPost]
         public async Task<IActionResult> UpdateTour(UpdateTourDto updateTourDto)
         {
             try
             {
-                // Destinasyon ID'sinden güncel lokasyon ismini çek
                 if (!string.IsNullOrEmpty(updateTourDto.DestinationID))
                 {
                     var dest = await _destinationService.GetDestinationByIdAsync(updateTourDto.DestinationID);
@@ -185,12 +164,8 @@ namespace ProjectVitour.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", "Güncelleme sırasında bir hata oluştu: " + ex.Message);
-                
-                // Form geri dönerken verilerin (Dropdown vb.) kopmaması için tekrar doldur
                 ViewBag.Destinations = await _destinationService.GetAllDestinationsAsync();
                 ViewBag.Categories = await _categoryService.GetAllCategoryAsync();
-                
-                // Model GetTourByIdDto beklediği için Update'i dönüştürüyoruz
                 var returnDto = new GetTourByIdDto 
                 {
                     TourID = updateTourDto.TourID,

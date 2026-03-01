@@ -1,4 +1,4 @@
-﻿using ProjectVitour.Dtos.TourImageDtos;
+using ProjectVitour.Dtos.TourImageDtos;
 
 namespace ProjectVitour.Dtos.TourDtos
 {
@@ -21,8 +21,6 @@ namespace ProjectVitour.Dtos.TourDtos
         public string DestinationID { get; set; }
         public string CategoryID { get; set; }
         public string MapLocationImageUrl { get; set; }
-
-        // Turun gün gün planlarını tutacak liste
         public List<TourPlanDto> TourPlans { get; set; }
         public List<ProjectVitour.Dtos.ReviewDtos.ResultReviewByTourIdDto> Reviews { get; set; }
         public List<ResultTourImageDto> TourImages { get; set; }

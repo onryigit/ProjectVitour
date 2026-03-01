@@ -1,7 +1,6 @@
 @use '../abstracts/' as *;
 
 
-/*----------------------Slide-home 01--------------------*/
 .slider-home1 {
     .silider-image {
         &::before {
@@ -203,11 +202,8 @@
     }
 }
 
-/*----------------------Slide-home 02--------------------*/
-.slider-home2-image {
 
-    // position: absolute;
-    // overflow: hidden;
+.slider-home2-image {
     .slider-home2 {
         position: relative;
 
@@ -331,7 +327,7 @@
 
 }
 
-/*----------------------Slide-home 03--------------------*/
+
 .booking-title {
     z-index: 3;
     rotate: -5deg;
@@ -432,7 +428,7 @@
     }
 }
 
-/*----------------------Slide-home 04--------------------*/
+
 .slider-home4 {
     background-image: url(../../assets/images/slide/slide4.jpg);
     background-position: center;
@@ -505,7 +501,7 @@
     }
 }
 
-/*----------------------Slide-home 05--------------------*/
+
 .slider-home5 {
     padding-top: 112px;
     padding-bottom: 185px;

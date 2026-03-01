@@ -16,7 +16,7 @@ asynctest('browser/core/ElementMatcherTest', [
 		};
 	};
 
-	var constantFalse = function (/*elm*/) {
+	var constantFalse = function () {
 		return false;
 	};
 

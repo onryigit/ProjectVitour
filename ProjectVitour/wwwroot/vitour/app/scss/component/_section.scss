@@ -1,8 +1,6 @@
 @use '../abstracts/' as *;
 
 
-
-/*----------------------breadcumb--------------------*/
 .breadcumb-section {
     padding: 137px 0px 135px 0px;
     background-image: url(../../assets/images/page/breakcrumb.jpg);
@@ -62,7 +60,7 @@
     }
 }
 
-/*----------------------Blog--------------------*/
+
 .side-blog {
     margin-right: 5px;
     margin-bottom: 56px;
@@ -567,7 +565,7 @@
     bottom: 0;
 }
 
-/*----------------------Video--------------------*/
+
 .widget-image-video {
     position: relative;
 
@@ -646,7 +644,7 @@
     }
 }
 
-/*----------------------call-to-action--------------------*/
+
 .callt-to-action {
     background-color: $primary;
     border-radius: 7px;
@@ -745,7 +743,7 @@
     }
 }
 
-/*----------------------About Us--------------------*/
+
 .inner-content-about {
     padding-left: 6px;
 
@@ -1125,7 +1123,7 @@
     }
 }
 
-/*----------------------Tour Package--------------------*/
+
 .tour-package {
     background-color: $bg3;
     background-image: url(../../assets/images/page/bg1.png);
@@ -1265,7 +1263,7 @@
     }
 }
 
-/*----------------------Activities--------------------*/
+
 .tf-widget-activities {
     .mask-top {
         position: absolute;
@@ -1295,9 +1293,7 @@
         .activities-image {
             img {
                 width: 370px;
-                // width: 100%;
                 margin-left: -6em;
-                // margin-right: 6em;
                 border-radius: 8px;
             }
         }
@@ -1475,7 +1471,7 @@
     }
 }
 
-/*----------------------Counter--------------------*/
+
 .widget-counter {
     background-color: $primary;
     background-image: url(../../assets/images/page/bg-counter.png);
@@ -1594,7 +1590,7 @@
     }
 }
 
-/*----------------------destination--------------------*/
+
 .widget-destination {
     padding-top: 317px;
 }
@@ -1650,7 +1646,7 @@
     margin-bottom: 11px;
 }
 
-/*----------------------Brand logo--------------------*/
+
 .line-brand-logo {
     .line {
         width: 100%;
@@ -1699,7 +1695,7 @@
     }
 }
 
-/*----------------------Adventure--------------------*/
+
 .adventure-content {
     margin-bottom: -8.3em;
     padding: 63px 0px 0px 65px;
@@ -1708,7 +1704,7 @@
     box-shadow: 0px -21px 26px 0px rgba(0, 0, 0, 0.02);
 }
 
-/*----------------------Testimonial--------------------*/
+
 .widget-testimonial-style01 {
     padding-top: 289px;
     padding-bottom: 158px;
@@ -1880,7 +1876,6 @@
     color: $secondary;
 }
 
-/*----------------------Banner part--------------------*/
 
 .banner-part-item {
     .btn-booking {
@@ -2071,7 +2066,7 @@
 
 }
 
-/*----------------------Video--------------------*/
+
 .widget-video {
     padding-top: 236px;
     padding-bottom: 137px;
@@ -2110,7 +2105,7 @@
     padding-top: 310px;
 }
 
-/*----------------------service--------------------*/
+
 .widget-service {
     padding-top: 112px;
     padding-bottom: 15px;
@@ -2127,7 +2122,7 @@
     }
 }
 
-/*----------------------Feature--------------------*/
+
 .widget-feature {
     .feature-shape {
         position: absolute;
@@ -2334,7 +2329,7 @@
     }
 }
 
-/*----------------------Mobie App--------------------*/
+
 .mobie-app {
     background-color: $main;
     border-radius: 14px;
@@ -2396,7 +2391,7 @@
     }
 }
 
-/*----------------------Faq--------------------*/
+
 .widget-faq {
     .image-faq {
         margin-left: -78px;
@@ -2411,7 +2406,7 @@
 
 }
 
-/*----------------------Top Week--------------------*/
+
 .widget-top-week {
     background-image: url(../../assets/images/page/bg3.png);
     background-position: center;
@@ -2451,7 +2446,7 @@
     padding-bottom: 218px;
 }
 
-/*----------------------Instagram--------------------*/
+
 .widget-instagram {
     padding: 26px 28px;
 }
@@ -2543,7 +2538,7 @@
     }
 }
 
-/*----------------------impresssino--------------------*/
+
 .impressino {
     padding-top: 182px;
     background-image: url(../../assets/images/page/bg-counter.jpg);
@@ -2575,7 +2570,6 @@
 }
 
 
-/*----------------------archieve tour--------------------*/
 .archieve-tour {
     padding-top: 120px;
     padding-bottom: 105px;
@@ -2868,7 +2862,7 @@
     }
 }
 
-/*----------------------terms-condition--------------------*/
+
 .terms-condition {
     padding-top: 116px;
     padding-bottom: 157px;
@@ -2923,7 +2917,7 @@
     }
 }
 
-/*----------------------faq--------------------*/
+
 .inner-faq {
     padding-top: 104px;
     padding-bottom: 143px;
@@ -2995,7 +2989,7 @@
     }
 }
 
-/*----------------------login--------------------*/
+
 .login {
     padding-top: 94px;
     padding-bottom: 105px;
@@ -3115,7 +3109,7 @@
     }
 }
 
-/*----------------------contact us--------------------*/
+
 .contact-us {
     .box-contact {
         border-radius: 8px;
@@ -3174,7 +3168,7 @@
     }
 }
 
-/*----------------------Team--------------------*/
+
 .team-member-page {
     .team-member-grid {
         display: grid;
@@ -3604,7 +3598,6 @@
             }
 
 
-
         }
 
         .client-review {
@@ -3867,7 +3860,7 @@
     }
 }
 
-/*----------------------Dash-board--------------------*/
+
 .sidebar-dashboard {
     transition: all 0.2s ease-out;
     background-color: $bg12;

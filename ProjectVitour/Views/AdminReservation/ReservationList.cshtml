@@ -59,6 +59,11 @@
                         foreach (var item in Model)
                         {
                             var tourName = tours?.FirstOrDefault(x => x.TourID?.ToString() == item.TourID?.ToString())?.Title ?? "Bilinmiyor";
+                            var reservationCode = !string.IsNullOrWhiteSpace(item.ReservationCode)
+                                ? item.ReservationCode
+                                : (!string.IsNullOrWhiteSpace(item.ReservationID)
+                                    ? "#VIT-" + item.ReservationID.Substring(Math.Max(0, item.ReservationID.Length - 5)).ToUpper()
+                                    : "-");
                             <tr>
                                 <td class="ps-4 py-3">
                                     <div class="d-flex align-items-center">
@@ -68,6 +73,7 @@
                                         <div class="ms-3">
                                             <div class="fw-bold text-dark mb-1">@item.FullName</div>
                                             <small class="text-muted"><i class="bi bi-envelope me-1"></i>@item.Email</small>
+                                            <div><small class="text-secondary">Kod: <span class="fw-semibold">@reservationCode</span></small></div>
                                         </div>
                                     </div>
                                 </td>
@@ -82,16 +88,16 @@
                                     }
                                 </td>
                                 <td class="text-end pe-4 py-3">
-                                    <div class="dropdown d-inline-block">
-                                        <button class="btn btn-sm btn-light rounded-circle shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:34px; height:34px; line-height:22px;" title="İşlemler">
-                                            <i class="bi bi-three-dots-vertical"></i>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-3">
-                                            <li><a class="dropdown-item text-success" href="/AdminReservation/ExportToExcelById/@item.ReservationID"><i class="bi bi-file-earmark-excel me-2"></i>Excel İndir</a></li>
-                                            <li><a class="dropdown-item text-danger" href="/AdminReservation/ExportToPdfById/@item.ReservationID"><i class="bi bi-file-earmark-pdf me-2"></i>PDF İndir</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item text-danger" href="/AdminReservation/DeleteReservation/@item.ReservationID" onclick="return confirm('Bu rezervasyonu silmek istediğinize emin misiniz?')"><i class="bi bi-trash me-2"></i>Sil</a></li>
-                                        </ul>
+                                    <div class="d-flex justify-content-end gap-2 flex-wrap action-buttons">
+                                        <a class="btn-action btn-excel" href="/AdminReservation/ExportToExcelById/@item.ReservationID" title="Excel İndir">
+                                            <i class="bi bi-file-earmark-excel-fill"></i>
+                                        </a>
+                                        <a class="btn-action btn-pdf" href="/AdminReservation/ExportToPdfById/@item.ReservationID" title="PDF İndir">
+                                            <i class="bi bi-file-earmark-pdf-fill"></i>
+                                        </a>
+                                        <a class="btn-action btn-delete" href="/AdminReservation/DeleteReservation/@item.ReservationID" title="Sil" onclick="return confirm('Bu rezervasyonu silmek istediğinize emin misiniz?')">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -136,3 +142,53 @@
         });
     </script>
 }
+
+<style>
+    .action-buttons .btn-action {
+        width: 34px;
+        height: 34px;
+        border: none;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        cursor: pointer;
+        transition: all .15s;
+        text-decoration: none;
+    }
+
+    .action-buttons .btn-action:hover {
+        transform: translateY(-1px);
+    }
+
+    .action-buttons .btn-excel {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+    .action-buttons .btn-excel:hover {
+        background: #bbf7d0;
+        color: #166534;
+    }
+
+    .action-buttons .btn-pdf {
+        background: #e0f2fe;
+        color: #0369a1;
+    }
+
+    .action-buttons .btn-pdf:hover {
+        background: #bae6fd;
+        color: #075985;
+    }
+
+    .action-buttons .btn-delete {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .action-buttons .btn-delete:hover {
+        background: #fecaca;
+        color: #7f1d1d;
+    }
+</style>

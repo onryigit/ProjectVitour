@@ -1,80 +1,44 @@
-/**
-  * Header Connect
-  * retinaLogo
-  * ajaxContactForm
-  * headerFixed
-  * select js
-  * mobileNav
-  * ajaxSubscribe
-  * alertBox
-  * loadmore
-*/
+
 
 ; (function ($) {
     "use strict";
 
     var themesflatTheme = {
-
-        // Main init function
         init: function () {
             this.config();
             this.events();
         },
-
-        // Define vars for caching
         config: function () {
             this.config = {
                 $window: $(window),
                 $document: $(document),
             };
         },
-
-        // Events
         events: function () {
             var self = this;
-
-            // Run on document ready
             self.config.$document.on('ready', function () {
-
-
-                // Retina Logos
                 self.retinaLogo();
 
 
             });
-
-            // Run on Window Load
             self.config.$window.on('load', function () {
 
             });
         },
 
     }; // end themesflatTheme
-
-    // Start things up
     themesflatTheme.init();
-
-    
-    //  show logo home2 
     $('#showlogo').prepend('<a href="index.html"><img id="theImg" src="assets/images/logo/logo2.png" /></a>');
 
     $('.select_js').niceSelect();
-
-    //Submenu Dropdown Toggle
     if ($('.main-header li.dropdown2 ul').length) {
         $('.main-header li.dropdown2').append('<div class="dropdown2-btn"></div>');
-
-        //Dropdown Button
         $('.main-header li.dropdown2 .dropdown2-btn').on('click', function () {
             $(this).prev('ul').slideToggle(500);
         });
-
-        //Disable dropdown parent link
         $('.navigation li.dropdown2 > a').on('click', function (e) {
             e.preventDefault();
         });
-
-        //Disable dropdown parent link
         $('.main-header .navigation li.dropdown2 > a,.hidden-bar .side-menu li.dropdown2 > a').on('click', function (e) {
             e.preventDefault();
         });
@@ -84,16 +48,11 @@
         });
 
     }
-    // Mobile Nav Hide Show
     if ($('.mobile-menu').length) {
-
-        //$('.mobile-menu .menu-box').mCustomScrollbar();
 
         var mobileMenuContent = $('.main-header .nav-outer .main-menu').html();
         $('.mobile-menu .menu-box .menu-outer').append(mobileMenuContent);
         $('.sticky-header .main-menu').append(mobileMenuContent);
-
-        //Hide / Show Submenu
         $('.mobile-menu .navigation > li.dropdown2 > .dropdown2-btn').on('click', function (e) {
             e.preventDefault();
             var target = $(this).parent('li').children('ul');
@@ -111,8 +70,6 @@
                 $(this).parent('li').children('ul').slideToggle(500);
             }
         });
-
-        //3rd Level Nav
         $('.mobile-menu .navigation > li.dropdown2 > ul  > li.dropdown2 > .dropdown2-btn').on('click', function (e) {
             e.preventDefault();
             var targetInner = $(this).parent('li').children('ul');
@@ -130,14 +87,10 @@
                 $(this).parent('li').children('ul').slideToggle(500);
             }
         });
-
-        //Menu Toggle Btn
         $('.mobile-nav-toggler').on('click', function () {
             $('body').addClass('mobile-menu-visible');
 
         });
-
-        //Menu Toggle Btn
         $('.mobile-menu .menu-backdrop, .close-btn').on('click', function () {
             $('body').removeClass('mobile-menu-visible');
             $('.mobile-menu .navigation > li').removeClass('open');
@@ -260,9 +213,6 @@
             box.addClass('faq-active');
         }
     });
-  
-    
-    // Dom Ready
     $(function () {
         ajaxSubscribe.eventLoad();
         alertBox();

@@ -1,26 +1,8 @@
-/**
- * Bookmark.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2016 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
+
 
 define('tinymce/inlite/alien/Bookmark', [
 ], function () {
-	/**
-	 * Returns a range bookmark. This will convert indexed bookmarks into temporary span elements with
-	 * index 0 so that they can be restored properly after the DOM has been modified. Text bookmarks will not have spans
-	 * added to them since they can be restored after a dom operation.
-	 *
-	 * So this: <p><b>|</b><b>|</b></p>
-	 * becomes: <p><b><span data-mce-type="bookmark">|</span></b><b data-mce-type="bookmark">|</span></b></p>
-	 *
-	 * @param  {DOMRange} rng DOM Range to get bookmark on.
-	 * @return {Object} Bookmark object.
-	 */
+	
 	var create = function (dom, rng) {
 		var bookmark = {};
 
@@ -62,11 +44,7 @@ define('tinymce/inlite/alien/Bookmark', [
 		return bookmark;
 	};
 
-	/**
-	 * Moves the selection to the current bookmark and removes any selection container wrappers.
-	 *
-	 * @param {Object} bookmark Bookmark object to move selection to.
-	 */
+	
 	var resolve = function (dom, bookmark) {
 		function restoreEndPoint(start) {
 			var container, offset, node;
@@ -78,8 +56,6 @@ define('tinymce/inlite/alien/Bookmark', [
 					if (node == container) {
 						return idx;
 					}
-
-					// Skip data-mce-type=bookmark nodes
 					if (node.nodeType != 1 || node.getAttribute('data-mce-type') != 'bookmark') {
 						idx++;
 					}

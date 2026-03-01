@@ -184,48 +184,7 @@ kernel.fp.functions = def(
     };
   }
 );
-/**
- * This module has a dual responsibility:
- *  1. Ensures that asynchronous function calls, 'f', that share the same
- *     'key' are not executed in parallel.
- *  2. In the case where an attempt to call in parallel is prevented,
- *     the 'action' callbacks are executed when the asynchronous call is
- *     completed.
- *
- * Example:
- *  When we async-map to remotely fetch module definition, it is
- *  important that only a single define is evaluated, but the
- *  notification that the definition has completed is propagated
- *  to all interested parties.
- *
- *    1. we require dependencies 'x' and 'y'
- *
- *    2. both x and y are defined in the same file  (i.e. compiled together), 'a.js'.
- *
- *    3. we resolve x and y, to their load spec using a modulator
- *        x_spec = {load: function () { -- load a.js -- }, url: a.js, serial: false};
- *        y_spec = {load: function () { -- load a.js -- }, url: a.js, serial: false};
- *
- *    4. we make the piggyback call for x:
- *        piggybacker.piggyback(x_spec.url, x_spec.load, xdone);
- *
- *       this will register the 'xdone' action, and actually
- *       trigger the load call, with a synthetic callback
- *       responsible for triggering all registered actions.
- *
- *    5. we make the piggyback call for y:
- *        piggybacker.piggyback(y_spec.url, y_spec.load, ydone);
- *
- *       this will register the 'ydone' action, but NOT trigger
- *       the load call.
- *
- *    6. the load call completes, and calls the synthetic callback,
- *       which is responsible for triggering both 'xdone' and 'ydone'.
- *
- *    7. something else happens that means we have to load 'a.js' again,
- *       the piggybacker DOES NOT prevent this call, and will follow
- *       the above process.
- */
+
 kernel.async.piggybacker = def(
   [
     kernel.fp.array,
@@ -267,7 +226,6 @@ kernel.modulator.globalator = def(
 
   function () {
     var create = function () {
-      // FIX pull out
       var resolve = function (name, scope) {
         var parts = name.split('.');
         var r = scope;
@@ -364,19 +322,7 @@ kernel.modulator.bolt = def(
     };
   }
 );
-/**
- * This module performs dependency analysis of strings that depend on sets of
- * strings.
- *
- * The input is an array of root strings to start analysis from, and an object
- * that contains a mapping of each string to the strings it depends on.
- *
- * Performing an analysis results in either:
- *   1. an empty array, indicating that all dependencies are satisfied,
- *   2. an array of strings that are, at the minimum, still needed in order to
- *      satisfy the given dependency trees, or
- *   3. an array of strings that form a dependency cycle.
- */
+
 kernel.module.analyser = def(
   [
     kernel.fp.array
@@ -389,10 +335,7 @@ kernel.module.analyser = def(
       return p.concat([name]);
     };
 
-    /**
-     * @param {array} roots Contains a list of root ids
-     * @param {object} modules Contains dependency information in format: { id: [ 'id1', 'id2' ] }
-     */
+    
     var analyse = function (roots, modules) {
       var done = {};
       var path = [];
@@ -525,8 +468,6 @@ kernel.module.manager = def(
     var create = function (regulator, onerror) {
       var blueprints = {};  // id -> { id: string, dependencies: [ string ], definition: function }
       var modules = {};     // id -> module
-
-      // Adds a module to the system.
       var define = function (id, dependencies, definition) {
         if (id === undefined)
           onerror("Define error: module id can not be undefined");
@@ -535,8 +476,6 @@ kernel.module.manager = def(
         else
           blueprints[id] = { id: id, dependencies: dependencies, definition: definition };
       };
-
-      // Loads a set of modules asynchronously.
       var require = function (ids, callback) {
         var onsuccess = function () {
           var instances = ar.map(ids, demand);
@@ -552,8 +491,6 @@ kernel.module.manager = def(
 
         oncontinue();
       };
-
-      // Instantiates a module and all of its dependencies.
       var demand = function (id) {
         if (modules[id] !== undefined)
           return modules[id];
@@ -676,12 +613,7 @@ kernel.api.regulator = def(
 
   function (ar, fn) {
     var create = function (sources) {
-      /*
-       * 1. Resolve configuration as much as possible
-       * 2. Check for unresolved modulator types that are required to continue.
-       *   a) Go ahead and resolve, if we have everything we need.
-       *   b) Delay, requiring the modulators, then retry.
-       */
+      
       var regulate = function (ids, define, require, demand, onsuccess, onerror) {
         sources.crank();
         var required = ar.map(ids, determinetype);
@@ -718,7 +650,7 @@ kernel.api.regulator = def(
 
       var delay = function (types, ids, define, require, demand, onsuccess, onerror) {
         var modulatorids = ar.map(types, sources.idOf);
-        require(modulatorids, function (/* modulators */) {
+        require(modulatorids, function () {
           var modulators = arguments;
           ar.each(types, function (type, i) {
              sources.register(type, modulators[i]);
@@ -854,8 +786,6 @@ loader.transporter.xhr = def(
 
   function () {
     var requestObject = function () {
-      // Correct way to use XMLHttpRequest in IE:
-      // http://blogs.msdn.com/b/ie/archive/2006/01/23/516393.aspx
       var factories = [
         function () { return new XMLHttpRequest() },
         function () { return new ActiveXObject("Microsoft.XMLHTTP") }
@@ -939,9 +869,6 @@ loader.executor.injector = def(
       };
 
       var noop = function () {};
-
-      // Injection does not fire events, but execution happens synchronously,
-      // so we just make an explicit callback
       script.insert(inject, noop);
       onsuccess(); 
     };
@@ -1206,8 +1133,6 @@ module.config.builtins = def(
 
   function (boltscripttag, boltcommonjs) {
     return {
-      // TODO: 'amd' is maintained for backwards compatibility, will be removed
-      // at some point.
       browser: { bolt: boltscripttag, amd: boltscripttag },
       commonjs: { bolt: boltcommonjs, amd: boltcommonjs }
     };
@@ -1229,7 +1154,7 @@ module.config.specs = def(
     };
 
     var source = function (relativeto) {
-      return function (type /*, args */) {
+      return function (type ) {
         return {
           type: type,
           relativeto: relativeto,
@@ -1272,24 +1197,11 @@ module.reader.bouncing = def(
         done({ sources: accumulated.sources, types: accumulated.types });
     };
 
-    /*
-     * All precedence is depth-first, pre-order. Example:
-     *
-     *        A
-     *       /-\
-     *      B   C
-     *     /|   |\
-     *    D E   F G
-     *
-     * Configs are read in A, B, D, E, C, F, G.
-     *
-     * If configs mixed delegation and sources, the
-     * sources would be ordered the same: A, B, D, E, C, F, G.
-     */
+    
 
     var evaluate = function (file, payload, done, read, acc) {
       var result = {};
-      /* eval scope */
+      
       var mapper = module.config.mapper;
       var type = specs.type;
       var source = specs.source(file);

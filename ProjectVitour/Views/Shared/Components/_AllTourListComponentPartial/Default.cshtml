@@ -1,4 +1,4 @@
-﻿@using ProjectVitour.Helpers
+@using ProjectVitour.Helpers
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<ProjectVitour.SharedResource> SharedLocalizer
 @model List<ProjectVitour.Dtos.TourDtos.ResultTourDto>
@@ -19,7 +19,7 @@
     .tour-listing:hover .tour-listing-image img {
         transform: scale(1.08);
     }
-    /* Premium Glassmorphism Badge */
+    
     .premium-badge {
         position: absolute;
         top: 15px;
@@ -51,7 +51,6 @@
                 <div class="row align-center">
                     <div class="col-sm-5">
                         @{
-                            // Eğer ViewBag verileri boş gelirse hata vermemesi için güvenli atamalar
                             int currentPage = ViewBag.CurrentPage != null ? (int)ViewBag.CurrentPage : 1;
                             int pageSize = ViewBag.PageSize != null ? (int)ViewBag.PageSize : 6;
                             long totalCount = ViewBag.TotalCount != null ? (long)ViewBag.TotalCount : Model.Count;
@@ -144,7 +143,6 @@
                 <div class="col-md-12">
                     <ul class="tf-pagination flex-five mt-20">
                         @{
-                            // Sayfalama değişkenleri yukarıda atanmıştı
                             int currentPg = ViewBag.CurrentPage != null ? (int)ViewBag.CurrentPage : 1;
                             int totalPgs = ViewBag.TotalPages != null ? (int)ViewBag.TotalPages : 1;
 

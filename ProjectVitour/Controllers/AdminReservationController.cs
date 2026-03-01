@@ -22,6 +22,22 @@ namespace ProjectVitour.Controllers
             _tourService = tourService;
         }
 
+        private static string ResolveReservationCode(string reservationCode, string reservationId)
+        {
+            if (!string.IsNullOrWhiteSpace(reservationCode))
+            {
+                return reservationCode;
+            }
+
+            if (string.IsNullOrWhiteSpace(reservationId))
+            {
+                return "-";
+            }
+
+            var suffixLength = Math.Min(5, reservationId.Length);
+            return "#VIT-" + reservationId.Substring(reservationId.Length - suffixLength).ToUpper();
+        }
+
         public async Task<IActionResult> ReservationList()
         {
             var values = await _reservationService.GetAllReservationAsync();
@@ -35,7 +51,6 @@ namespace ProjectVitour.Controllers
             return RedirectToAction("ReservationList");
         }
 
-        // --- GERÇEK EXCEL RAPORLAMA ---
         public async Task<IActionResult> ExportToExcel()
         {
             var reservations = await _reservationService.GetAllReservationAsync();
@@ -44,10 +59,9 @@ namespace ProjectVitour.Controllers
             using (var workbook = new XLWorkbook())
             {
                 var worksheet = workbook.Worksheets.Add("Rezervasyonlar");
-                
-                // Başlık Stili
-                var titleRange = worksheet.Range("A1:F1");
-                titleRange.Merge().Value = "VİTOUR REZERVASYON RAPORU";
+
+                var titleRange = worksheet.Range("A1:G1");
+                titleRange.Merge().Value = "VITOUR REZERVASYON RAPORU";
                 titleRange.Style.Font.Bold = true;
                 titleRange.Style.Font.FontSize = 16;
                 titleRange.Style.Font.FontColor = XLColor.White;
@@ -56,15 +70,15 @@ namespace ProjectVitour.Controllers
                 titleRange.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
                 worksheet.Row(1).Height = 30;
 
-                // Sütun Başlıkları
-                worksheet.Cell(2, 1).Value = "Müşteri Ad Soyad";
-                worksheet.Cell(2, 2).Value = "E-Posta";
-                worksheet.Cell(2, 3).Value = "Telefon";
-                worksheet.Cell(2, 4).Value = "Tur Adı";
-                worksheet.Cell(2, 5).Value = "Kişi Sayısı";
-                worksheet.Cell(2, 6).Value = "Kayıt Tarihi";
+                worksheet.Cell(2, 1).Value = "Rezervasyon Kodu";
+                worksheet.Cell(2, 2).Value = "Musteri Ad Soyad";
+                worksheet.Cell(2, 3).Value = "E-Posta";
+                worksheet.Cell(2, 4).Value = "Telefon";
+                worksheet.Cell(2, 5).Value = "Tur Adi";
+                worksheet.Cell(2, 6).Value = "Kisi Sayisi";
+                worksheet.Cell(2, 7).Value = "Kayit Tarihi";
 
-                var headerRange = worksheet.Range("A2:F2");
+                var headerRange = worksheet.Range("A2:G2");
                 headerRange.Style.Font.Bold = true;
                 headerRange.Style.Fill.BackgroundColor = XLColor.LightGray;
                 headerRange.Style.Font.FontColor = XLColor.Black;
@@ -74,20 +88,21 @@ namespace ProjectVitour.Controllers
                 foreach (var item in reservations)
                 {
                     var tourName = tours.FirstOrDefault(x => x.TourID?.ToString() == item.TourID?.ToString())?.Title ?? "Bilinmeyen Tur";
-                    worksheet.Cell(row, 1).Value = item.FullName;
-                    worksheet.Cell(row, 2).Value = item.Email;
-                    worksheet.Cell(row, 3).Value = item.Phone ?? "-";
-                    worksheet.Cell(row, 4).Value = tourName;
-                    worksheet.Cell(row, 5).Value = item.PersonCount;
-                    worksheet.Cell(row, 5).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-                    worksheet.Cell(row, 6).Value = item.ReservationDate.ToString("dd.MM.yyyy HH:mm");
+                    worksheet.Cell(row, 1).Value = ResolveReservationCode(item.ReservationCode, item.ReservationID);
+                    worksheet.Cell(row, 2).Value = item.FullName;
+                    worksheet.Cell(row, 3).Value = item.Email;
+                    worksheet.Cell(row, 4).Value = item.Phone ?? "-";
+                    worksheet.Cell(row, 5).Value = tourName;
+                    worksheet.Cell(row, 6).Value = item.PersonCount;
                     worksheet.Cell(row, 6).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                    worksheet.Cell(row, 7).Value = item.ReservationDate.ToString("dd.MM.yyyy HH:mm");
+                    worksheet.Cell(row, 7).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
-                    // Alternatif satır rengi
                     if (row % 2 == 0)
                     {
-                        worksheet.Range($"A{row}:F{row}").Style.Fill.BackgroundColor = XLColor.AliceBlue;
+                        worksheet.Range($"A{row}:G{row}").Style.Fill.BackgroundColor = XLColor.AliceBlue;
                     }
+
                     row++;
                 }
 
@@ -103,7 +118,6 @@ namespace ProjectVitour.Controllers
             }
         }
 
-        // --- GERÇEK PDF RAPORLAMA ---
         public async Task<IActionResult> ExportToPdf()
         {
             var reservations = await _reservationService.GetAllReservationAsync();
@@ -115,42 +129,45 @@ namespace ProjectVitour.Controllers
                 PdfDocument pdf = new PdfDocument(writer);
                 Document document = new Document(pdf);
 
-                // Türkçe Karakter Desteği İçin Font (Arial varsa kullan, yoksa standart cp1254)
                 PdfFont turkishFont;
+                PdfFont turkishBoldFont;
                 string fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "arial.ttf");
+                string boldFontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "arialbd.ttf");
                 if (System.IO.File.Exists(fontPath))
                 {
                     turkishFont = PdfFontFactory.CreateFont(fontPath, "Identity-H", PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
+                    turkishBoldFont = System.IO.File.Exists(boldFontPath)
+                        ? PdfFontFactory.CreateFont(boldFontPath, "Identity-H", PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED)
+                        : turkishFont;
                 }
                 else
                 {
                     turkishFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA, "Cp1254", PdfFontFactory.EmbeddingStrategy.PREFER_NOT_EMBEDDED);
+                    turkishBoldFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD, "Cp1254", PdfFontFactory.EmbeddingStrategy.PREFER_NOT_EMBEDDED);
                 }
-                
+
                 document.SetFont(turkishFont);
 
-                // Başlık
-                Paragraph header = new Paragraph("VİTOUR REZERVASYON RAPORU")
+                var header = new Paragraph("VITOUR REZERVASYON RAPORU")
                     .SetTextAlignment(TextAlignment.CENTER)
                     .SetFontSize(22)
-                    .SetFontColor(iText.Kernel.Colors.ColorConstants.DARK_GRAY);
+                    .SetFontColor(iText.Kernel.Colors.ColorConstants.DARK_GRAY)
+                    .SetFont(turkishBoldFont);
                 document.Add(header);
-                
-                document.Add(new Paragraph($"Oluşturulma Tarihi: {DateTime.Now:dd.MM.yyyy HH:mm}")
+
+                document.Add(new Paragraph($"Olusturulma Tarihi: {DateTime.Now:dd.MM.yyyy HH:mm}")
                     .SetTextAlignment(TextAlignment.RIGHT)
                     .SetFontSize(10)
                     .SetFontColor(iText.Kernel.Colors.ColorConstants.GRAY));
 
                 document.Add(new Paragraph("\n"));
 
-                // Tablo (5 Kolon)
-                Table table = new Table(UnitValue.CreatePercentArray(new float[] { 25, 25, 25, 10, 15 })).UseAllAvailableWidth();
-                
-                // Tablo Başlıkları
-                string[] headers = { "Müşteri Ad Soyad", "E-Posta", "Tur Adı", "Kişi", "Tarih" };
+                Table table = new Table(UnitValue.CreatePercentArray(new float[] { 18, 22, 22, 20, 8, 10 })).UseAllAvailableWidth();
+
+                string[] headers = { "Rez. Kodu", "Musteri", "E-Posta", "Tur", "Kisi", "Tarih" };
                 foreach (var h in headers)
                 {
-                    Cell cell = new Cell().Add(new Paragraph(h))
+                    Cell cell = new Cell().Add(new Paragraph(h).SetFont(turkishBoldFont))
                         .SetBackgroundColor(iText.Kernel.Colors.ColorConstants.LIGHT_GRAY)
                         .SetTextAlignment(TextAlignment.CENTER)
                         .SetPadding(5);
@@ -162,9 +179,12 @@ namespace ProjectVitour.Controllers
                 {
                     rowNum++;
                     var tourName = tours.FirstOrDefault(x => x.TourID?.ToString() == item.TourID?.ToString())?.Title ?? "Bilinmeyen Tur";
-                    
-                    var bg = rowNum % 2 == 0 ? new iText.Kernel.Colors.DeviceRgb(240, 248, 255) : iText.Kernel.Colors.ColorConstants.WHITE;
+                    var reservationCode = ResolveReservationCode(item.ReservationCode, item.ReservationID);
+                    var bg = rowNum % 2 == 0
+                        ? new iText.Kernel.Colors.DeviceRgb(240, 248, 255)
+                        : iText.Kernel.Colors.ColorConstants.WHITE;
 
+                    table.AddCell(new Cell().Add(new Paragraph(reservationCode)).SetBackgroundColor(bg).SetPadding(4));
                     table.AddCell(new Cell().Add(new Paragraph(item.FullName)).SetBackgroundColor(bg).SetPadding(4));
                     table.AddCell(new Cell().Add(new Paragraph(item.Email)).SetBackgroundColor(bg).SetPadding(4));
                     table.AddCell(new Cell().Add(new Paragraph(tourName)).SetBackgroundColor(bg).SetPadding(4));
@@ -178,7 +198,7 @@ namespace ProjectVitour.Controllers
                 return File(stream.ToArray(), "application/pdf", $"Vitour_Rezervasyonlar_{DateTime.Now:yyyyMMdd}.pdf");
             }
         }
-        // --- TEKİL REZERVASYON EXCEL RAPORLAMA ---
+
         public async Task<IActionResult> ExportToExcelById(string id)
         {
             var reservation = await _reservationService.GetReservationByIdAsync(id);
@@ -189,22 +209,22 @@ namespace ProjectVitour.Controllers
 
             using (var workbook = new XLWorkbook())
             {
-                var worksheet = workbook.Worksheets.Add("Rezervasyon Detayı");
-                
+                var worksheet = workbook.Worksheets.Add("Rezervasyon Detayi");
+
                 var titleRange = worksheet.Range("A1:B1");
-                titleRange.Merge().Value = "VİTOUR REZERVASYON DETAYI";
+                titleRange.Merge().Value = "VITOUR REZERVASYON DETAYI";
                 titleRange.Style.Font.Bold = true;
                 titleRange.Style.Font.FontSize = 14;
                 titleRange.Style.Font.FontColor = XLColor.White;
-                titleRange.Style.Fill.BackgroundColor = XLColor.FromHtml("#1a6b4a"); // Ana Renk
+                titleRange.Style.Fill.BackgroundColor = XLColor.FromHtml("#1a6b4a");
                 titleRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                 titleRange.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
                 worksheet.Row(1).Height = 25;
 
                 worksheet.Cell(2, 1).Value = "Rezervasyon Kodu:";
-                worksheet.Cell(2, 2).Value = reservation.ReservationID;
+                worksheet.Cell(2, 2).Value = ResolveReservationCode(reservation.ReservationCode, reservation.ReservationID);
 
-                worksheet.Cell(3, 1).Value = "Müşteri Ad Soyad:";
+                worksheet.Cell(3, 1).Value = "Musteri Ad Soyad:";
                 worksheet.Cell(3, 2).Value = reservation.FullName;
 
                 worksheet.Cell(4, 1).Value = "E-Posta:";
@@ -213,13 +233,13 @@ namespace ProjectVitour.Controllers
                 worksheet.Cell(5, 1).Value = "Telefon:";
                 worksheet.Cell(5, 2).Value = reservation.Phone ?? "-";
 
-                worksheet.Cell(6, 1).Value = "Tur Adı:";
+                worksheet.Cell(6, 1).Value = "Tur Adi:";
                 worksheet.Cell(6, 2).Value = tourName;
 
-                worksheet.Cell(7, 1).Value = "Kişi Sayısı:";
+                worksheet.Cell(7, 1).Value = "Kisi Sayisi:";
                 worksheet.Cell(7, 2).Value = reservation.PersonCount;
 
-                worksheet.Cell(8, 1).Value = "Kayıt Tarihi:";
+                worksheet.Cell(8, 1).Value = "Kayit Tarihi:";
                 worksheet.Cell(8, 2).Value = reservation.ReservationDate.ToString("dd.MM.yyyy HH:mm");
 
                 var headerRange = worksheet.Range("A2:A8");
@@ -237,7 +257,6 @@ namespace ProjectVitour.Controllers
             }
         }
 
-        // --- TEKİL REZERVASYON PDF RAPORLAMA ---
         public async Task<IActionResult> ExportToPdfById(string id)
         {
             var reservation = await _reservationService.GetReservationByIdAsync(id);
@@ -253,26 +272,32 @@ namespace ProjectVitour.Controllers
                 Document document = new Document(pdf);
 
                 PdfFont turkishFont;
+                PdfFont turkishBoldFont;
                 string fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "arial.ttf");
+                string boldFontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "arialbd.ttf");
                 if (System.IO.File.Exists(fontPath))
                 {
                     turkishFont = PdfFontFactory.CreateFont(fontPath, "Identity-H", PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
+                    turkishBoldFont = System.IO.File.Exists(boldFontPath)
+                        ? PdfFontFactory.CreateFont(boldFontPath, "Identity-H", PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED)
+                        : turkishFont;
                 }
                 else
                 {
                     turkishFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA, "Cp1254", PdfFontFactory.EmbeddingStrategy.PREFER_NOT_EMBEDDED);
+                    turkishBoldFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD, "Cp1254", PdfFontFactory.EmbeddingStrategy.PREFER_NOT_EMBEDDED);
                 }
-                
+
                 document.SetFont(turkishFont);
 
-                // Başlık
-                document.Add(new Paragraph("VİTOUR REZERVASYON DETAYI")
+                var header = new Paragraph("VITOUR REZERVASYON DETAYI")
                     .SetTextAlignment(TextAlignment.CENTER)
                     .SetFontSize(20)
                     .SetFontColor(iText.Kernel.Colors.ColorConstants.DARK_GRAY)
-                    .SetBold());
-                
-                document.Add(new Paragraph($"Oluşturulma Tarihi: {DateTime.Now:dd.MM.yyyy HH:mm}")
+                    .SetFont(turkishBoldFont);
+                document.Add(header);
+
+                document.Add(new Paragraph($"Olusturulma Tarihi: {DateTime.Now:dd.MM.yyyy HH:mm}")
                     .SetTextAlignment(TextAlignment.RIGHT)
                     .SetFontSize(10)
                     .SetFontColor(iText.Kernel.Colors.ColorConstants.GRAY));
@@ -280,22 +305,22 @@ namespace ProjectVitour.Controllers
                 document.Add(new Paragraph("\n"));
 
                 Table table = new Table(UnitValue.CreatePercentArray(new float[] { 30, 70 })).UseAllAvailableWidth();
-                
+
                 void AddRow(string label, string value)
                 {
-                    var labelParagraph = new Paragraph(label).SetBold();
+                    var labelParagraph = new Paragraph(label).SetFont(turkishBoldFont);
                     var labelCell = new Cell().Add(labelParagraph).SetBackgroundColor(iText.Kernel.Colors.ColorConstants.LIGHT_GRAY).SetPadding(5);
                     table.AddCell(labelCell);
                     table.AddCell(new Cell().Add(new Paragraph(value)).SetPadding(5));
                 }
 
-                AddRow("Rezervasyon Kodu:", reservation.ReservationID);
-                AddRow("Müşteri Ad Soyad:", reservation.FullName);
+                AddRow("Rezervasyon Kodu:", ResolveReservationCode(reservation.ReservationCode, reservation.ReservationID));
+                AddRow("Musteri Ad Soyad:", reservation.FullName);
                 AddRow("E-Posta:", reservation.Email);
                 AddRow("Telefon:", reservation.Phone ?? "-");
-                AddRow("Tur Adı:", tourName);
-                AddRow("Kişi Sayısı:", reservation.PersonCount.ToString());
-                AddRow("Kayıt Tarihi:", reservation.ReservationDate.ToString("dd.MM.yyyy HH:mm"));
+                AddRow("Tur Adi:", tourName);
+                AddRow("Kisi Sayisi:", reservation.PersonCount.ToString());
+                AddRow("Kayit Tarihi:", reservation.ReservationDate.ToString("dd.MM.yyyy HH:mm"));
 
                 document.Add(table);
                 document.Close();

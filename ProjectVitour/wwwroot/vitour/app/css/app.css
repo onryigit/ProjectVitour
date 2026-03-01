@@ -1,45 +1,6 @@
 @charset "UTF-8";
-/**
-  * Name: Vitour - Travel & Tour Booking HTML Template
-  * Version: 1.0.2
-  * Author: Themesflat
-  * Author URI: http://www.themesflat.com
-*/
-/**
-  * Name: Vitour - Travel & Tour Booking HTML Template
-  * Version: 1.0.2
-  * Author: Themesflat
-  * Author URI: http://www.themesflat.com
-*/
-/**
-  * Name: Vitour - Travel & Tour Booking HTML Template
-  * Version: 1.0.2
-  * Author: Themesflat
-  * Author URI: http://www.themesflat.com
-*/
-/**
-  	* scroll-top
-    * PreLoad
-    * pagination
-    * Social
-    * price-range
-    * video
-    * widget Tour List
-    * Counter
-    * widget Destination
-    * Blog
-    * widget clip text
-    * widget icon box
-    * widget Testimonial
-    * widget Team
-    * Gallery
-    * widget Image Box
-    * Faq
-    * Count Down 
-    * slider
-    * Button
-    * Tab
-*/
+
+
 @import "animate.css";
 @import "jquery.fancybox.min.css";
 @import "magnific-popup.css";
@@ -48,8 +9,7 @@
 @import "../../assets/fonts/style.css";
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Yesteryear&display=swap");
 @import "../css/bootstrap.css";
-/* Header
--------------------------------------------------------------- */
+
 .header-top {
   padding-left: 209px;
   background-color: #EBEBEB;
@@ -230,7 +190,7 @@
   display: none;
 }
 
-/* Header Email */
+
 .main-header .header-account {
   padding: 12px 0;
   gap: 26px;
@@ -327,7 +287,7 @@
   position: relative;
 }
 
-/* Main Menu */
+
 .main-header .main-menu {
   position: relative;
   -webkit-transition: all 300ms ease;
@@ -361,7 +321,7 @@
   margin-top: 40px;
 }
 
-/*Sticky Header*/
+
 .main-header .sticky-header {
   position: fixed;
   opacity: 0;
@@ -707,13 +667,7 @@
   display: none;
 }
 
-/*** 
 
-====================================================================
-	Mobile Menu
-====================================================================
-
-***/
 .mobile-menu {
   position: fixed;
   left: 0;
@@ -1170,8 +1124,7 @@
   color: #4DA528;
 }
 
-/* button 
---------------------------------------------------*/
+
 .button-link {
   font-size: 14px;
   font-weight: 700;
@@ -1356,7 +1309,7 @@
   opacity: 0;
 }
 
-/*----------------------breadcumb--------------------*/
+
 .breadcumb-section {
     padding: 137px 0px 135px 0px;
     background-image: url(https://vitourwp.themesflat.co/wp-content/uploads/2024/05/page-title-e1715311291465.webp);
@@ -1406,7 +1359,7 @@
   top: 40%;
 }
 
-/*----------------------Blog--------------------*/
+
 .side-blog {
   margin-right: 5px;
   margin-bottom: 56px;
@@ -1795,7 +1748,7 @@
   bottom: 0;
 }
 
-/*----------------------Video--------------------*/
+
 .widget-image-video {
   position: relative;
 }
@@ -1873,7 +1826,7 @@
   margin-top: 46px;
 }
 
-/*----------------------call-to-action--------------------*/
+
 .callt-to-action {
   background-color: #4DA528;
   border-radius: 7px;
@@ -1959,7 +1912,7 @@
   padding-bottom: 50px;
 }
 
-/*----------------------About Us--------------------*/
+
 .inner-content-about {
   padding-left: 6px;
 }
@@ -2268,7 +2221,7 @@
   z-index: 1;
 }
 
-/*----------------------Tour Package--------------------*/
+
 .tour-package {
   background-color: #F3F8F6;
   background-image: url(../../assets/images/page/bg1.png);
@@ -2384,7 +2337,7 @@
   margin-top: 7em;
 }
 
-/*----------------------Activities--------------------*/
+
 .tf-widget-activities .mask-top {
   position: absolute;
   top: 0;
@@ -2548,7 +2501,7 @@
   left: -5em;
 }
 
-/*----------------------Counter--------------------*/
+
 .widget-counter {
   background-color: #4DA528;
   background-image: url(../../assets/images/page/bg-counter.png);
@@ -2659,7 +2612,7 @@
   background-color: transparent;
 }
 
-/*----------------------destination--------------------*/
+
 .widget-destination {
   padding-top: 317px;
 }
@@ -2709,7 +2662,7 @@
   margin-bottom: 11px;
 }
 
-/*----------------------Brand logo--------------------*/
+
 .line-brand-logo .line {
   width: 100%;
   height: 1px;
@@ -2753,7 +2706,7 @@
   padding-bottom: 68px;
 }
 
-/*----------------------Adventure--------------------*/
+
 .adventure-content {
   margin-bottom: -8.3em;
   padding: 63px 0px 0px 65px;
@@ -2762,7 +2715,7 @@
   box-shadow: 0px -21px 26px 0px rgba(0, 0, 0, 0.02);
 }
 
-/*----------------------Testimonial--------------------*/
+
 .widget-testimonial-style01 {
   padding-top: 289px;
   padding-bottom: 158px;
@@ -2907,7 +2860,7 @@
   color: #FF970D;
 }
 
-/*----------------------Banner part--------------------*/
+
 .banner-part-item .btn-booking {
   font-size: 14px;
   font-weight: 600;
@@ -3068,7 +3021,7 @@
   bottom: 33%;
 }
 
-/*----------------------Video--------------------*/
+
 .widget-video {
   padding-top: 236px;
   padding-bottom: 137px;
@@ -3109,7 +3062,7 @@
   padding-top: 310px;
 }
 
-/*----------------------service--------------------*/
+
 .widget-service {
   padding-top: 112px;
   padding-bottom: 15px;
@@ -3124,7 +3077,7 @@
   background-color: #EBEBEB;
 }
 
-/*----------------------Feature--------------------*/
+
 .widget-feature .feature-shape {
   position: absolute;
   left: 0;
@@ -3300,7 +3253,7 @@
   margin-right: -2em;
 }
 
-/*----------------------Mobie App--------------------*/
+
 .mobie-app {
   background-color: #081E2A;
   border-radius: 14px;
@@ -3347,7 +3300,7 @@
   width: auto;
 }
 
-/*----------------------Faq--------------------*/
+
 .widget-faq .image-faq {
   margin-left: -78px;
   margin-right: -39px;
@@ -3358,7 +3311,7 @@
   padding-left: 25px;
 }
 
-/*----------------------Top Week--------------------*/
+
 .widget-top-week {
   background-image: url(../../assets/images/page/bg3.png);
   background-position: center;
@@ -3390,7 +3343,7 @@
   padding-bottom: 218px;
 }
 
-/*----------------------Instagram--------------------*/
+
 .widget-instagram {
   padding: 26px 28px;
 }
@@ -3480,7 +3433,7 @@
   color: #4DA528;
 }
 
-/*----------------------impresssino--------------------*/
+
 .impressino {
   padding-top: 182px;
   background-image: url(../../assets/images/page/bg-counter.jpg);
@@ -3512,7 +3465,7 @@
   padding-left: 11px;
 }
 
-/*----------------------archieve tour--------------------*/
+
 .archieve-tour {
   padding-top: 120px;
   padding-bottom: 105px;
@@ -3744,7 +3697,7 @@
   margin-left: 5px;
 }
 
-/*----------------------terms-condition--------------------*/
+
 .terms-condition {
   padding-top: 116px;
   padding-bottom: 157px;
@@ -3786,7 +3739,7 @@
   line-height: 40px;
 }
 
-/*----------------------faq--------------------*/
+
 .inner-faq {
   padding-top: 104px;
   padding-bottom: 143px;
@@ -3839,7 +3792,7 @@
   display: inline-block;
 }
 
-/*----------------------login--------------------*/
+
 .login {
   padding-top: 94px;
   padding-bottom: 105px;
@@ -3939,7 +3892,7 @@
   border-radius: 5px;
 }
 
-/*----------------------contact us--------------------*/
+
 .contact-us .box-contact {
   border-radius: 8px;
   border: 1px solid #EDEEEE;
@@ -3981,7 +3934,7 @@
   height: 559px;
 }
 
-/*----------------------Team--------------------*/
+
 .team-member-page .team-member-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -4484,7 +4437,7 @@
   transition: all 0.3s ease;
 }
 
-/*----------------------Dash-board--------------------*/
+
 .sidebar-dashboard {
   transition: all 0.2s ease-out;
   background-color: #021B32;
@@ -5423,7 +5376,7 @@
   color: #4DA528;
 }
 
-/*----------------------Slide-home 01--------------------*/
+
 .slider-home1 .silider-image::before {
   background: linear-gradient(90deg, rgb(4, 27, 40), rgba(0, 0, 0, 0));
   top: 0;
@@ -5601,7 +5554,7 @@
   color: #FFFFFF;
 }
 
-/*----------------------Slide-home 02--------------------*/
+
 .slider-home2-image .slider-home2 {
   position: relative;
 }
@@ -5705,7 +5658,7 @@
   text-transform: capitalize;
 }
 
-/*----------------------Slide-home 03--------------------*/
+
 .booking-title {
   z-index: 3;
   rotate: -5deg;
@@ -5794,7 +5747,7 @@
   color: #FF970D;
 }
 
-/*----------------------Slide-home 04--------------------*/
+
 .slider-home4 {
   background-image: url(../../assets/images/slide/slide4.jpg);
   background-position: center;
@@ -5865,7 +5818,7 @@
   transform: translate(-50%, -50%);
 }
 
-/*----------------------Slide-home 05--------------------*/
+
 .slider-home5 {
   padding-top: 112px;
   padding-bottom: 185px;
@@ -6297,29 +6250,7 @@
   gap: 30px;
 }
 
-/**
-  	* scroll-top
-    * PreLoad
-    * pagination
-    * Social
-    * price-range
-    * video
-    * widget Tour List
-    * Counter
-    * widget Destination
-    * Blog
-    * widget clip text
-    * widget icon box
-    * widget Testimonial
-    * widget Team
-    * Gallery
-    * widget Image Box
-    * Faq
-    * Count Down 
-*/
-/* Scroll Top
 
--------------------------------------------------------------- */
 .button-go {
   position: fixed;
   display: block;
@@ -6369,8 +6300,7 @@
   transform: translateY(-3px);
 }
 
-/* PreLoad
--------------------------------------------------------------- */
+
 .pl {
   width: 6em;
   height: 6em;
@@ -6419,8 +6349,7 @@
   align-items: center;
 }
 
-/*pagination
--------------------------------------------------------------- */
+
 .swiper-pagination .swiper-pagination-bullet {
   background: #EDEEEE;
   opacity: 1;
@@ -6469,8 +6398,7 @@
   color: #4DA528 !important;
 }
 
-/*pagination
--------------------------------------------------------------- */
+
 .tf-pagination {
   flex-wrap: wrap;
   gap: 16px;
@@ -6501,8 +6429,7 @@
   color: #FFFFFF;
 }
 
-/*Social 
--------------------------------------------------------------- */
+
 .social {
   display: flex;
   align-items: center;
@@ -6529,8 +6456,7 @@
   background-color: rgba(255, 255, 255, 0.07);
 }
 
-/* price-range 
--------------------------------------------------------------- */
+
 .noUi-target,
 .noUi-target * {
   -webkit-touch-callout: none;
@@ -6607,7 +6533,7 @@
   margin-top: 20px;
 }
 
-/* Styling; */
+
 .noUi-background {
   background: #081E2A;
 }
@@ -6632,8 +6558,7 @@
   left: -7px;
 }
 
-/* Handles and cursors;
- */
+
 .noUi-draggable {
   cursor: w-resize;
 }
@@ -6653,7 +6578,7 @@
   border: 1px solid #4DA528;
 }
 
-/* Disabled state; */
+
 [disabled].noUi-connect,
 [disabled] .noUi-connect {
   background: #B8B8B8;
@@ -6677,8 +6602,7 @@
   margin: 0 2px;
 }
 
-/* Tag
--------------------------------------------------------------- */
+
 .tag {
   display: flex;
   align-items: center;
@@ -6711,10 +6635,7 @@
   color: #FFFFFF;
 }
 
-/* body
--------------------------------------------------------------- */
-/* video
--------------------------------------------------------------- */
+
 .widget-icon-video {
   width: 80px;
   height: 80px;
@@ -6736,8 +6657,7 @@
   color: #FFFFFF;
 }
 
-/* video
--------------------------------------------------------------- */
+
 .image-list img, .image-list .icon {
   width: 36px;
   height: 36px;
@@ -6762,8 +6682,7 @@
   color: #000000;
 }
 
-/* Next Priev
--------------------------------------------------------------- */
+
 .swiper-button-next,
 .swiper-button-prev {
   width: 66px;
@@ -6783,8 +6702,7 @@
   background-color: #FF970D !important;
 }
 
-/* widget heading
--------------------------------------------------------------- */
+
 .sub-title-heading {
   font-size: 18px;
   font-weight: 500;
@@ -6792,8 +6710,7 @@
   display: inline-block;
 }
 
-/* widget Tour List
--------------------------------------------------------------- */
+
 .tour-listing {
   border-radius: 8px 8px 8px 8px;
   position: relative;
@@ -6965,8 +6882,7 @@
   color: #4DA528;
 }
 
-/* widget Counter
--------------------------------------------------------------- */
+
 .tf-counter {
   background-color: #FFFFFF;
   padding: 50px;
@@ -7064,8 +6980,7 @@
   content: "k";
 }
 
-/* widget Destination
--------------------------------------------------------------- */
+
 .tf-widget-destination:hover .destination-imgae img {
   transform: scale(1.1);
   -webkit-transition: all 0.3s ease;
@@ -7366,8 +7281,7 @@
   gap: 30px;
 }
 
-/* widget Blog
--------------------------------------------------------------- */
+
 .tf-widget-blog:hover .blog-image > img {
   transform: scale(1.1);
   -webkit-transition: all 0.3s ease;
@@ -7689,8 +7603,7 @@
   transition: all 0.3s ease;
 }
 
-/* widget populer
--------------------------------------------------------------- */
+
 .tf-widget-populer {
   border-radius: 8px;
   overflow: hidden;
@@ -7755,8 +7668,7 @@
   color: #4F545A;
 }
 
-/* widget places
--------------------------------------------------------------- */
+
 .tf-widget-place:hover .content .price-place {
   color: #081E2A;
   background-color: #FF970D;
@@ -7857,8 +7769,7 @@
   line-height: 22px;
 }
 
-/* widget clip text
--------------------------------------------------------------- */
+
 .clip-text {
   font-size: 105px;
   font-weight: 800;
@@ -7878,8 +7789,7 @@
   }
 }
 
-/* widget icon box
--------------------------------------------------------------- */
+
 .icon-box-style1 {
   border: 1px solid rgba(224, 224, 224, 0.28);
   box-shadow: 0px 8px 25px 0px rgba(0, 0, 0, 0.06);
@@ -8134,8 +8044,7 @@
   color: #4F545A;
   text-transform: capitalize;
 }
-/* widget Testimonial
--------------------------------------------------------------- */
+
 .widget-testimonial .testimonial-content .profile .name {
   font-size: 29px;
   line-height: 31px;
@@ -8361,8 +8270,7 @@
   color: #4DA528;
 }
 
-/* widget Team
--------------------------------------------------------------- */
+
 .tf-widget-team:hover .team-image .social-team {
   opacity: 1;
   visibility: visible;
@@ -8453,8 +8361,7 @@
   margin-bottom: 6px;
 }
 
-/* widget Gallery
--------------------------------------------------------------- */
+
 .grid-gallery {
   display: grid;
   grid-gap: 20px;
@@ -8617,8 +8524,7 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* widget Image Box
--------------------------------------------------------------- */
+
 .tf-adventure .adventure-image {
   margin-right: 19px;
   display: inline-block;
@@ -8667,8 +8573,7 @@
   transition: all 0.3s ease;
 }
 
-/* Box Tour
--------------------------------------------------------------- */
+
 .box-tour-select-wrap {
   background-color: #FFFFFF;
   border-radius: 14px;
@@ -8752,8 +8657,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* Faq
--------------------------------------------------------------- */
+
 .faq-list .accordion-item {
   border: unset !important;
   border-radius: unset;
@@ -8796,8 +8700,7 @@
   right: 0;
 }
 
-/* Count Down
--------------------------------------------------------------- */
+
 .count-down .countdown__timer {
   display: flex;
   gap: 20px;
@@ -9148,8 +9051,7 @@ section {
   display: block;
 }
 
-/* Elements
--------------------------------------------------------------- */
+
 html {
   margin-right: 0 !important;
 }
@@ -9306,7 +9208,7 @@ input[type=color]:focus {
   transition: all 0.3s ease;
 }
 
-/* Placeholder color */
+
 ::-webkit-input-placeholder {
   color: #8A8AA0;
 }
@@ -9320,13 +9222,12 @@ input[type=color]:focus {
   opacity: 1;
 }
 
-/* Since FF19 lowers the opacity of the placeholder by default */
+
 :-ms-input-placeholder {
   color: #8A8AA0;
 }
 
-/* Typography
--------------------------------------------------------------- */
+
 h1,
 h2,
 h3,
@@ -9379,8 +9280,7 @@ p {
   font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-/* Extra classes
--------------------------------------------------------------- */
+
 .msg-success {
   background: linear-gradient(to right, #E250E5, #4B50E6, #E250E5);
   background-clip: text;
@@ -9834,7 +9734,7 @@ input[type=submit]:hover {
   background-color: #FFFFFF;
 }
 
-/* Custom radio buttons */
+
 input[type=radio] + label {
   display: inline-block;
   cursor: pointer;
@@ -9874,7 +9774,7 @@ input[type=radio]:checked + label:after {
   background: #4DA528;
 }
 
-/* Custom checkbox */
+
 input[type=checkbox] + label {
   display: inline-block;
   cursor: pointer;
@@ -9916,8 +9816,7 @@ input[type=checkbox]:checked + label:after {
   padding-left: 4px;
 }
 
-/* link style
--------------------------------------------------------------- */
+
 a {
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -10074,8 +9973,7 @@ body .dribbble img {
   height: 28px;
 }
 
-/* Media Queries
--------------------------------------------------------------- */
+
 @media only screen and (max-width: 1400px) {
   .widget-faq .image-faq {
     margin-left: 0px;
@@ -11676,4 +11574,4 @@ body .dribbble img {
   }
 }
 
-/*# sourceMappingURL=app.css.map */
+
