@@ -61,3 +61,17 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+###############################################################################
+# Dil İstatistikleri Düzenlemesi (Linguist Settings)
+###############################################################################
+
+*.html linguist-vendored
+*.css linguist-vendored
+*.js linguist-vendored
+*.scss linguist-vendored
+
+
+/ProjectVitour/wwwroot/* linguist-vendored
+
+
+*.cs linguist-detectable=true
