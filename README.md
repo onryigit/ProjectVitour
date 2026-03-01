@@ -36,6 +36,7 @@ Proje, tek katmanlı görünmesine rağmen kendi içinde `Services`, `Entities` 
 ## 📸 Ekran Görüntüleri
 <img width="1906" height="951" alt="111" src="https://github.com/user-attachments/assets/3c5b8ba6-812e-4861-b8bb-543ff5d18fba" />
 <img width="1912" height="948" alt="dashboard" src="https://github.com/user-attachments/assets/7e4029ef-3ae5-4921-85d1-178e1e378b6f" />
+<img width="1903" height="948" alt="harita" src="https://github.com/user-attachments/assets/7f960d51-e910-4ad2-99d7-04bc4ca9f009" />
 <img width="1905" height="944" alt="3" src="https://github.com/user-attachments/assets/4d06ef77-3dc2-42f8-b04a-23bf0911041f" />
 <img width="1892" height="950" alt="4" src="https://github.com/user-attachments/assets/06ee87cd-3d4f-4122-bab8-5f5948cba930" />
 <img width="1883" height="862" alt="5" src="https://github.com/user-attachments/assets/7a6ba143-36e0-4e1b-959a-0a2248e15da8" />
