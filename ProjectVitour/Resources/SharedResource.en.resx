@@ -63,4 +63,13 @@
   <data name="Yeni"><value>New</value></data>
   <data name="SonEklenenler"><value>Recently Added</value></data>
   <data name="SiralamaFiyat"><value>Price</value></data>
+  <data name="KisiBasi"><value>Per Person</value></data>
+  <data name="LuksKonaklama"><value>Luxury Accommodation</value></data>
+  <data name="ProfesyonelRehberlik"><value>Professional Guide Service</value></data>
+  <data name="HavalimaniTransferi"><value>Airport Transfers</value></data>
+  <data name="AcikBufeKahvalti"><value>Open Buffet Breakfast</value></data>
+  <data name="OgleAksamYemekleri"><value>Lunch and Dinner</value></data>
+  <data name="KisiselHarcamalar"><value>Personal Expenses</value></data>
+  <data name="MuzeGirisUcretleri"><value>Museum and Site Entrance Fees</value></data>
+  <data name="YurtdisiCikisHarci"><value>International Departure Tax</value></data>
 </root>

@@ -94,19 +94,19 @@
                                 <div class="col-md-6 border-end border-light">
                                     <h5 class="fw-bold mb-4 text-success"><i class="bi bi-check-circle-fill me-2 fs-4 align-middle"></i>@SharedLocalizer["DahilOlanlar"]</h5>
                                     <ul class="list-unstyled text-muted">
-                                        <li class="mb-3"><i class="bi bi-check2 text-success me-3 fw-bold"></i>Lüks Konaklama</li>
-                                        <li class="mb-3"><i class="bi bi-check2 text-success me-3 fw-bold"></i>Profesyonel Rehberlik Hizmeti</li>
-                                        <li class="mb-3"><i class="bi bi-check2 text-success me-3 fw-bold"></i>Havalimanı Transferleri</li>
-                                        <li class="mb-3"><i class="bi bi-check2 text-success me-3 fw-bold"></i>Açık Büfe Sabah Kahvaltıları</li>
+                                        <li class="mb-3"><i class="bi bi-check2 text-success me-3 fw-bold"></i>@SharedLocalizer["LuksKonaklama"]</li>
+                                        <li class="mb-3"><i class="bi bi-check2 text-success me-3 fw-bold"></i>@SharedLocalizer["ProfesyonelRehberlik"]</li>
+                                        <li class="mb-3"><i class="bi bi-check2 text-success me-3 fw-bold"></i>@SharedLocalizer["HavalimaniTransferi"]</li>
+                                        <li class="mb-3"><i class="bi bi-check2 text-success me-3 fw-bold"></i>@SharedLocalizer["AcikBufeKahvalti"]</li>
                                     </ul>
                                 </div>
                                 <div class="col-md-6 ps-md-4">
                                     <h5 class="fw-bold mb-4 text-danger"><i class="bi bi-x-circle-fill me-2 fs-4 align-middle"></i>@SharedLocalizer["DahilOlmayanlar"]</h5>
                                     <ul class="list-unstyled text-muted">
-                                        <li class="mb-3"><i class="bi bi-x-lg text-danger me-3 fw-bold"></i>Öğle ve Akşam Yemekleri</li>
-                                        <li class="mb-3"><i class="bi bi-x-lg text-danger me-3 fw-bold"></i>Kişisel Harcamalar</li>
-                                        <li class="mb-3"><i class="bi bi-x-lg text-danger me-3 fw-bold"></i>Müze ve Ören Yeri Giriş Ücretleri</li>
-                                        <li class="mb-3"><i class="bi bi-x-lg text-danger me-3 fw-bold"></i>Yurtdışı Çıkış Harcı</li>
+                                        <li class="mb-3"><i class="bi bi-x-lg text-danger me-3 fw-bold"></i>@SharedLocalizer["OgleAksamYemekleri"]</li>
+                                        <li class="mb-3"><i class="bi bi-x-lg text-danger me-3 fw-bold"></i>@SharedLocalizer["KisiselHarcamalar"]</li>
+                                        <li class="mb-3"><i class="bi bi-x-lg text-danger me-3 fw-bold"></i>@SharedLocalizer["MuzeGirisUcretleri"]</li>
+                                        <li class="mb-3"><i class="bi bi-x-lg text-danger me-3 fw-bold"></i>@SharedLocalizer["YurtdisiCikisHarci"]</li>
                                     </ul>
                                 </div>
                             </div>
@@ -250,11 +250,12 @@
 
             <!-- RIGHT COLUMN: STICKY BOOKING PANEL -->
             <div class="col-lg-4">
-                <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm" style="position: sticky; top: 120px; border-top: 5px solid #1a6b4a;">
+                <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm position-relative overflow-hidden" style="position: sticky; top: 120px;">
+                    <div class="position-absolute top-0 start-0 w-100" style="height: 6px; background: linear-gradient(90deg, #1a6b4a, #2ecc71);"></div>
                     <div class="price-wrap mb-4 text-center">
-                        <span class="text-muted d-block mb-1 fw-bold text-uppercase" style="letter-spacing: 1px; font-size: 12px;">@SharedLocalizer["Fiyat"]</span>
-                        <h2 style="color:#1a6b4a; font-weight:900; font-size: 2.8rem; margin:0;">@localizedPrice</h2>
-                        <span class="text-muted small">/ kişi başı</span>
+                        <span class="text-muted d-block mb-2 fw-bold text-uppercase" style="letter-spacing: 2px; font-size: 12px;">@SharedLocalizer["Fiyat"]</span>
+                        <h2 style="color:#1a6b4a; font-weight:900; font-size: 3rem; margin:0; line-height: 1;">@localizedPrice</h2>
+                        <span class="d-inline-block mt-3 px-3 py-1 bg-light text-secondary rounded-pill" style="font-size: 0.85rem; font-weight: 600;">@SharedLocalizer["KisiBasi"]</span>
                     </div>
                     
                     <hr class="text-muted opacity-10 mb-4">

@@ -91,6 +91,9 @@ namespace ProjectVitour.Controllers
             // 5. PROFESYONEL MAİL GÖNDERİMİ (Arka planda çalışır, kullanıcıyı bekletmez)
             string totalPrice = LocalizationHelper.GetLocalizedPrice(tour.Price * createReservationDto.PersonCount);
             string formattedDate = createReservationDto.ReservationDate.ToString("dd.MM.yyyy HH:mm");
+            
+            string reservationCode = "#VIT-" + Guid.NewGuid().ToString("N").Substring(0, 5).ToUpper();
+            TempData["ReservationCode"] = reservationCode;
 
             _ = _emailService.SendReservationSuccessEmailAsync(
                 createReservationDto.Email,
@@ -98,7 +101,8 @@ namespace ProjectVitour.Controllers
                 localizedTitle,
                 formattedDate,
                 totalPrice,
-                createReservationDto.PersonCount
+                createReservationDto.PersonCount,
+                reservationCode
             );
 
             // 6. Başarılı sayfasına yönlendir

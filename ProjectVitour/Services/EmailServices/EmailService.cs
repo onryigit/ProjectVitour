@@ -16,7 +16,7 @@ namespace ProjectVitour.Services.EmailServices
             _config = config;
         }
 
-        public async Task SendReservationSuccessEmailAsync(string toEmail, string userName, string tourName, string tourDate, string price, int personCount)
+        public async Task SendReservationSuccessEmailAsync(string toEmail, string userName, string tourName, string tourDate, string price, int personCount, string reservationCode)
         {
             // PROFESYONEL HTML MAİL ŞABLONU
             string htmlTemplate = $@"
@@ -31,6 +31,9 @@ namespace ProjectVitour.Services.EmailServices
                     .header p {{ margin: 10px 0 0 0; opacity: 0.8; font-size: 14px; }}
                     .content {{ padding: 40px; color: #444444; line-height: 1.6; }}
                     .content h2 {{ color: #1a6b4a; font-size: 22px; margin-top: 0; }}
+                    .reservation-code-box {{ background-color: #e2f1e9; border: 2px dashed #1a6b4a; text-align: center; padding: 15px; margin: 20px 0; border-radius: 8px; }}
+                    .reservation-code-box .code {{ font-size: 32px; font-weight: bold; color: #1a6b4a; letter-spacing: 2px; }}
+                    .reservation-code-box .label {{ font-size: 14px; color: #64748b; text-transform: uppercase; margin-bottom: 5px; }}
                     .details-box {{ background-color: #f8fafc; border-radius: 8px; padding: 20px; margin-top: 25px; border-left: 4px solid #1a6b4a; }}
                     .details-table {{ width: 100%; border-collapse: collapse; }}
                     .details-table th, .details-table td {{ padding: 12px 0; border-bottom: 1px solid #e2e8f0; text-align: left; font-size: 15px; }}
@@ -41,6 +44,7 @@ namespace ProjectVitour.Services.EmailServices
                     .footer {{ background-color: #ffffff; text-align: center; padding: 20px; font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9; }}
                     .button-container {{ text-align: center; margin-top: 35px; }}
                     .btn {{ background-color: #1a6b4a; color: #ffffff; text-decoration: none; padding: 14px 30px; border-radius: 50px; font-weight: bold; display: inline-block; transition: background 0.3s; }}
+                    .support-msg {{ margin-top: 25px; font-size: 14px; background-color: #fffbeb; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 4px; color: #78350f; }}
                 </style>
             </head>
             <body>
@@ -53,6 +57,11 @@ namespace ProjectVitour.Services.EmailServices
                         <h2>Merhaba {userName},</h2>
                         <p>Harika haber! Rezervasyon işleminiz sistemimize başarıyla ulaştı. Hayalinizdeki tatil için ilk adımı attınız, gerisini bize bırakın.</p>
                         
+                        <div class='reservation-code-box'>
+                            <div class='label'>Rezervasyon Kodunuz</div>
+                            <div class='code'>{reservationCode}</div>
+                        </div>
+
                         <div class='details-box'>
                             <table class='details-table'>
                                 <tr>
@@ -75,6 +84,10 @@ namespace ProjectVitour.Services.EmailServices
                         </div>
 
                         <p style='margin-top: 30px;'>En kısa sürede müşteri temsilcilerimiz ödeme ve seyahat belgelerinizin onayı için sizinle iletişime geçecektir. Şimdiden iyi tatiller dileriz!</p>
+                        
+                        <div class='support-msg'>
+                            <strong>💡 Bilgilendirme:</strong> Herhangi bir destek ihtiyacınızda veya rezervasyonunuzla ilgili değişiklik taleplerinizde, size özel oluşturulan bu <strong>{reservationCode}</strong> referans kodu ile müşteri hizmetlerimizden öncelikli ve kesintisiz yardım alabilirsiniz.
+                        </div>
                         
                         <div class='button-container'>
                             <a href='#' class='btn' style='color:white;'>Müşteri Paneline Git</a>

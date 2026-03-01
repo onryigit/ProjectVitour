@@ -63,4 +63,13 @@
   <data name="Yeni"><value>Yeni</value></data>
   <data name="SonEklenenler"><value>Son Eklenenler</value></data>
   <data name="SiralamaFiyat"><value>Fiyat (Sırala)</value></data>
+  <data name="KisiBasi"><value>Kişi Başı</value></data>
+  <data name="LuksKonaklama"><value>Lüks Konaklama</value></data>
+  <data name="ProfesyonelRehberlik"><value>Profesyonel Rehberlik Hizmeti</value></data>
+  <data name="HavalimaniTransferi"><value>Havalimanı Transferleri</value></data>
+  <data name="AcikBufeKahvalti"><value>Açık Büfe Sabah Kahvaltıları</value></data>
+  <data name="OgleAksamYemekleri"><value>Öğle ve Akşam Yemekleri</value></data>
+  <data name="KisiselHarcamalar"><value>Kişisel Harcamalar</value></data>
+  <data name="MuzeGirisUcretleri"><value>Müze ve Ören Yeri Giriş Ücretleri</value></data>
+  <data name="YurtdisiCikisHarci"><value>Yurtdışı Çıkış Harcı</value></data>
 </root>
