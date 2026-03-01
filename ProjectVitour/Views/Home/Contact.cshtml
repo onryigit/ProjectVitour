@@ -71,23 +71,29 @@
                     <h3 class="fw-bold mb-2" style="color: #112240;">Mesaj Gönderin</h3>
                     <p class="text-muted mb-4">Aşağıdaki formu eksiksiz doldurarak müşteri temsilcilerimize anında mesaj iletebilirsiniz.</p>
                     
-                    <form action="#" method="post">
+                    <form action="/Home/Contact" method="post">
+                        @if (TempData["SuccessMsg"] != null)
+                        {
+                            <div class="alert alert-success fw-bold text-center mb-4 rounded-3 border-0">
+                                <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMsg"]
+                            </div>
+                        }
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label fw-bold small">Adınız Soyadınız</label>
-                                <input type="text" class="form-control bg-light border-0 py-3 rounded-3" placeholder="Örn: Ahmet Yılmaz" required>
+                                <input type="text" name="Name" class="form-control bg-light border-0 py-3 rounded-3" placeholder="Örn: Ahmet Yılmaz" required>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label fw-bold small">E-Posta Adresiniz</label>
-                                <input type="email" class="form-control bg-light border-0 py-3 rounded-3" placeholder="info@ornek.com" required>
+                                <input type="email" name="Email" class="form-control bg-light border-0 py-3 rounded-3" placeholder="info@ornek.com" required>
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-bold small">Konu</label>
-                                <input type="text" class="form-control bg-light border-0 py-3 rounded-3" placeholder="Mesajınızın konusu nedir?" required>
+                                <input type="text" name="Subject" class="form-control bg-light border-0 py-3 rounded-3" placeholder="Mesajınızın konusu nedir?" required>
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-bold small">Mesajınız</label>
-                                <textarea class="form-control bg-light border-0 py-3 rounded-3" rows="5" placeholder="Lütfen detayları buraya yazınız..." required></textarea>
+                                <textarea name="Message" class="form-control bg-light border-0 py-3 rounded-3" rows="5" placeholder="Lütfen detayları buraya yazınız..." required></textarea>
                             </div>
                             <div class="col-12 mt-4">
                                 <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-sm" style="transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">

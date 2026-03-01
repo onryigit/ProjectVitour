@@ -80,35 +80,12 @@
                                 <div class="language">
                                     <div class="dropdown">
                                         <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="icon-globe"></i> Dil Seçin
+                                            <i class="icon-globe"></i> @SharedLocalizer["DilSecin"]
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="/Language/ChangeLanguage?culture=tr&returnUrl=@Context.Request.Path">Türkçe (TR)</a></li>
                                             <li><a class="dropdown-item" href="/Language/ChangeLanguage?culture=en&returnUrl=@Context.Request.Path">English (EN)</a></li>
                                             <li><a class="dropdown-item" href="/Language/ChangeLanguage?culture=de&returnUrl=@Context.Request.Path">Deutsch (DE)</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="currency">
-                                    <div class="nice-select" tabindex="0">
-                                        <span class="current">USD</span>
-                                        <ul class="list">
-                                            <li data-value class="option selected">USD</li>
-                                            <li data-value="vnd" class="option">VND</li>
-                                            <li data-value="eur" class="option">EUR</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="search-mobie relative">
-                                    <div class="dropdown">
-                                        <a type="button" class="show-search" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="icon-Vector5"></i>
-                                        </a>
-                                        <ul class="dropdown-menu top-search">
-                                            <form action="/Tour/TourList" id="search-bar-widget" method="get">
-                                                <input type="text" name="search" placeholder="@SharedLocalizer["AramaYap"]">
-                                                <button type="submit"><i class="icon-search-2"></i></button>
-                                            </form>
                                         </ul>
                                     </div>
                                 </div>

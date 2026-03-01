@@ -17,7 +17,7 @@
                                     <i class="icon-search-2 text-primary fs-5 me-2"></i>
                                     <div class="w-100">
                                         <label class="text-muted small fw-bold mb-1">@SharedLocalizer["AramaYap"]</label>
-                                        <input type="text" name="search" class="form-control border-0 p-0 bg-transparent" placeholder="Tur adı veya lokasyon..." value="@Context.Request.Query["search"]">
+                                        <input type="text" name="search" class="form-control border-0 p-0 bg-transparent" placeholder="@SharedLocalizer["TurAdiVeyaLokasyon"]" value="@Context.Request.Query["search"]">
                                     </div>
                                 </div>
                             </div>
@@ -27,9 +27,9 @@
                                 <div class="form-group border rounded-3 px-3 py-2 d-flex align-items-center">
                                     <i class="icon-18 text-primary fs-5 me-2"></i>
                                     <div class="w-100">
-                                        <label class="text-muted small fw-bold mb-1">Kategori</label>
+                                        <label class="text-muted small fw-bold mb-1">@SharedLocalizer["Kategori"]</label>
                                         <select name="categoryId" class="form-select border-0 p-0 bg-transparent shadow-none" style="cursor:pointer;">
-                                            <option value="">Tüm Kategoriler</option>
+                                            <option value="">@SharedLocalizer["TumKategoriler"]</option>
                                             @if(Model != null)
                                             {
                                                 foreach(var cat in Model)
@@ -54,7 +54,7 @@
                                 <div class="form-group border rounded-3 px-3 py-2 d-flex align-items-center">
                                     <span class="text-primary fw-bold fs-5 me-2">$</span>
                                     <div class="w-100">
-                                        <label class="text-muted small fw-bold mb-1">Min. Fiyat</label>
+                                        <label class="text-muted small fw-bold mb-1">@SharedLocalizer["MinFiyat"]</label>
                                         <input type="number" name="minPrice" class="form-control border-0 p-0 bg-transparent" placeholder="0" value="@Context.Request.Query["minPrice"]">
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                                 <div class="form-group border rounded-3 px-3 py-2 d-flex align-items-center">
                                     <span class="text-primary fw-bold fs-5 me-2">$</span>
                                     <div class="w-100">
-                                        <label class="text-muted small fw-bold mb-1">Max. Fiyat</label>
+                                        <label class="text-muted small fw-bold mb-1">@SharedLocalizer["MaxFiyat"]</label>
                                         <input type="number" name="maxPrice" class="form-control border-0 p-0 bg-transparent" placeholder="5000" value="@Context.Request.Query["maxPrice"]">
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@
                             <!-- Arama Butonu -->
                             <div class="col-lg-2 col-md-4 text-end">
                                 <button type="submit" class="btn btn-primary w-100 py-3 rounded-3 fw-bold" style="background: #1a6b4a; border-color: #1a6b4a;">
-                                    <i class="icon-Vector5 me-2"></i> Turları Bul
+                                    <i class="icon-Vector5 me-2"></i> @SharedLocalizer["TurlariBul"]
                                 </button>
                             </div>
 
