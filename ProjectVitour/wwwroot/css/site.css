@@ -29,3 +29,18 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* Vitour UI Card - Distinct White on White Background */
+.vitour-ui-card {
+    background-color: #FAFAFA !important;
+    border: 1px solid #EAEAEA !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+/* Hover Effect for clickable cards */
+a.vitour-ui-card:hover, div.vitour-ui-card-hover:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12) !important;
+}

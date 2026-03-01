@@ -82,9 +82,17 @@
                                     }
                                 </td>
                                 <td class="text-end pe-4 py-3">
-                                    <a href="/AdminReservation/DeleteReservation/@item.ReservationID" class="btn btn-sm btn-light text-danger rounded-circle shadow-sm" style="width:34px; height:34px; line-height:22px;" onclick="return confirm('Bu rezervasyonu silmek istediğinize emin misiniz?')" title="Sil">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </a>
+                                    <div class="dropdown d-inline-block">
+                                        <button class="btn btn-sm btn-light rounded-circle shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:34px; height:34px; line-height:22px;" title="İşlemler">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-3">
+                                            <li><a class="dropdown-item text-success" href="/AdminReservation/ExportToExcelById/@item.ReservationID"><i class="bi bi-file-earmark-excel me-2"></i>Excel İndir</a></li>
+                                            <li><a class="dropdown-item text-danger" href="/AdminReservation/ExportToPdfById/@item.ReservationID"><i class="bi bi-file-earmark-pdf me-2"></i>PDF İndir</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="/AdminReservation/DeleteReservation/@item.ReservationID" onclick="return confirm('Bu rezervasyonu silmek istediğinize emin misiniz?')"><i class="bi bi-trash me-2"></i>Sil</a></li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                         }

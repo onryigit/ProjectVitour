@@ -178,5 +178,130 @@ namespace ProjectVitour.Controllers
                 return File(stream.ToArray(), "application/pdf", $"Vitour_Rezervasyonlar_{DateTime.Now:yyyyMMdd}.pdf");
             }
         }
+        // --- TEKİL REZERVASYON EXCEL RAPORLAMA ---
+        public async Task<IActionResult> ExportToExcelById(string id)
+        {
+            var reservation = await _reservationService.GetReservationByIdAsync(id);
+            if (reservation == null) return NotFound();
+
+            var tour = await _tourService.GetTourByIdAsync(reservation.TourID);
+            var tourName = tour?.Title ?? "Bilinmeyen Tur";
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Rezervasyon Detayı");
+                
+                var titleRange = worksheet.Range("A1:B1");
+                titleRange.Merge().Value = "VİTOUR REZERVASYON DETAYI";
+                titleRange.Style.Font.Bold = true;
+                titleRange.Style.Font.FontSize = 14;
+                titleRange.Style.Font.FontColor = XLColor.White;
+                titleRange.Style.Fill.BackgroundColor = XLColor.FromHtml("#1a6b4a"); // Ana Renk
+                titleRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                titleRange.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                worksheet.Row(1).Height = 25;
+
+                worksheet.Cell(2, 1).Value = "Rezervasyon Kodu:";
+                worksheet.Cell(2, 2).Value = reservation.ReservationID;
+
+                worksheet.Cell(3, 1).Value = "Müşteri Ad Soyad:";
+                worksheet.Cell(3, 2).Value = reservation.FullName;
+
+                worksheet.Cell(4, 1).Value = "E-Posta:";
+                worksheet.Cell(4, 2).Value = reservation.Email;
+
+                worksheet.Cell(5, 1).Value = "Telefon:";
+                worksheet.Cell(5, 2).Value = reservation.Phone ?? "-";
+
+                worksheet.Cell(6, 1).Value = "Tur Adı:";
+                worksheet.Cell(6, 2).Value = tourName;
+
+                worksheet.Cell(7, 1).Value = "Kişi Sayısı:";
+                worksheet.Cell(7, 2).Value = reservation.PersonCount;
+
+                worksheet.Cell(8, 1).Value = "Kayıt Tarihi:";
+                worksheet.Cell(8, 2).Value = reservation.ReservationDate.ToString("dd.MM.yyyy HH:mm");
+
+                var headerRange = worksheet.Range("A2:A8");
+                headerRange.Style.Font.Bold = true;
+                headerRange.Style.Fill.BackgroundColor = XLColor.LightGray;
+
+                worksheet.Columns().AdjustToContents();
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"Rezervasyon_{reservation.FullName.Replace(" ", "_")}.xlsx");
+                }
+            }
+        }
+
+        // --- TEKİL REZERVASYON PDF RAPORLAMA ---
+        public async Task<IActionResult> ExportToPdfById(string id)
+        {
+            var reservation = await _reservationService.GetReservationByIdAsync(id);
+            if (reservation == null) return NotFound();
+
+            var tour = await _tourService.GetTourByIdAsync(reservation.TourID);
+            var tourName = tour?.Title ?? "Bilinmeyen Tur";
+
+            using (var stream = new MemoryStream())
+            {
+                PdfWriter writer = new PdfWriter(stream);
+                PdfDocument pdf = new PdfDocument(writer);
+                Document document = new Document(pdf);
+
+                PdfFont turkishFont;
+                string fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "arial.ttf");
+                if (System.IO.File.Exists(fontPath))
+                {
+                    turkishFont = PdfFontFactory.CreateFont(fontPath, "Identity-H", PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
+                }
+                else
+                {
+                    turkishFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA, "Cp1254", PdfFontFactory.EmbeddingStrategy.PREFER_NOT_EMBEDDED);
+                }
+                
+                document.SetFont(turkishFont);
+
+                // Başlık
+                document.Add(new Paragraph("VİTOUR REZERVASYON DETAYI")
+                    .SetTextAlignment(TextAlignment.CENTER)
+                    .SetFontSize(20)
+                    .SetFontColor(iText.Kernel.Colors.ColorConstants.DARK_GRAY)
+                    .SetBold());
+                
+                document.Add(new Paragraph($"Oluşturulma Tarihi: {DateTime.Now:dd.MM.yyyy HH:mm}")
+                    .SetTextAlignment(TextAlignment.RIGHT)
+                    .SetFontSize(10)
+                    .SetFontColor(iText.Kernel.Colors.ColorConstants.GRAY));
+
+                document.Add(new Paragraph("\n"));
+
+                Table table = new Table(UnitValue.CreatePercentArray(new float[] { 30, 70 })).UseAllAvailableWidth();
+                
+                void AddRow(string label, string value)
+                {
+                    var labelParagraph = new Paragraph(label).SetBold();
+                    var labelCell = new Cell().Add(labelParagraph).SetBackgroundColor(iText.Kernel.Colors.ColorConstants.LIGHT_GRAY).SetPadding(5);
+                    table.AddCell(labelCell);
+                    table.AddCell(new Cell().Add(new Paragraph(value)).SetPadding(5));
+                }
+
+                AddRow("Rezervasyon Kodu:", reservation.ReservationID);
+                AddRow("Müşteri Ad Soyad:", reservation.FullName);
+                AddRow("E-Posta:", reservation.Email);
+                AddRow("Telefon:", reservation.Phone ?? "-");
+                AddRow("Tur Adı:", tourName);
+                AddRow("Kişi Sayısı:", reservation.PersonCount.ToString());
+                AddRow("Kayıt Tarihi:", reservation.ReservationDate.ToString("dd.MM.yyyy HH:mm"));
+
+                document.Add(table);
+                document.Close();
+
+                return File(stream.ToArray(), "application/pdf", $"Rezervasyon_{reservation.FullName.Replace(" ", "_")}.pdf");
+            }
+        }
     }
 }

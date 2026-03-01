@@ -104,7 +104,7 @@
                     var localizedTitle = LocalizationHelper.GetLocalizedText(item.Title, item.Title_EN, item.Title_DE);
                     var localizedPrice = LocalizationHelper.GetLocalizedPrice(item.Price);
                     
-                    <div class="tour-listing box-sd" style="border-radius: 16px; transition: box-shadow 0.3s;">
+                    <div class="tour-listing vitour-ui-card vitour-ui-card-hover" style="border-radius: 12px; transition: transform 0.3s, box-shadow 0.3s;">
                         <a href="/Tour/Details/@item.TourID" class="tour-listing-image">
                             <span class="premium-badge">@item.Badge</span>
                             <img src="@item.CoverImageUrl" alt="@localizedTitle">

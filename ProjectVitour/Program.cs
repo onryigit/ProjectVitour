@@ -12,6 +12,7 @@ using ProjectVitour.Services.ContactMessageServices;
 using ProjectVitour.Services.DestinationServices;
 using ProjectVitour.Services.GuideServices;
 using ProjectVitour.Services.EmailServices;
+using ProjectVitour.Services.GeminiServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,7 @@ builder.Services.AddScoped<IContactMessageService, ContactMessageService>();
 builder.Services.AddScoped<IDestinationService, DestinationService>();
 builder.Services.AddScoped<IGuideService, GuideService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddHttpClient<IGeminiCostService, GeminiCostService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettingKey"));

@@ -6,6 +6,7 @@
     var localizedTitle = LocalizationHelper.GetLocalizedText(Model.Title, Model.Title_EN, Model.Title_DE);
     var localizedDesc = LocalizationHelper.GetLocalizedText(Model.Description, Model.Description_EN, Model.Description_DE);
     var localizedPrice = LocalizationHelper.GetLocalizedPrice(Model.Price);
+    var includedItemsText = $"{SharedLocalizer["LuksKonaklama"]}, {SharedLocalizer["ProfesyonelRehberlik"]}, {SharedLocalizer["HavalimaniTransferi"]}, {SharedLocalizer["AcikBufeKahvalti"]}";
 
     // Bulanıklık sorununu çözmek için URL'yi Full HD çözünürlüğe ve yüksek kaliteye (1920px, q=100) zorluyoruz.
     var highResCoverImage = Model.CoverImageUrl;
@@ -33,7 +34,7 @@
 </section>
 
 <!-- MAIN CONTENT -->
-<section class="tour-single-content py-5 bg-light">
+<section class="tour-single-content py-5">
     <div class="container">
         <div class="row g-5">
             
@@ -41,7 +42,7 @@
             <div class="col-lg-8">
                 
                 <!-- PREMIUM TAB NAVIGATION -->
-                <div class="bg-white rounded-4 shadow-sm mb-4 px-3 py-2">
+                <div class="bg-white rounded-4 shadow-sm mb-4 px-3 py-2 vitour-ui-card">
                     <ul class="nav nav-pills flex-nowrap overflow-auto" id="tour-pills-tab" role="tablist" style="scrollbar-width: none;">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active px-4 py-3 fw-bold rounded-pill text-dark" id="tab-overview" data-bs-toggle="pill" data-bs-target="#content-overview" type="button" role="tab">
@@ -84,12 +85,12 @@
                     
                     <!-- 1. OVERVIEW & INCLUSIONS -->
                     <div class="tab-pane fade show active" id="content-overview" role="tabpanel">
-                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm mb-4">
+                        <div class="p-4 p-md-5 mb-4 vitour-ui-card">
                             <h3 class="fw-bold mb-4" style="color: #112240;">@SharedLocalizer["TurAciklamasi"]</h3>
                             <p class="text-muted" style="line-height: 1.8; font-size: 1.05rem;">@Html.Raw(localizedDesc)</p>
                         </div>
                         
-                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
+                        <div class="p-4 p-md-5 vitour-ui-card">
                             <div class="row g-4">
                                 <div class="col-md-6 border-end border-light">
                                     <h5 class="fw-bold mb-4 text-success"><i class="bi bi-check-circle-fill me-2 fs-4 align-middle"></i>@SharedLocalizer["DahilOlanlar"]</h5>
@@ -111,11 +112,55 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- YENI EKLENEN: GIZLI MALIYET HESAPLAYICI -->
+                        <div class="p-4 p-md-5 mt-4 vitour-ui-card" id="hidden-cost-section">
+                            <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-3">
+                                <h4 class="fw-bold m-0" style="color: #112240;"><i class="bi bi-magic text-primary me-2"></i>AI Bütçe Asistanı</h4>
+                                <button id="btnCalculateCost" class="btn btn-outline-primary rounded-pill fw-bold px-4" data-location="@Model.Location" data-days="@Model.DayCount" data-tourprice="@Model.Price" data-includeditems="@includedItemsText">
+                                    <i class="bi bi-calculator me-1"></i> Gizli Maliyetleri Hesapla
+                                </button>
+                            </div>
+                            <p class="text-muted small mb-4">Gemini AI, <strong>@Model.Location</strong> bölgesindeki <strong>@Model.DayCount</strong> günlük bu tur için olası ekstra harcamalarınızı sizin için tahmin eder.</p>
+
+                            <div id="costLoading" class="text-center py-4 d-none">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Hesaplanıyor...</span>
+                                </div>
+                                <p class="mt-3 text-muted fw-bold mb-0">Yapay zeka hesaplıyor...</p>
+                            </div>
+
+                            <div id="costResults" class="d-none">
+                                <ul class="list-group list-group-flush rounded-3 border">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <div><span class="fs-5 me-2">🍽️</span> <strong class="text-dark">Yemek</strong> <br><small class="text-muted fst-italic" id="cost-yemek-detay"></small></div>
+                                        <span class="badge bg-success rounded-pill fs-6" id="cost-yemek-fiyat"></span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <div><span class="fs-5 me-2">🚇</span> <strong class="text-dark">Ulaşım</strong> <br><small class="text-muted fst-italic" id="cost-ulasim-detay"></small></div>
+                                        <span class="badge bg-success rounded-pill fs-6" id="cost-ulasim-fiyat"></span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <div><span class="fs-5 me-2">🏛️</span> <strong class="text-dark">Müzeler & Aktiviteler</strong> <br><small class="text-muted fst-italic" id="cost-muzeler-detay"></small></div>
+                                        <span class="badge bg-success rounded-pill fs-6" id="cost-muzeler-fiyat"></span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <div><span class="fs-5 me-2">☕</span> <strong class="text-dark">Ekstra (Kahve, Bahşiş vb.)</strong> <br><small class="text-muted fst-italic" id="cost-ekstra-detay"></small></div>
+                                        <span class="badge bg-success rounded-pill fs-6" id="cost-ekstra-fiyat"></span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 bg-light">
+                                        <strong class="fs-5 text-dark">Tahmini Toplam Ekstra Bütçe</strong>
+                                        <strong class="fs-4 text-danger" id="cost-toplam"></strong>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="costError" class="alert alert-danger d-none mt-3"></div>
+                        </div>
                     </div>
 
                     <!-- 2. ITINERARY (TOUR PLAN) -->
                     <div class="tab-pane fade" id="content-itinerary" role="tabpanel">
-                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
+                        <div class="p-4 p-md-5 mb-4 vitour-ui-card">
                             <h3 class="fw-bold mb-4" style="color: #112240;">@SharedLocalizer["GunlukTurProgrami"]</h3>
                             @if (Model.TourPlans != null && Model.TourPlans.Count > 0)
                             {
@@ -250,7 +295,7 @@
 
             <!-- RIGHT COLUMN: STICKY BOOKING PANEL -->
             <div class="col-lg-4">
-                <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm position-relative overflow-hidden" style="position: sticky; top: 120px;">
+                <div class="p-4 p-md-5 position-relative overflow-hidden vitour-ui-card" style="position: sticky; top: 120px;">
                     <div class="position-absolute top-0 start-0 w-100" style="height: 6px; background: linear-gradient(90deg, #1a6b4a, #2ecc71);"></div>
                     <div class="price-wrap mb-4 text-center">
                         <span class="text-muted d-block mb-2 fw-bold text-uppercase" style="letter-spacing: 2px; font-size: 12px;">@SharedLocalizer["Fiyat"]</span>
@@ -295,3 +340,69 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const btnCalculate = document.getElementById("btnCalculateCost");
+            const loadingDiv = document.getElementById("costLoading");
+            const resultsDiv = document.getElementById("costResults");
+            const errorDiv = document.getElementById("costError");
+
+            if (btnCalculate) {
+                btnCalculate.addEventListener("click", async function () {
+                    const location = this.getAttribute("data-location");
+                    const days = this.getAttribute("data-days");
+                    const tourPrice = this.getAttribute("data-tourprice");
+                    const includedItems = this.getAttribute("data-includeditems");
+
+                    // UI durumlarını ayarla
+                    btnCalculate.disabled = true;
+                    resultsDiv.classList.add("d-none");
+                    errorDiv.classList.add("d-none");
+                    loadingDiv.classList.remove("d-none");
+
+                    try {
+                        const response = await fetch(`/Tour/CalculateHiddenCost?location=${encodeURIComponent(location)}&days=${days}&tourPrice=${tourPrice}&includedItems=${encodeURIComponent(includedItems)}`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success && result.data) {
+                            // Dönen JSON'u ekrana bas
+                            document.getElementById("cost-yemek-detay").innerText = result.data.yemek?.detay || "";
+                            document.getElementById("cost-yemek-fiyat").innerText = "$" + (result.data.yemek?.fiyat || 0);
+
+                            document.getElementById("cost-ulasim-detay").innerText = result.data.ulasim?.detay || "";
+                            document.getElementById("cost-ulasim-fiyat").innerText = "$" + (result.data.ulasim?.fiyat || 0);
+
+                            document.getElementById("cost-muzeler-detay").innerText = result.data.muzeler?.detay || "";
+                            document.getElementById("cost-muzeler-fiyat").innerText = "$" + (result.data.muzeler?.fiyat || 0);
+
+                            document.getElementById("cost-ekstra-detay").innerText = result.data.ekstra?.detay || "";
+                            document.getElementById("cost-ekstra-fiyat").innerText = "$" + (result.data.ekstra?.fiyat || 0);
+
+                            document.getElementById("cost-toplam").innerText = "$" + (result.data.toplamMaliyet || 0);
+
+                            // Sonuçları göster
+                            resultsDiv.classList.remove("d-none");
+                        } else {
+                            errorDiv.innerText = result.message || "Bütçe hesaplanırken bir hata oluştu.";
+                            errorDiv.classList.remove("d-none");
+                        }
+                    } catch (error) {
+                        errorDiv.innerText = "Sunucu ile bağlantı kurulamadı. Lütfen tekrar deneyin.";
+                        errorDiv.classList.remove("d-none");
+                    } finally {
+                        loadingDiv.classList.add("d-none");
+                        btnCalculate.disabled = false;
+                    }
+                });
+            }
+        });
+    </script>
+}

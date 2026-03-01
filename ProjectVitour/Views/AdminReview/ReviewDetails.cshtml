@@ -1,0 +1,105 @@
+@model ProjectVitour.Dtos.ReviewDtos.GetReviewByIdDto
+@{
+    ViewData["Title"] = "Yorum Detayı";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+    double avgScore = (Model.GuideRating + Model.AccommodationRating + Model.TransportRating + Model.ComfortRating) / 4.0;
+}
+
+<div class="page-header d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="page-title text-navy fw-bold"><i class="bi bi-chat-left-text me-2"></i>Yorum Detayı</h2>
+        <p class="text-muted mb-0">Müşterinin tur hakkındaki detaylı değerlendirmesi.</p>
+    </div>
+    <a href="/AdminReview/ReviewList" class="btn btn-outline-secondary rounded-pill fw-bold">
+        <i class="bi bi-arrow-left me-1"></i> Yorumlara Dön
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-body p-4 p-md-5">
+                <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold fs-3 shadow-sm me-4" style="width: 70px; height: 70px;">
+                        @Model.NameSurname.Substring(0,1).ToUpper()
+                    </div>
+                    <div>
+                        <h4 class="fw-bold mb-1">@Model.NameSurname</h4>
+                        <div class="text-muted">
+                            <i class="bi bi-calendar-event me-1"></i> @Model.ReviewDate.ToString("dd MMMM yyyy, HH:mm")
+                        </div>
+                    </div>
+                    <div class="ms-auto text-end">
+                        <div class="d-inline-block px-3 py-2 rounded-3 @(Model.Status ? "bg-success-subtle text-success" : "bg-warning-subtle text-warning") fw-bold">
+                            @if(Model.Status){ <span><i class="bi bi-check-circle me-1"></i> Yayında</span> } else { <span><i class="bi bi-hourglass-split me-1"></i> Beklemede</span> }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="fw-bold text-dark mb-3">Değerlendirme Metni</h5>
+                    <div class="p-4 bg-light rounded-4 text-muted fst-italic" style="font-size: 1.1rem; line-height: 1.8;">
+                        "@Model.Detail"
+                    </div>
+                </div>
+
+                <div class="mt-5">
+                    <h5 class="fw-bold text-dark mb-3">Detaylı Puanlama</h5>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded-3 d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-secondary"><i class="bi bi-person-badge me-2"></i>Rehber</span>
+                                <span class="badge bg-primary fs-6">@Model.GuideRating / 5</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded-3 d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-secondary"><i class="bi bi-house me-2"></i>Konaklama</span>
+                                <span class="badge bg-primary fs-6">@Model.AccommodationRating / 5</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded-3 d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-secondary"><i class="bi bi-bus-front me-2"></i>Ulaşım</span>
+                                <span class="badge bg-primary fs-6">@Model.TransportRating / 5</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded-3 d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-secondary"><i class="bi bi-emoji-smile me-2"></i>Konfor</span>
+                                <span class="badge bg-primary fs-6">@Model.ComfortRating / 5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4 mb-4 text-center">
+            <div class="card-body p-5">
+                <h5 class="fw-bold text-muted text-uppercase tracking-wider mb-4">Genel Ortalama</h5>
+                <h1 class="display-1 fw-bolder text-primary mb-3">@avgScore.ToString("0.0")</h1>
+                <div class="text-warning fs-3 mb-4">
+                    @for(int i=0; i<Math.Round(avgScore); i++){ <i class="bi bi-star-fill"></i> }
+                    @for(int i=0; i<5-Math.Round(avgScore); i++){ <i class="bi bi-star text-muted opacity-25"></i> }
+                </div>
+                
+                <hr class="my-4 text-muted">
+                
+                @if (!Model.Status)
+                {
+                    <a href="/AdminReview/ApproveReview/@Model.ReviewId" class="btn btn-success w-100 py-3 rounded-pill fw-bold mb-3 shadow-sm">
+                        <i class="bi bi-check-circle me-2"></i> Yorumu Onayla
+                    </a>
+                }
+                
+                <a href="/AdminReview/DeleteReview/@Model.ReviewId" class="btn btn-outline-danger w-100 py-3 rounded-pill fw-bold" onclick="return confirm('Bu yorumu silmek istediğinize emin misiniz?');">
+                    <i class="bi bi-trash me-2"></i> Yorumu Sil
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

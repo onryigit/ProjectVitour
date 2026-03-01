@@ -48,5 +48,16 @@ namespace ProjectVitour.Controllers
             }
             return RedirectToAction("ReviewList");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ReviewDetails(string id)
+        {
+            var review = await _reviewService.GetReviewByIdAsync(id);
+            if (review == null)
+            {
+                return NotFound();
+            }
+            return View(review);
+        }
     }
 }
