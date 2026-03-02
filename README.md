@@ -8,7 +8,7 @@ Bu proje sadece standart CRUD işlemlerini değil; gelişmiş raporlama, yapay z
 
 ### 👥 Son Kullanıcı (UI) Deneyimi
 * **Gelişmiş Çoklu Dil & Para Birimi Sistemi:** Cookie tabanlı altyapı ile TR/EN/DE dil seçenekleri. Sayfa içeriği ve tur fiyatlandırmaları (para birimleri) seçilen dile göre dinamik olarak anında değişir.
-* **Dinamik Tur Listeleme & Paging:** MongoDB'den asenkron çekilen tur verileri, sayfa başına 6 öğe düşecek şekilde performanslı bir sayfalama (Paging) yapısıyla sunulur.
+* **Dinamik Tur Listeleme, Filtreleme & Paging:** MongoDB'den asenkron çekilen tur verileri, sayfa başına 6 öğe düşecek şekilde performanslı bir sayfalama (Paging) yapısıyla sunulur.
 * **İnteraktif Tur Detayları:** Turlara ait *Information, Tour Planning, Reviews* ve *Shot Gallery* sekmeleri dinamik olarak yönetilir.
 * **Gemini AI Harita & Bütçe Asistanı:** Klasik Google Haritalar yerine, Google Gemini API kullanılarak üretilmiş "Pixar animasyon" tarzı statik bölge görcelleri entegre edilmiştir. Ayrıca gizli maliyetleri hesaplayan bir Yapay Zeka Bütçe Asistanı bulunur.
 * **Güvenli Rezervasyon Akışı:** Kullanıcı rezervasyon yaparken anlık kapasite (kontenjan) kontrolü yapılır. İşlem başarılı olduğunda **MailKit** aracılığıyla otomatik bilgilendirme e-postası gönderilir.
