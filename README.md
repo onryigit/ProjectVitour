@@ -1,6 +1,6 @@
 # 🌍 Tour & Reservation Management Platform
 
-ProjectVitour ASP.NET Core MVC (.NET 10) ve MongoDB tabanlı kapsamlı bir tur, destinasyon ve rezervasyon yönetim platformudur.
+ASP.NET Core MVC (.NET 10) ve MongoDB tabanlı kapsamlı bir tur, destinasyon ve rezervasyon yönetim platformudur.
 
 Bu proje sadece standart CRUD işlemlerini değil; gelişmiş raporlama, yapay zeka entegrasyonu, asenkron veritabanı yönetimi ve çoklu dil desteği gibi gerçek dünya senaryolarını içerir.
 
